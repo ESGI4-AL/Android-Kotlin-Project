@@ -1,0 +1,43 @@
+# Ignore Android Studio project files
+*.iml
+.gradle/
+local.properties
+.idea/
+
+# Exclude all .idea/ files, except run configurations and misc settings
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/vcs.xml
+.idea/gradle.xml
+.idea/copyright/
+
+# Ignore build output directories
+/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore generated gradle files
+.gradle/
+
+# Ignore APK, AAB, and ProGuard mapping files
+*.apk
+*.ap_
+*.aab
+*.mapping
+
+# Google Services (contains API keys)
+google-services.json
+
+# Keystore files (do not commit sensitive keys)
+*.jks
+
+# Miscellaneous
+.env
