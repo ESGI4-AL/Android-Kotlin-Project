@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">Android-Kotlin-Project</string>
+    <string name="app_name">Health app</string>
+    <string name="home">Home</string>
+    <string name="categories">Categories</string>
+    <string name="settings">Settings</string>
 </resources>

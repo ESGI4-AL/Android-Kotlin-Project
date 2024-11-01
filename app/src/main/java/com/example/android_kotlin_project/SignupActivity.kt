@@ -44,7 +44,7 @@ class SignupActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     saveUserData(user?.uid, email, name)
                 } else {
-                    Toast.makeText(baseContext, "Inscription échouée : ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, "${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }
