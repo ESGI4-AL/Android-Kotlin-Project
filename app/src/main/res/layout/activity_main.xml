@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navigation_fragment"
@@ -28,6 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/main_menu" />
 
+    <!--
     <Button
         android:id="@+id/button_test"
         android:layout_width="match_parent"
@@ -44,6 +45,6 @@
         android:textSize="18dp"
         app:cornerRadius="25dp"
         tools:ignore="MissingConstraints" />
-
+-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
