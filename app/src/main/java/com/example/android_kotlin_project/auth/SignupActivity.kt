@@ -1,14 +1,17 @@
 package com.example.android_kotlin_project.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android_kotlin_project.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -36,6 +39,16 @@ class SignupActivity : AppCompatActivity() {
             }
 
         }
+
+      // Find the text by its ID and set an onClickListener to navigate to LoginActivity
+        val signUpLink: TextView =findViewById(R.id.textView_login)
+        signUpLink.setOnClickListener{
+            // Create an intent to navigate to LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     private fun registerUser(email: String, password: String, name: String) {
