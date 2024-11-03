@@ -4,7 +4,7 @@
     android:id="@+id/settingsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsFragment">
+    tools:context=".fragments.SettingsFragment">
 
     <!-- TODO: Update blank settings layout -->
     <TextView
