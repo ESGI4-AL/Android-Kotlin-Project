@@ -5,9 +5,9 @@
         android:icon="@drawable/home_icon"
         android:title="@string/home" />
     <item
-        android:id="@+id/categoriesFragment"
-        android:icon="@drawable/categories_icon"
-        android:title="@string/categories" />
+        android:id="@+id/healthFragment"
+        android:icon="@drawable/heart_rate"
+        android:title="@string/health" />
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/settings_icon"

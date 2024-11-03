@@ -26,6 +26,6 @@ class HealthFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.health_categories, container, false)
+        return inflater.inflate(R.layout.fragment_health, container, false)
     }
 }

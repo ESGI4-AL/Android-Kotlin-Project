@@ -10,9 +10,9 @@
         android:label="Home" />
 
     <fragment
-        android:id="@+id/categoriesFragment"
+        android:id="@+id/healthFragment"
         android:name="com.example.android_kotlin_project.fragments.HealthFragment"
-        android:label="Categories" />
+        android:label="Health" />
 
     <fragment
         android:id="@+id/settingsFragment"
