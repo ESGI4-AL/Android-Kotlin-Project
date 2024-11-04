@@ -17,9 +17,9 @@
         <activity
             android:name=".auth.LoginActivity"
             android:exported="false" />
-        <!--<activity
-            android:name=".SignupActivity"
-            android:exported="false" />-->
+        <activity
+            android:name=".auth.SignupActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">
