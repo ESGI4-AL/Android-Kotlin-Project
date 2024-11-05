@@ -13,12 +13,12 @@ import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
 
-    private fun hideBottomNavigationLabels(bottomNavigationView: BottomNavigationView) {
+    /*private fun hideBottomNavigationLabels(bottomNavigationView: BottomNavigationView) {
         for (i in 0 until bottomNavigationView.menu.size()) {
             val item = bottomNavigationView.menu.getItem(i)
             item.setTitle("")
         }
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val bottomNavigationView  = findViewById<BottomNavigationView>(R.id.navigation)
-        hideBottomNavigationLabels(bottomNavigationView)
+        //hideBottomNavigationLabels(bottomNavigationView)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navigation_fragment) as NavHostFragment
         val navController: NavController = navHostFragment.navController

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Health app</string>
     <string name="home">Home</string>
+    <string name="activity">Activity</string>
     <string name="health">Health</string>
+    <string name="recipe">Recipes</string>
+    <string name="profile">Profile</string>
     <string name="settings">Settings</string>
 </resources>
