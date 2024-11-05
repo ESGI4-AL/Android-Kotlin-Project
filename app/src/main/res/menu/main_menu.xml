@@ -6,10 +6,18 @@
         android:title="@string/home" />
     <item
         android:id="@+id/healthFragment"
-        android:icon="@drawable/heart_rate"
+        android:icon="@drawable/health_icon"
         android:title="@string/health" />
     <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/settings_icon"
-        android:title="@string/settings" />
+        android:id="@+id/activityFragment"
+        android:icon="@drawable/activity_icon"
+        android:title="@string/activity" />
+    <item
+        android:id="@+id/recipesFragment"
+        android:icon="@drawable/apple_icon"
+        android:title="@string/recipe" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/user_icon"
+        android:title="@string/profile" />
 </menu>
