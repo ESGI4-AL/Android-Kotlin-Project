@@ -1,0 +1,91 @@
+package com.example.android_kotlin_project.viewmodels
+
+import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.android_kotlin_project.repositories.HealthDataRepository
+import com.example.android_kotlin_project.repositories.HealthPermissionsRepository
+import com.example.android_kotlin_project.utils.HealthConnectAvailability
+import kotlinx.coroutines.launch
+
+class HealthViewModel(
+    private val healthDataRepository: HealthDataRepository,
+    private val permissionsRepository: HealthPermissionsRepository
+) : ViewModel() {
+
+    // Expose availability as LiveData from the repository
+    val availability: LiveData<HealthConnectAvailability> = healthDataRepository.availability
+
+    // LiveData to handle permission related messages
+    private val _permissionStatus = MutableLiveData<String>()
+    val permissionStatus: LiveData<String> get() = _permissionStatus
+
+    private val _dailySteps = MutableLiveData<String>()
+    val dailySteps: LiveData<String> get() = _dailySteps
+
+    fun checkHealthConnectAvailability() {
+        viewModelScope.launch {
+            try {
+                healthDataRepository.checkAvailability()
+            } catch (e: Exception) {
+                _permissionStatus.value = "Error checking Health Connect availability: ${e.message}"
+            }
+        }
+    }
+
+    /**
+     * Check permissions and request if necessary
+     */
+    fun checkAndRequestPermissions(launcher: ActivityResultLauncher<Array<String>>) {
+        viewModelScope.launch {
+            try {
+                if (!permissionsRepository.hasAllPermissions()) {
+                    permissionsRepository.requestPermissions(launcher)
+                } else {
+                    _permissionStatus.value = "Permissions already granted"
+                    fetchDailySteps()
+                }
+            } catch (e: Exception) {
+                _permissionStatus.value = "Error checking permissions: ${e.message}"
+            }
+        }
+    }
+
+    /**
+     * Fetch daily steps data
+     */
+    fun fetchDailySteps() {
+        viewModelScope.launch {
+
+            try {
+                val stepRecords = healthDataRepository.getDailySteps()
+                Log.d("HealthConnect", "Step Records: $stepRecords")
+
+                // If no records are found
+                if (stepRecords.isEmpty()) {
+                    _dailySteps.value = """
+                    No steps data available today
+                    Please check:
+                    1. Health Connect is installed
+                    2. Health Connect has permissions
+                    3. The device has step data for today
+                """.trimIndent()
+                } else {
+                    val totalSteps = stepRecords.sumOf { it.count }
+                    val recordsCount = stepRecords.size
+
+                    _dailySteps.value = """
+                    Steps today: $totalSteps
+                    (From $recordsCount records)
+                """.trimIndent()
+                }
+            } catch (e: Exception) {
+                _dailySteps.value = "Error loading step data: ${e.message}"
+                Log.e("HealthConnect", "Error fetching daily steps", e)
+            }
+        }
+    }
+}

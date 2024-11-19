@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE"/>
+    <uses-permission android:name="android.permission.health.READ_STEPS"/>
 
     <application
         android:name=".HealthApplication"
@@ -17,21 +19,53 @@
         android:forceDarkAllowed="false"
         android:localeConfig="@xml/locales_config"
         tools:targetApi="31">
-            <activity
-                android:name=".auth.LoginActivity"
-                android:exported="true">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-            <activity
-                android:name=".auth.SignupActivity"
-                android:exported="false" />
-            <activity
-                android:name=".activities.MainActivity"
-                android:exported="false">
-            </activity>
+        <activity
+            android:name=".auth.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".auth.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:exported="false">
+            <!-- Permission handling for Android 13 and before -->
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+
+            <!-- Permission handling for Android 14 and later -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE"/>
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.PermissionsRationaleActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" />
+            </intent-filter>
+        </activity>
+        <activity-alias
+            android:name="ViewPermissionUsageActivity"
+            android:exported="true"
+            android:targetActivity=".activities.PermissionsRationaleActivity"
+            android:permission="android.permission.START_VIEW_PERMISSION_USAGE">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
+            </intent-filter>
+        </activity-alias>
     </application>
+
+    <!-- Check if Health Connect is installed -->
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
 
 </manifest>

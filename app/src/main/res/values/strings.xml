@@ -45,6 +45,16 @@
     <string name="add_a_new_note">Add a new note</string>
     <string name="delete_note" />
 
+    <string name="privacy_policy_text">
+        Your privacy is important to us. This app collects data from Health Connect
+        to provide health-related insights. We collect only the data necessary for the app’s core
+        functionalities, which include monitoring health metrics such as steps, heart rate, oxygen levels,
+        stress levels, activity, body measurements and sleep data. The data is stored securely on your device,
+        and we do not share it with third parties. By accepting this policy, you agree to allow the app to
+        access Health Connect data as specified in the app’s permissions.
+        You can revoke access at any time from the app settings.
+    </string>
+
     <string-array name="languages">
         <item>English</item>
         <item>French</item>
