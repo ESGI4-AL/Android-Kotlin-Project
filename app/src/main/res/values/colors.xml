@@ -21,4 +21,8 @@
     <color name="spinner_item_color">#F5F3F9</color>
     <color name="startColor">#EBFDB2</color>
     <color name="endColor">#FFD1B6</color>
+
+    <color name="red_heart">#F54255</color>
+    <color name="card_background">#EEECEC</color>
+    <color name="green_steps">#2B7627</color>
 </resources>

@@ -26,6 +26,15 @@ class HealthViewModel(
     private val _dailySteps = MutableLiveData<String>()
     val dailySteps: LiveData<String> get() = _dailySteps
 
+    private val _lastHeartRate = MutableLiveData<String>()
+    val lastHeartRate: LiveData<String> get() = _lastHeartRate
+
+    private val _heartRateData = MutableLiveData<List<Pair<Float, Float>>>()
+    val heartRateData: LiveData<List<Pair<Float, Float>>> = _heartRateData
+
+    /**
+     * Check Health Connect availability
+     */
     fun checkHealthConnectAvailability() {
         viewModelScope.launch {
             try {
@@ -47,6 +56,8 @@ class HealthViewModel(
                 } else {
                     _permissionStatus.value = "Permissions already granted"
                     fetchDailySteps()
+                    fetchLastHeartRate()
+                    fetchHeartRateData()
                 }
             } catch (e: Exception) {
                 _permissionStatus.value = "Error checking permissions: ${e.message}"
@@ -75,17 +86,38 @@ class HealthViewModel(
                 """.trimIndent()
                 } else {
                     val totalSteps = stepRecords.sumOf { it.count }
-                    val recordsCount = stepRecords.size
 
                     _dailySteps.value = """
-                    Steps today: $totalSteps
-                    (From $recordsCount records)
+                    $totalSteps
                 """.trimIndent()
                 }
             } catch (e: Exception) {
                 _dailySteps.value = "Error loading step data: ${e.message}"
                 Log.e("HealthConnect", "Error fetching daily steps", e)
             }
+        }
+    }
+
+    /**
+     * Fetch the last heart rate data
+     */
+    fun fetchLastHeartRate() {
+        viewModelScope.launch {
+            try {
+                val lastHeartRate = healthDataRepository.getLastHeartRate()
+                _lastHeartRate.value = lastHeartRate?.toString() ?: "0"
+            } catch (e: Exception) {
+                _lastHeartRate.value = "Error loading heart rate data: ${e.message}"
+            }
+        }
+    }
+
+    /**
+     * Fetch heart rate data for the day
+     */
+    fun fetchHeartRateData() {
+        viewModelScope.launch {
+            _heartRateData.value = healthDataRepository.getHeartRateData()
         }
     }
 }

@@ -31,10 +31,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var healthViewModel: HealthViewModel
-
     private lateinit var permissionStatusTextView: TextView
-    private lateinit var dailyStepsTextView: TextView
-
 
     private val requestPermissionsLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -43,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         if (allGranted) {
             permissionStatusTextView.text = "All permissions granted"
             healthViewModel.fetchDailySteps()
+            healthViewModel.fetchLastHeartRate()
+            healthViewModel.fetchHeartRateData()
         } else {
             permissionStatusTextView.text = "Permissions denied"
         }
@@ -81,9 +80,6 @@ class MainActivity : AppCompatActivity() {
         }
         // initialize views
         permissionStatusTextView = findViewById(R.id.permission_status)
-        dailyStepsTextView = findViewById(R.id.daily_steps)
-
-
 
         // Initialize ViewModel
         val healthDataRepository = HealthDataRepository(applicationContext, HealthConnectClient.getOrCreate(applicationContext))
@@ -107,13 +103,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Observe permission status
         healthViewModel.permissionStatus.observe(this) { statusMessage ->
             permissionStatusTextView.text = statusMessage
-        }
-
-        // Observe daily steps
-        healthViewModel.dailySteps.observe(this) { dailySteps ->
-            dailyStepsTextView.text = dailySteps
         }
 
         // Start the Health Connect setup process

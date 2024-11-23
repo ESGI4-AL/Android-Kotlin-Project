@@ -8,6 +8,19 @@
     android:background="@color/backgroundColor"
     tools:context=".activities.MainActivity">
 
+    <!--TODO: enlever le text -->
+    <TextView
+        android:id="@+id/permission_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Permission status: Unknown"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navigation_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -86,32 +99,4 @@
                 android:background="?attr/selectableItemBackground"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <!--TODO: enlever les deux texts -->
-    <TextView
-        android:id="@+id/permission_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Permission status: Unknown"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"/>
-
-    <TextView
-        android:id="@+id/daily_steps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Steps today: "
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
