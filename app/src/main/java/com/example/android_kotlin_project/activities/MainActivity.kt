@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             healthViewModel.fetchDailySteps()
             healthViewModel.fetchLastHeartRate()
             healthViewModel.fetchHeartRateData()
+            healthViewModel.fetchOxygenLevel()
         } else {
             permissionStatusTextView.text = "Permissions denied"
         }

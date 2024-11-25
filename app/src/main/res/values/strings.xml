@@ -59,9 +59,12 @@
     <string name="steps">Steps</string>
     <string name="default_value">0</string>
     <string name="health_title">Health</string>
-    <string name="heart_logo">Heart logo</string>
+    <string name="heart_icon">Heart Icon</string>
     <string name="heart_rate">Heart Rate</string>
     <string name="heart_rate_label">BPM</string>
+    <string name="oxygen_icon">Oxygen Icon</string>
+    <string name="oxygen_level">Oxygen Level</string>
+    <string name="oxygen_unit">%</string>
 
     <string-array name="languages">
         <item>English</item>

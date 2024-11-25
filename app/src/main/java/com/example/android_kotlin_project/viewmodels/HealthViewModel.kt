@@ -32,6 +32,9 @@ class HealthViewModel(
     private val _heartRateData = MutableLiveData<List<Pair<Float, Float>>>()
     val heartRateData: LiveData<List<Pair<Float, Float>>> = _heartRateData
 
+    private val _oxygenLevel = MutableLiveData<String>()
+    val oxygenLevel: LiveData<String> get() = _oxygenLevel
+
     /**
      * Check Health Connect availability
      */
@@ -58,6 +61,7 @@ class HealthViewModel(
                     fetchDailySteps()
                     fetchLastHeartRate()
                     fetchHeartRateData()
+                    fetchOxygenLevel()
                 }
             } catch (e: Exception) {
                 _permissionStatus.value = "Error checking permissions: ${e.message}"
@@ -70,7 +74,6 @@ class HealthViewModel(
      */
     fun fetchDailySteps() {
         viewModelScope.launch {
-
             try {
                 val stepRecords = healthDataRepository.getDailySteps()
                 Log.d("HealthConnect", "Step Records: $stepRecords")
@@ -118,6 +121,17 @@ class HealthViewModel(
     fun fetchHeartRateData() {
         viewModelScope.launch {
             _heartRateData.value = healthDataRepository.getHeartRateData()
+        }
+    }
+
+    fun fetchOxygenLevel() {
+        viewModelScope.launch {
+            try {
+                val oxygenLevel = healthDataRepository.getOxygenLevel()
+                _oxygenLevel.value = oxygenLevel.toString() ?: "0"
+            } catch (e: Exception) {
+                _oxygenLevel.value = "Error loading heart rate data: ${e.message}"
+            }
         }
     }
 }

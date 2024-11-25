@@ -9,6 +9,7 @@ class HealthPermissionsRepository(private val healthConnectClient: HealthConnect
     private val requiredPermissions = setOf(
         HealthPermissions.READ_STEPS,
         HealthPermissions.READ_HEART_RATE,
+        HealthPermissions.READ_OXYGEN_SATURATION
     )
 
     /**

@@ -30,7 +30,7 @@
                     android:id="@+id/heart_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="@string/heart_logo"
+                    android:contentDescription="@string/heart_icon"
                     android:src="@drawable/heart"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintTop_toTopOf="parent"

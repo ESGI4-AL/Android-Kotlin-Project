@@ -9,6 +9,7 @@ import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.records.HeartRateRecord
+import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.lifecycle.MutableLiveData
 import com.example.android_kotlin_project.utils.HealthConnectAvailability
 import java.time.Duration
@@ -150,4 +151,24 @@ class HealthDataRepository(private val context: Context, private val healthConne
         return String.format("%02d:%02d", hours, minutes)
     }
 
+    /**
+     * Get oxygen level data for the day
+     */
+    suspend fun getOxygenLevel(): String? {
+        val today = LocalDate.now()
+        val startOfDay = today.atStartOfDay(ZoneId.systemDefault()).toInstant()
+        val endOfDay = today.atTime(23, 59, 59).atZone(ZoneId.systemDefault()).toInstant()
+
+        return try {
+            val request = ReadRecordsRequest(
+                recordType = OxygenSaturationRecord::class,
+                timeRangeFilter = TimeRangeFilter.between(startOfDay, endOfDay)
+            )
+            val response = healthConnectClient.readRecords(request)
+
+            response.records.joinToString(", ") { it.percentage.toString() }
+        } catch (e: Exception) {
+            null
+        }
+    }
 }

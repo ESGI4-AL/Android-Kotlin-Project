@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/steps_data_card"
+        android:id="@+id/oxygen_data_card"
         android:layout_width="170dp"
         android:layout_height="140dp"
         android:layout_margin="10dp"
@@ -18,53 +18,53 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- Steps Icon and Title -->
+            <!-- Oxygen Icon and Title -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/daily_steps_layout"
+                android:id="@+id/oxygen_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/steps_icon"
+                    android:id="@+id/oxygen_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:contentDescription="@string/steps_icon"
-                    android:src="@drawable/steps"
+                    android:contentDescription="@string/oxygen_icon"
+                    android:src="@drawable/oxygen_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
-                    android:id="@+id/daily_steps_label"
+                    android:id="@+id/oxygen_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/steps"
-                    android:textColor="@color/green_steps"
+                    android:text="@string/oxygen_level"
+                    android:textColor="@color/blue_oxygen"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginStart="10dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/steps_icon"/>
+                    app:layout_constraintStart_toEndOf="@id/oxygen_icon"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Steps Data -->
+            <!-- Oxygen Data -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/daily_steps_data_layout"
+                android:id="@+id/oxygen_data_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/daily_steps_layout">
+                app:layout_constraintTop_toBottomOf="@id/oxygen_layout">
 
                 <TextView
-                    android:id="@+id/daily_steps_data"
+                    android:id="@+id/oxygen_data"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/default_value"
@@ -73,6 +73,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@ import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.databinding.DailyStepsCardBinding
 import com.example.android_kotlin_project.databinding.FragmentHealthBinding
 import com.example.android_kotlin_project.databinding.HeartRateCardBinding
+import com.example.android_kotlin_project.databinding.OxygenCardBinding
 import com.example.android_kotlin_project.viewmodels.HealthViewModel
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -25,6 +26,8 @@ class HealthFragment : Fragment() {
     private lateinit var dailyStepsTextView: TextView
     private lateinit var heartRateTextView: TextView
     private lateinit var lineChart: LineChart
+    private lateinit var oxygenLevelTextView: TextView
+
     private var _fragmentBinding: FragmentHealthBinding? = null
     private val fragmentBinding get() = _fragmentBinding!!
 
@@ -33,6 +36,9 @@ class HealthFragment : Fragment() {
 
     private var _dailyStepsCardBinding: DailyStepsCardBinding? = null
     private val dailyStepsCardBinding get() = _dailyStepsCardBinding!!
+
+    private var _oxygenLevelCardBinding: OxygenCardBinding? = null
+    private val oxygenLevelCardBinding get() = _oxygenLevelCardBinding!!
 
     /**
      * Create the view
@@ -44,6 +50,7 @@ class HealthFragment : Fragment() {
         _fragmentBinding = FragmentHealthBinding.inflate(inflater, container, false)
         _heartRateBinding = HeartRateCardBinding.bind(fragmentBinding.root.findViewById(R.id.heart_rate_card))
         _dailyStepsCardBinding = DailyStepsCardBinding.bind(fragmentBinding.root.findViewById(R.id.daily_steps_card))
+        _oxygenLevelCardBinding = OxygenCardBinding.bind(fragmentBinding.root.findViewById(R.id.oxygen_card))
 
         return fragmentBinding.root
     }
@@ -57,6 +64,7 @@ class HealthFragment : Fragment() {
         heartRateTextView = heartRateBinding.heartRateData
         lineChart = heartRateBinding.heartRateLineChart
         dailyStepsTextView = dailyStepsCardBinding.dailyStepsData
+        oxygenLevelTextView = oxygenLevelCardBinding.oxygenData
 
         setupChart()
 
@@ -78,6 +86,10 @@ class HealthFragment : Fragment() {
             updateDailySteps(dailySteps)
         }
 
+        // Observe oxygen level data
+        healthViewModel.oxygenLevel.observe(viewLifecycleOwner) { oxygenLevel ->
+            updateOxygenLevel(oxygenLevel)
+        }
     }
 
     /**
@@ -176,6 +188,13 @@ class HealthFragment : Fragment() {
             animateX(1000)
             invalidate()
         }
+    }
+
+    /**
+     * Update the oxygen level with new data
+     */
+    private fun updateOxygenLevel(oxygenLevel: String) {
+        oxygenLevelTextView.text = oxygenLevel
     }
 
     /**
