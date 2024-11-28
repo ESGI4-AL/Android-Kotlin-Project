@@ -36,4 +36,14 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.settingsFragment)
         }
     }
+    override fun onBackPressed() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navigation_fragment) as NavHostFragment
+        val navController: NavController = navHostFragment.navController
+
+        if (navController.previousBackStackEntry != null) {
+            navController.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

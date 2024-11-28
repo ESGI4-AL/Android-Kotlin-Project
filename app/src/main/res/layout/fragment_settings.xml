@@ -5,6 +5,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:src="@drawable/ic_arrow_back"
+    android:contentDescription="@string/back"
+    android:background="?android:attr/selectableItemBackgroundBorderless" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +31,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose langage"
+        android:text="Choose language"
         android:textSize="18sp"
         android:layout_marginBottom="8dp"/>
 
