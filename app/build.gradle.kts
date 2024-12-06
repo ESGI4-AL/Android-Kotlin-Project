@@ -40,6 +40,9 @@ android {
             enableSplit = false
         }
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
