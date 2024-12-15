@@ -1,0 +1,29 @@
+<resources>
+    <string name="home">Principal</string>
+    <string name="activity">Actividad</string>
+    <string name="health">Salud</string>
+    <string name="recipe">Recetas</string>
+    <string name="profile">Perfil</string>
+    <string name="settings">Ajustes</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="forgotPwd">Has olvidado tu contraseña?</string>
+    <string name="login">Acceso</string>
+    <string name="signup">Inscribirse</string>
+    <string name="noAccount">¿Sin cuenta?</string>
+    <string name="yrName">Su nombre</string>
+    <string name="yrEmail">Tu correo electrónico</string>
+    <string name="yrPassword">Introduce tu contraseña</string>
+    <string name="confirmPassword">Confirma tu contraseña</string>
+    <string name="submit">Entregar</string>
+    <string name="anAccount">Tienes una cuenta?</string>
+    <string name="welcome">¡Bienvenido a nuestra aplicación!</string>
+
+    <string-array name="languages">
+        <item>Inglés</item>
+        <item>Francés</item>
+        <item>Español</item>
+        <item>Chino</item>
+    </string-array>
+
+</resources>

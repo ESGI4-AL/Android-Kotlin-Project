@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">Acceuil</string>
+    <string name="activity">Activités</string>
+    <string name="health">Santé</string>
+    <string name="recipe">Recettes</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Paramétre</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="forgotPwd">Mot de passe oublié ?</string>
+    <string name="login">Se connecter</string>
+    <string name="signup">Inscription</string>
+    <string name="noAccount">Pas de compte ?</string>
+    <string name="yrName">Votre name</string>
+    <string name="yrEmail">Votre email</string>
+    <string name="yrPassword">Entrez votre mot de passe</string>
+    <string name="confirmPassword">Confirmation du mot de passe</string>
+    <string name="submit">Connexion</string>
+    <string name="anAccount">Vous avez un compte ?</string>
+    <string name="welcome">Bienvenue sur notre app !</string>
+
+    <string-array name="languages">
+        <item>Anglais</item>
+        <item>Français</item>
+        <item>Espagnol</item>
+        <item>Chinois</item>
+    </string-array>
+
+</resources>

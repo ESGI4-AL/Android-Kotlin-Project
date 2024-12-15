@@ -10,6 +10,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hello from profile" />
+        android:text="@string/profile" />
+
+    <Spinner
+        android:id="@+id/language"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_margin="76dp"
+        android:entries="@array/languages"
+        android:spinnerMode="dropdown" />
 
 </FrameLayout>
