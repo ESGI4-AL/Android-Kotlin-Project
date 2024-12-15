@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.example.android_kotlin_project.R
+import com.example.android_kotlin_project.adapters.FlagSpinnerAdapter
 import java.util.Locale
 
 /**
@@ -42,6 +43,16 @@ class ProfileFragment : Fragment() {
 
     private fun setupLanguageSpinner(view: View) {
         val languageSpinner = view.findViewById<Spinner>(R.id.language)
+        val languages = resources.getStringArray(R.array.languages).toList()
+        val flags = listOf(
+            R.drawable.flag_uk,
+            R.drawable.flag_frensh,
+            R.drawable.flag_spanish,
+            R.drawable.flag_chinese
+        )
+
+        val adapter = FlagSpinnerAdapter(requireContext(), languages, flags)
+        languageSpinner.adapter = adapter
 
         val currentLocale = requireContext().resources.configuration.locales[0].language
         val position = when (currentLocale) {
