@@ -6,6 +6,7 @@
     <string name="recipe">Recettes</string>
     <string name="profile">Profile</string>
     <string name="settings">Paramétres</string>
+    <string name="no_quotes_found">Pas de citations trouvés</string>
     <string name="back">Retour</string>
     <string name="email">Email</string>
     <string name="password">Mot de passe</string>

@@ -6,6 +6,7 @@
     <string name="profile">Perfil</string>
     <string name="settings">Ajustes</string>
     <string name="back">Atrás</string>
+    <string name="no_quotes_found">No se encontraron citas</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
     <string name="forgotPwd">Has olvidado tu contraseña?</string>
