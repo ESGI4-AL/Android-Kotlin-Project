@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">家</string>
+    <string name="activity">活动</string>
+    <string name="health">健康</string>
+    <string name="recipe">食谱</string>
+    <string name="profile">轮廓</string>
+    <string name="settings">设置</string>
+    <string name="email">电子邮件</string>
+    <string name="password">密码</string>
+    <string name="forgotPwd">忘记密码？</string>
+    <string name="login">登录</string>
+    <string name="signup">报名</string>
+    <string name="noAccount">没有帐户？</string>
+    <string name="yrName">你的名字</string>
+    <string name="yrEmail">您的电子邮件</string>
+    <string name="yrPassword">输入您的密码</string>
+    <string name="confirmPassword">确认您的密码</string>
+    <string name="submit">提交</string>
+    <string name="anAccount">您有帐户吗？</string>
+    <string name="welcome">欢迎使用我们的应用程序！</string>
+
+    <string-array name="languages">
+        <item>英语</item>
+        <item>法语</item>
+        <item>西班牙语</item>
+        <item>中国人</item>
+    </string-array>
+
+</resources>
