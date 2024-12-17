@@ -36,10 +36,10 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLanguageSpinner(view)
-    }
+    }*/
 
     /*private fun setupLanguageSpinner(view: View) {
         val languageSpinner = view.findViewById<Spinner>(R.id.language)
