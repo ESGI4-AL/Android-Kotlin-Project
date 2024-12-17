@@ -41,7 +41,7 @@ class ProfileFragment : Fragment() {
         setupLanguageSpinner(view)
     }
 
-    private fun setupLanguageSpinner(view: View) {
+    /*private fun setupLanguageSpinner(view: View) {
         val languageSpinner = view.findViewById<Spinner>(R.id.language)
         val languages = resources.getStringArray(R.array.languages).toList()
         val flags = listOf(
@@ -103,5 +103,5 @@ class ProfileFragment : Fragment() {
             activity.resources.updateConfiguration(config, activity.resources.displayMetrics)
             activity.recreate()
         }
-    }
+    }*/
 }
