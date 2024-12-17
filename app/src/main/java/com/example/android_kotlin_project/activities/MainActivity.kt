@@ -47,12 +47,6 @@ class MainActivity : AppCompatActivity() {
             settingsPopup.visibility = View.GONE
             navController.navigate(R.id.settingsFragment)
         }
-
-        val signupButton: Button = findViewById(R.id.button_test)
-        signupButton.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     override fun onBackPressed() {

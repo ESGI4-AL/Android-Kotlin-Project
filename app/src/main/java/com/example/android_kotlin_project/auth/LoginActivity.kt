@@ -3,7 +3,7 @@ package com.example.android_kotlin_project.auth
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,51 +14,62 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    private  val firestore= FirebaseFirestore.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
+
+    // UI Elements
+    private lateinit var emailEditText: TextInputEditText
+    private lateinit var passwordEditText: TextInputEditText
+    private lateinit var emailErrorTextView: TextView
+    private lateinit var passwordErrorTextView: TextView
+    private lateinit var loginButton: Button
+    private lateinit var registerLink: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Initialize Firebase Auth and Firestore
-        auth = FirebaseAuth.getInstance()
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        // Find the button by its ID and set an onClickListener to navigate to SignUpActivity
-        val signUpButton: Button = findViewById(R.id.button_signUp)
-        signUpButton.setOnClickListener {
-            // Create an intent to navigate to SignUpActivity
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        // Setup UI components
+        emailEditText = findViewById(R.id.textInputEditText_email)
+        passwordEditText = findViewById(R.id.textInputEditView_password)
+        loginButton = findViewById(R.id.button_login)
+
+        // Error TextViews
+        emailErrorTextView = findViewById(R.id.email_error)
+        passwordErrorTextView = findViewById(R.id.password_error)
+
+        // Navigate to SignUpActivity
+        registerLink = findViewById(R.id.register_Link)
+        registerLink.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
 
-
-        // Find the icon by its ID and set an onClickListener to navigate to home
-        val backButton: ImageView = findViewById(R.id.imageView_leftArrow)
-        backButton.setOnClickListener {
-            // Create an intent to navigate to home
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        
-        val emailEditText: TextInputEditText = findViewById(R.id.textInputEditText_email)
-        val passwordEditText: TextInputEditText = findViewById(R.id.textInputEditView_password)
-        val loginButton: Button = findViewById(R.id.button_login)
-
+        // Handle login button click
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
+            // Clear previous error messages
+            clearErrorMessages()
+
+            // Check if both fields are filled
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 checkIfEmailExistsInFirestore(email, password)
             } else {
-                Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT)
-                    .show()
+                if (email.isEmpty()) {
+                    emailErrorTextView.text = "Please enter your email"
+                    emailErrorTextView.visibility = TextView.VISIBLE
+                }
+                if (password.isEmpty()) {
+                    passwordErrorTextView.text = "Please enter your password"
+                    passwordErrorTextView.visibility = TextView.VISIBLE
+                }
             }
         }
     }
@@ -69,16 +80,16 @@ class LoginActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { documents ->
                 if (documents.isEmpty) {
-                    // No user found with this email
-                    Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                    emailErrorTextView.text = "User not found"
+                    emailErrorTextView.visibility = TextView.VISIBLE
                 } else {
                     // User found, now attempt login
                     loginUser(email, password)
                 }
             }
             .addOnFailureListener {
-                // Handle query failure
-                Toast.makeText(this, "Error checking user", Toast.LENGTH_SHORT).show()
+                emailErrorTextView.text = "Error checking user"
+                emailErrorTextView.visibility = TextView.VISIBLE
             }
     }
 
@@ -86,21 +97,27 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { signInTask ->
                 if (signInTask.isSuccessful) {
-                    // Login successful
-                    Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    // Login successful, navigate to MainActivity
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish() // Prevent user from navigating back to LoginActivity
                 } else {
                     val exception = signInTask.exception
                     if (exception is FirebaseAuthInvalidCredentialsException) {
                         // Wrong password
-                        Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show()
+                        passwordErrorTextView.text = "Wrong password"
+                        passwordErrorTextView.visibility = TextView.VISIBLE
                     } else {
                         // General login failure
-                        Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
+                        emailErrorTextView.text = "Authentication failed"
+                        emailErrorTextView.visibility = TextView.VISIBLE
                     }
                 }
             }
     }
 
+    private fun clearErrorMessages() {
+        emailErrorTextView.visibility = TextView.GONE
+        passwordErrorTextView.visibility = TextView.GONE
+    }
 }
