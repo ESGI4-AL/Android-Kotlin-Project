@@ -22,6 +22,10 @@
     <string name="anAccount">You have an account ?</string>
     <string name="welcome">"Welcome to our app !</string>
     <string name="sign_up">Register</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Your Email</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="logout">Log Out</string>
 
     <string-array name="languages">
         <item>English</item>

@@ -1,31 +1,27 @@
 package com.example.android_kotlin_project.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.android_kotlin_project.R
-import com.example.android_kotlin_project.adapters.FlagSpinnerAdapter
-import java.util.Locale
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    private var isInitialSelection = true
+    private lateinit var auth: FirebaseAuth
+    private val firestore = FirebaseFirestore.getInstance()
+
+    // UI elements
+    private lateinit var nameTextView: TextView
+    private lateinit var emailTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -36,72 +32,43 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupLanguageSpinner(view)
-    }*/
 
-    /*private fun setupLanguageSpinner(view: View) {
-        val languageSpinner = view.findViewById<Spinner>(R.id.language)
-        val languages = resources.getStringArray(R.array.languages).toList()
-        val flags = listOf(
-            R.drawable.flag_uk,
-            R.drawable.flag_frensh,
-            R.drawable.flag_spanish,
-            R.drawable.flag_chinese
-        )
+        // Initialize TextViews
+        nameTextView = view.findViewById(R.id.nameTextView)
+        emailTextView = view.findViewById(R.id.emailTextView)
 
-        val adapter = FlagSpinnerAdapter(requireContext(), languages, flags)
-        languageSpinner.adapter = adapter
-
-        val currentLocale = requireContext().resources.configuration.locales[0].language
-        val position = when (currentLocale) {
-            "en" -> 0
-            "fr" -> 1
-            "es" -> 2
-            "zh" -> 3
-            else -> 0
-        }
-        languageSpinner.setSelection(position)
-
-        languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (isInitialSelection) {
-                    isInitialSelection = false
-                    return
-                }
-
-                val selectedLanguage = when (position) {
-                    0 -> "en"
-                    1 -> "fr"
-                    2 -> "es"
-                    3 -> "zh"
-                    else -> "fr"
-                }
-                if (currentLocale != selectedLanguage) {
-                    updateLocale(selectedLanguage)
-                }
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
+        // Fetch user data
+        fetchUserData()
     }
 
-    private fun updateLocale(languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
+    private fun fetchUserData() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            firestore.collection("users").document(userId)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val name = document.getString("name") ?: "Unknown"
+                        val email = document.getString("email") ?: "Unknown"
 
-        val config = requireContext().resources.configuration
-        config.setLocale(locale)
-
-        requireContext().getSharedPreferences("Settings", Context.MODE_PRIVATE)
-            .edit()
-            .putString("language", languageCode)
-            .apply()
-
-        activity?.let { activity ->
-            activity.createConfigurationContext(config)
-            activity.resources.updateConfiguration(config, activity.resources.displayMetrics)
-            activity.recreate()
+                        // Update UI
+                        nameTextView.text = name
+                        emailTextView.text = email
+                    } else {
+                        nameTextView.text = "Name not found"
+                        emailTextView.text = "Email not found"
+                    }
+                }
+                .addOnFailureListener {
+                    nameTextView.text = "Error fetching name"
+                    emailTextView.text = "Error fetching email"
+                }
+        } else {
+            nameTextView.text = "No user logged in"
+            emailTextView.text = ""
         }
-    }*/
+    }
 }
