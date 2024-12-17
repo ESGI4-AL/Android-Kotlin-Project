@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.EditText
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.android_kotlin_project.R
 import com.google.firebase.auth.FirebaseAuth
@@ -16,8 +18,9 @@ class ProfileFragment : Fragment() {
     private val firestore = FirebaseFirestore.getInstance()
 
     // UI elements
-    private lateinit var nameTextView: TextView
-    private lateinit var emailTextView: TextView
+    private lateinit var nameEditText: EditText
+    private lateinit var emailEditText: EditText
+    private lateinit var saveButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +38,18 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize TextViews
-        nameTextView = view.findViewById(R.id.nameTextView)
-        emailTextView = view.findViewById(R.id.emailTextView)
+        // Initialize EditTexts and Button
+        nameEditText = view.findViewById(R.id.nameEditText)
+        emailEditText = view.findViewById(R.id.emailEditText)
+        saveButton = view.findViewById(R.id.saveButton)
 
         // Fetch user data
         fetchUserData()
+
+        // Save button click listener
+        saveButton.setOnClickListener {
+            updateUserData()
+        }
     }
 
     private fun fetchUserData() {
@@ -54,21 +63,49 @@ class ProfileFragment : Fragment() {
                         val name = document.getString("name") ?: "Unknown"
                         val email = document.getString("email") ?: "Unknown"
 
-                        // Update UI
-                        nameTextView.text = name
-                        emailTextView.text = email
+                        // Set values to EditText
+                        nameEditText.setText(name)
+                        emailEditText.setText(email)
                     } else {
-                        nameTextView.text = "Name not found"
-                        emailTextView.text = "Email not found"
+                        nameEditText.setText("Name not found")
+                        emailEditText.setText("Email not found")
                     }
                 }
                 .addOnFailureListener {
-                    nameTextView.text = "Error fetching name"
-                    emailTextView.text = "Error fetching email"
+                    nameEditText.setText("Error fetching name")
+                    emailEditText.setText("Error fetching email")
                 }
         } else {
-            nameTextView.text = "No user logged in"
-            emailTextView.text = ""
+            nameEditText.setText("No user logged in")
+            emailEditText.setText("")
+        }
+    }
+
+    private fun updateUserData() {
+        val name = nameEditText.text.toString()
+        val email = emailEditText.text.toString()
+
+        if (name.isNotEmpty() && email.isNotEmpty()) {
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                val userId = currentUser.uid
+                val userMap = hashMapOf(
+                    "name" to name,
+                    "email" to email
+                )
+
+                // Update user data in Firestore
+                firestore.collection("users").document(userId)
+                    .set(userMap)
+                    .addOnSuccessListener {
+                        Toast.makeText(requireContext(), "Profile updated", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), "Error updating profile", Toast.LENGTH_SHORT).show()
+                    }
+            }
+        } else {
+            Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
         }
     }
 }
