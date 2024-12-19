@@ -87,5 +87,4 @@
                 android:background="?attr/selectableItemBackground"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

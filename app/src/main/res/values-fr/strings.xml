@@ -21,6 +21,17 @@
     <string name="submit">Connexion</string>
     <string name="anAccount">Vous avez un compte ?</string>
     <string name="welcome">Bienvenue sur notre app !</string>
+    <string name="sign_up">S\'inscrire</string>
+    <string name="name_error">Veuillez entrer votre nom</string>
+    <string name="email_error">Veuillez entrer votre adresse e-mail</string>
+    <string name="password_errror">Veuillez entrer votre mot de passe</string>
+    <string name="confirm_password_error">Veuillez confirmer votre mot de passe</string>
+    <string name="passwords_matching_error">Les mots de passe ne correspondent pas</string>
+    <string name="user_not_found_error">Utilisateur non trouvé</string>
+    <string name="error_checking_user">Erreur lors de la vérification de l\'utilisateur</string>
+    <string name="incorrect_password">Mot de passe incorrect</string>
+    <string name="authentication_failed">Échec de l\'authentification</string>
+
 
     <string-array name="languages">
         <item>Anglais</item>
