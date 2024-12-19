@@ -1,5 +1,6 @@
 package com.example.android_kotlin_project.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.android_kotlin_project.R
+import com.example.android_kotlin_project.auth.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -17,10 +19,11 @@ class ProfileFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private val firestore = FirebaseFirestore.getInstance()
 
-    // UI elements
+    //UI element
     private lateinit var nameEditText: EditText
     private lateinit var emailEditText: EditText
     private lateinit var saveButton: Button
+    private lateinit var logoutButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,24 +34,27 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        //Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize EditTexts and Button
+        //initi
         nameEditText = view.findViewById(R.id.nameEditText)
         emailEditText = view.findViewById(R.id.emailEditText)
         saveButton = view.findViewById(R.id.saveButton)
+        logoutButton = view.findViewById(R.id.logoutButton) // Initialisation du bouton
 
-        // Fetch user data
         fetchUserData()
 
-        // Save button click listener
         saveButton.setOnClickListener {
             updateUserData()
+        }
+
+        logoutButton.setOnClickListener {
+            logoutUser()
         }
     }
 
@@ -63,7 +69,6 @@ class ProfileFragment : Fragment() {
                         val name = document.getString("name") ?: "Unknown"
                         val email = document.getString("email") ?: "Unknown"
 
-                        // Set values to EditText
                         nameEditText.setText(name)
                         emailEditText.setText(email)
                     } else {
@@ -94,7 +99,7 @@ class ProfileFragment : Fragment() {
                     "email" to email
                 )
 
-                // Update user data in Firestore
+                //update in database
                 firestore.collection("users").document(userId)
                     .set(userMap)
                     .addOnSuccessListener {
@@ -107,5 +112,15 @@ class ProfileFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun logoutUser() {
+        auth.signOut()
+        Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
+
+        //go to login page after logout
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }
