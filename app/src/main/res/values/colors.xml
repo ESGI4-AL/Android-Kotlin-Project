@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green1">#EDF3DD</color>
+    <color name="logo_background_light">#DBE6D4</color>
     <color name="green2">#91A361</color>
     <color name="green3">#698F3F</color>
     <color name="sage">#D3DDC2</color>
@@ -11,5 +11,6 @@
     <color name="pink2">#FFADA8</color>
     <color name="background_light">#F5F3F9</color>
     <color name="bold_green">#61735A</color>
+    <color name="logo_brown">#510800</color>
 
 </resources>
