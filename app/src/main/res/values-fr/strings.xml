@@ -31,6 +31,16 @@
     <string name="error_checking_user">Erreur lors de la vérification de l\'utilisateur</string>
     <string name="incorrect_password">Mot de passe incorrect</string>
     <string name="authentication_failed">Échec de l\'authentification</string>
+    <string name="your_name">Votre nom</string>
+    <string name="your_email">Votre email</string>
+    <string name="save_changes">Enregistrer les modifications</string>
+    <string name="logout">Se déconnecter</string>
+    <string name="profile_information">Informations du profil</string>
+    <string name="name">Nom</string>
+    <string name="enter_your_name">Entrez votre nom</string>
+    <string name="enter_your_email">Entrez votre email</string>
+    <string name="save">Enregistrer</string>
+
 
 
     <string-array name="languages">

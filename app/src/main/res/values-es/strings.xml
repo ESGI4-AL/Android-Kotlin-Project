@@ -30,6 +30,15 @@
     <string name="error_checking_user">Error al verificar el usuario</string>
     <string name="incorrect_password">Contraseña incorrecta</string>
     <string name="authentication_failed">Error de autenticación</string>
+    <string name="your_name">Tu nombre</string>
+    <string name="your_email">Tu correo electrónico</string>
+    <string name="save_changes">Guardar cambios</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="profile_information">Información del perfil</string>
+    <string name="name">Nombre</string>
+    <string name="enter_your_name">Introduce tu nombre</string>
+    <string name="enter_your_email">Introduce tu correo electrónico</string>
+    <string name="save">Guardar</string>
 
 
     <string-array name="languages">
