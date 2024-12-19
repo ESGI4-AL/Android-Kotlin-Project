@@ -19,16 +19,18 @@
             android:orientation="vertical"
             android:background="@drawable/home_gradient_background">
 
+
             <TextView
                 android:id="@+id/welcome_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
                 android:padding="16dp"
-                android:textSize="18sp"
-                android:layout_margin="10dp"
+                android:textSize="20sp"
+                android:layout_margin="20dp"
                 android:layout_gravity="center"
-                android:textColor="@android:color/black" />
+                android:fontFamily="@font/blogger_sans_bold"
+                android:textColor="@color/logo_brown" />
 
             <include
                 android:id="@+id/quote_card"

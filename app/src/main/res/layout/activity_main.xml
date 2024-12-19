@@ -53,8 +53,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/settings"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/settings_popup"

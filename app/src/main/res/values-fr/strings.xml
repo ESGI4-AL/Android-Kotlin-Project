@@ -20,7 +20,7 @@
     <string name="confirmPassword">Confirmation du mot de passe</string>
     <string name="submit">Connexion</string>
     <string name="anAccount">Vous avez un compte ?</string>
-    <string name="welcome">Bienvenue sur notre app !</string>
+    <string name="welcome">Bienvenue dans Health Wave !</string>
     <string name="sign_up">S\'inscrire</string>
     <string name="name_error">Veuillez entrer votre nom</string>
     <string name="email_error">Veuillez entrer votre adresse e-mail</string>

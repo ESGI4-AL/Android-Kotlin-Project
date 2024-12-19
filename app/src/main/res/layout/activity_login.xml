@@ -11,25 +11,34 @@
         android:id="@+id/relativeLayout_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green1">
+        android:background="@color/logo_background_light">
 
         <LinearLayout
             android:id="@+id/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="40dp"
-            android:gravity="center">
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription="@string/app_logo"
+                android:src="@drawable/heart_logo"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/textView_appName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:text="@string/app_name"
-                android:textColor="@color/bold_green"
+                android:fontFamily="@font/blogger_sans_bold"
+                android:textColor="@color/logo_brown"
                 android:textSize="30sp" />
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/linearLayout_loginForm"
