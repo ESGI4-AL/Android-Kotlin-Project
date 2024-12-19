@@ -31,6 +31,10 @@
     <string name="error_checking_user">Error checking user</string>
     <string name="incorrect_password">Incorrect password</string>
     <string name="authentication_failed">Authentication failed</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Your Email</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="logout">Log Out</string>
 
     <string-array name="languages">
         <item>English</item>
