@@ -35,6 +35,11 @@
     <string name="your_email">Your Email</string>
     <string name="save_changes">Save Changes</string>
     <string name="logout">Log Out</string>
+    <string name="profile_information">Profile Information</string>
+    <string name="name">Name</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="save">Save</string>
 
     <string-array name="languages">
         <item>English</item>

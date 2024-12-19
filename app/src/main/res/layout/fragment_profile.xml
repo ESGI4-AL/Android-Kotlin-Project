@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile Information"
+            android:text="@string/profile_information"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/name"
             android:textSize="16sp"
             android:textColor="#555555"
             android:layout_marginBottom="4dp" />
@@ -38,7 +38,7 @@
             android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your name"
+            android:hint="@string/enter_your_name"
             android:textSize="16sp"
             android:background="@android:color/white"
             android:padding="12dp"
@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="@string/email"
             android:textSize="16sp"
             android:textColor="#555555"
             android:layout_marginBottom="4dp" />
@@ -58,7 +58,7 @@
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your email"
+            android:hint="@string/enter_your_email"
             android:textSize="16sp"
             android:background="@android:color/white"
             android:padding="12dp"
@@ -71,7 +71,7 @@
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="@string/save"
             android:textSize="14sp"
             android:backgroundTint="#8BC34A"
             android:textColor="#FFFFFF"
@@ -88,7 +88,7 @@
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="@string/logout"
             android:textSize="14sp"
             android:backgroundTint="#F44336"
             android:textColor="#FFFFFF"
