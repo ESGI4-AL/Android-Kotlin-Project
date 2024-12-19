@@ -41,6 +41,7 @@
     <string name="enter_your_email">Enter your email</string>
     <string name="save">Save</string>
     <string name="app_logo">App Logo</string>
+    <string name="what_are_your_thoughts_today">What are your thoughts today?</string>
 
     <string-array name="languages">
         <item>English</item>

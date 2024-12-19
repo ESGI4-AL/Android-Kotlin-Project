@@ -71,7 +71,7 @@
                     android:id="@+id/thought_prompt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="What are your thoughts today?"
+                    android:text="@string/what_are_your_thoughts_today"
                     android:textSize="14sp"
                     android:textColor="#1C1B1F" />
 
