@@ -18,7 +18,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val firestore = FirebaseFirestore.getInstance()
 
-    // UI Elements
     private lateinit var emailEditText: TextInputEditText
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var emailErrorTextView: TextView
@@ -31,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
 
         // Setup UI components
@@ -63,11 +61,11 @@ class LoginActivity : AppCompatActivity() {
                 checkIfEmailExistsInFirestore(email, password)
             } else {
                 if (email.isEmpty()) {
-                    emailErrorTextView.text = "Please enter your email"
+                    emailErrorTextView.text = getString(R.string.email_error)
                     emailErrorTextView.visibility = TextView.VISIBLE
                 }
                 if (password.isEmpty()) {
-                    passwordErrorTextView.text = "Please enter your password"
+                    passwordErrorTextView.text = getString(R.string.password_errror)
                     passwordErrorTextView.visibility = TextView.VISIBLE
                 }
             }
@@ -80,15 +78,15 @@ class LoginActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { documents ->
                 if (documents.isEmpty) {
-                    emailErrorTextView.text = "User not found"
+                    emailErrorTextView.text = getString(R.string.user_not_found_error)
                     emailErrorTextView.visibility = TextView.VISIBLE
                 } else {
-                    // User found, now attempt login
+                    // User found => now attempt login
                     loginUser(email, password)
                 }
             }
             .addOnFailureListener {
-                emailErrorTextView.text = "Error checking user"
+                emailErrorTextView.text = getString(R.string.error_checking_user)
                 emailErrorTextView.visibility = TextView.VISIBLE
             }
     }
@@ -104,12 +102,10 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     val exception = signInTask.exception
                     if (exception is FirebaseAuthInvalidCredentialsException) {
-                        // Wrong password
-                        passwordErrorTextView.text = "Wrong password"
+                        passwordErrorTextView.text = getString(R.string.incorrect_password)
                         passwordErrorTextView.visibility = TextView.VISIBLE
                     } else {
-                        // General login failure
-                        emailErrorTextView.text = "Authentication failed"
+                        emailErrorTextView.text = getString(R.string.authentication_failed)
                         emailErrorTextView.visibility = TextView.VISIBLE
                     }
                 }

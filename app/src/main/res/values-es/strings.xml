@@ -20,6 +20,17 @@
     <string name="submit">Entregar</string>
     <string name="anAccount">Tienes una cuenta?</string>
     <string name="welcome">¡Bienvenido a nuestra aplicación!</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="name_error">Por favor, introduzca su nombre</string>
+    <string name="email_error">Por favor, introduzca su correo electrónico</string>
+    <string name="password_errror">Por favor, introduzca su contraseña</string>
+    <string name="confirm_password_error">Por favor, confirme su contraseña</string>
+    <string name="passwords_matching_error">Las contraseñas no coinciden</string>
+    <string name="user_not_found_error">Usuario no encontrado</string>
+    <string name="error_checking_user">Error al verificar el usuario</string>
+    <string name="incorrect_password">Contraseña incorrecta</string>
+    <string name="authentication_failed">Error de autenticación</string>
+
 
     <string-array name="languages">
         <item>Inglés</item>
