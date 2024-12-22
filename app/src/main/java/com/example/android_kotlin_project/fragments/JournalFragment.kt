@@ -16,7 +16,7 @@ class JournalFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // binding for JournalFragment
+        //binding for JournalFragment
         _binding = FragmentJournalBinding.inflate(inflater, container, false)
         return binding.root
     }
