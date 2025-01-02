@@ -26,5 +26,8 @@
         <item>西班牙语</item>
         <item>中国人</item>
     </string-array>
+    <string name="dark_mode">深色模式</string>
+    <string name="notification">通知</string>
+    <string name="langue">语言</string>
 
 </resources>
