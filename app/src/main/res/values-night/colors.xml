@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="backgroundColor">#121212</color> <!-- Arrière-plan sombre -->
+    <color name="colorOnBackground">#FFFFFFFF</color> <!-- Texte blanc -->
+    <color name="logo_background_light">#2E2E2E</color>
+    <color name="green2">#8DB562</color>
+    <color name="green3">#4E7F30</color>
+    <color name="sage">#445842</color>
+    <color name="orange">#A66A4B</color>
+    <color name="pink1">#5A4041</color>
+    <color name="pink2">#8E5453</color>
+    <color name="bold_green">#48694A</color>
+    <color name="logo_brown">#3A0700</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
