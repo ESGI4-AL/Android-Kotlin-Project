@@ -48,4 +48,7 @@
         <item>Spanish</item>
         <item>Chinese</item>
     </string-array>
+    <string name="dark_mode">Dark mode</string>
+    <string name="notification">Notifications</string>
+    <string name="langue">Language</string>
 </resources>

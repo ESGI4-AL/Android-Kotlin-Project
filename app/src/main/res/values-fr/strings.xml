@@ -40,6 +40,9 @@
     <string name="enter_your_name">Entrez votre nom</string>
     <string name="enter_your_email">Entrez votre email</string>
     <string name="save">Enregistrer</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="notification">Notifications</string>
+    <string name="langue">Langue</string>
 
 
 
