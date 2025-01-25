@@ -1,5 +1,4 @@
 package com.example.android_kotlin_project.models
-
 data class Recipe(
     val aggregateLikes: Int,
     val analyzedInstructions: List<AnalyzedInstruction>,

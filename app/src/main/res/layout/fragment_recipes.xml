@@ -68,7 +68,8 @@
                     android:id="@+id/RandomRecipeIV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/green2"/>
+                    android:background="@color/green2"
+                    android:scaleType="centerCrop"/>
             </androidx.cardview.widget.CardView>
             <TextView
                 android:id="@+id/PopularTV"

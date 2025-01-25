@@ -38,8 +38,10 @@ class RecipesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_recipes, container, false)
     }
 private lateinit var recipeImageView: ImageView
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    // all the population of the elements should happen in  sperate functions that are in repos and serices and dto da and shit
         recipeImageView = view.findViewById(R.id.RandomRecipeIV)
 
         RetrofitInstance.api.getRandomRecipe().enqueue(object:Callback<RecipeList>{
