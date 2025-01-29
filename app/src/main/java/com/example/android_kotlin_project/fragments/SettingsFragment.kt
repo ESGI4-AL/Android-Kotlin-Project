@@ -31,7 +31,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupLanguageSpinner(view)
 
-        val themeSwitch = view.findViewById<Switch>(R.id.theme_switch)
+        val themeSwitch = view.findViewById<Switch>(R.id.dark_mode_switch)
 
         val backButton: ImageButton = view.findViewById(R.id.back_button)
         backButton.setOnClickListener {
