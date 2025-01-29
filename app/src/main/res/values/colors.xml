@@ -19,4 +19,6 @@
     <color name="button_logout">#F44336</color>
     <color name="background_cadre">#FFFFFFFF</color>
     <color name="spinner_item_color">#F5F3F9</color>
+    <color name="startColor">#EBFDB2</color>
+    <color name="endColor">#FFD1B6</color>
 </resources>
