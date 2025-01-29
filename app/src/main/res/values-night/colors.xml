@@ -2,7 +2,7 @@
 <resources>
     <color name="backgroundColor">#121212</color> <!-- Arrière-plan sombre -->
     <color name="colorOnBackground">#FFFFFFFF</color> <!-- Texte blanc -->
-    <color name="logo_background_light">#2E2E2E</color>
+    <color name="logo_background_light">#48694A</color>
     <color name="green2">#9CCA5B</color>
     <color name="green3">#4E7F30</color>
     <color name="sage">#445842</color>
@@ -19,4 +19,6 @@
     <color name="button_logout">#923024</color>
     <color name="background_cadre">#2C2C2C</color>
     <color name="spinner_item_color">#535252</color>
+    <color name="startColor">#375030</color>
+    <color name="endColor">#8F8E6A</color>
 </resources>
