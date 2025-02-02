@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     id("kotlin-parcelize")
+    id("kotlin-kapt")
+
 }
 
 android {
@@ -46,6 +48,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    val lifecycle_version = "2.4.0"
     implementation(libs.firebase.common.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     // navigation
@@ -68,13 +74,28 @@ dependencies {
     // samsung health sdk
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
     implementation(libs.gson)
-    // Retrofit
+    //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    // glide
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    //viewmodel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation ("androidx.lifecycle:lifecycle-extensions:2.1.0")
+
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    //room
+    val room_version = "2.6.0" // Use the latest Room version
+
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt ("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
+    //gson
+    implementation("com.google.code.gson:gson:2.10.1")
+
 }
+
+
