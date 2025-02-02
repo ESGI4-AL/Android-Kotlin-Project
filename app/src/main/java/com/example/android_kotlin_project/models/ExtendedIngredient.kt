@@ -1,5 +1,9 @@
 package com.example.android_kotlin_project.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ExtendedIngredient(
     val aisle: String,
     val amount: Double,
@@ -13,4 +17,4 @@ data class ExtendedIngredient(
     val original: String,
     val originalName: String,
     val unit: String
-)
+) : Parcelable
