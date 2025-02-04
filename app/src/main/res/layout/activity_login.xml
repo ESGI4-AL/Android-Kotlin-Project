@@ -5,6 +5,7 @@
     android:id="@+id/scrollView_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     tools:context=".auth.LoginActivity">
 
     <RelativeLayout
@@ -142,7 +143,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="90dp"
-                android:backgroundTint="@color/green2"
+                android:backgroundTint="@color/green3"
                 android:padding="15dp"
                 android:text="@string/login"
                 android:textAllCaps="true"

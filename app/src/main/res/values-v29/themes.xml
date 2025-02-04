@@ -1,8 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
     <style name="Base.Theme.HealthWaves" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/green2</item>
         <item name="colorPrimaryVariant">@color/green3</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -10,7 +11,8 @@
         <item name="colorOnBackground">@color/colorOnBackground</item>
         <item name="colorAccent">@color/pink2</item>
         <item name="colorSecondary">@color/sage</item>
-    </style>
 
-    <style name="Theme.HealthWaves" parent="Base.Theme.HealthWaves" />
+        <!-- Désactiver le mode sombre forcé d’Android -->
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
 </resources>

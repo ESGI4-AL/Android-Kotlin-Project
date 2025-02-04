@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Paramètres"
+            android:text="@string/settings"
             android:textSize="18sp"
             android:layout_marginStart="8dp"
             android:layout_gravity="center_vertical" />
@@ -97,7 +97,9 @@
                     android:id="@+id/language"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:entries="@array/languages" />
+                    android:entries="@array/languages"
+                    android:background="@color/backgroundColor"
+                    android:popupBackground="@color/backgroundColor"/>
             </LinearLayout>
 
             <TextView

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="backgroundColor">#121212</color> <!-- Arrière-plan sombre -->
+    <color name="colorOnBackground">#FFFFFFFF</color> <!-- Texte blanc -->
+    <color name="logo_background_light">#48694A</color>
+    <color name="green2">#9CCA5B</color>
+    <color name="green3">#4E7F30</color>
+    <color name="sage">#445842</color>
+    <color name="orange">#A66A4B</color>
+    <color name="pink1">#5A4041</color>
+    <color name="pink2">#8E5453</color>  <!-- bouton switch -->
+    <color name="bold_green">#48694A</color>
+    <color name="logo_brown">#3A0700</color>
+    <color name="black">#ffffff</color>
+    <color name="white">#535252</color>
+    <color name="input_profile">#535252</color> <!-- input page profile -->
+    <color name="title_input_profile">#F5F5F5</color>
+    <color name="button_save">#547C26</color>
+    <color name="button_logout">#923024</color>
+    <color name="background_cadre">#2C2C2C</color>
+    <color name="spinner_item_color">#535252</color>
+    <color name="startColor">#375030</color>
+    <color name="endColor">#8F8E6A</color>
+</resources>

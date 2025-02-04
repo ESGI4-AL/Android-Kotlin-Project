@@ -1,9 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.AndroidKotlinProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.HealthWaves" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/green2</item>
+        <item name="colorPrimaryVariant">@color/green3</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="backgroundColor">@color/backgroundColor</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorAccent">@color/pink2</item>
+        <item name="colorSecondary">@color/sage</item>
     </style>
 
-    <style name="Theme.AndroidKotlinProject" parent="Base.Theme.AndroidKotlinProject" />
+    <style name="Theme.HealthWaves" parent="Base.Theme.HealthWaves" />
 </resources>
