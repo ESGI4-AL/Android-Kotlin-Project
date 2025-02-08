@@ -9,6 +9,9 @@ import com.example.android_kotlin_project.models.Entities.Recipe
 @Dao
 interface RecipeDao {
 
+    @Query("SELECT * FROM recipes ORDER BY RANDOM() LIMIT 1")
+    suspend fun getFirstRecipe(): Recipe?
+
     // Fetch all saved recipes
     @Query("SELECT * FROM recipes")
     suspend fun getAllRecipes(): List<Recipe>

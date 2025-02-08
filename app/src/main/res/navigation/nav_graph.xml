@@ -39,6 +39,22 @@
         tools:layout="@layout/fragment_recipes" />
 
     <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.example.android_kotlin_project.fragments.RecipeDetailsFragment"
+        tools:layout="@layout/fragment_recipe_details">
+        <argument
+            android:name="RECIPE_ID"
+            app:argType="integer" />
+        <argument
+            android:name="RECIPE_TITLE"
+            app:argType="string" />
+        <argument
+            android:name="RECIPE_IMAGE"
+            app:argType="string" />
+    </fragment>
+
+
+    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.android_kotlin_project.fragments.SettingsFragment"
         android:label="Settings"

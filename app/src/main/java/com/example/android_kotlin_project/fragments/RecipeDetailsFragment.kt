@@ -1,57 +1,61 @@
 package com.example.android_kotlin_project.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.example.android_kotlin_project.ARG_PARAM1
-import com.example.android_kotlin_project.ARG_PARAM2
+import com.bumptech.glide.Glide
 import com.example.android_kotlin_project.R
+import com.google.android.material.appbar.CollapsingToolbarLayout
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RecipeDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RecipeDetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var recipeId: Int? = null
+    private var recipeTitle: String? =null
+    private var recipeImage: String? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Debug
+        Log.d("RecipeDetailsFragment", "onCreate called")
+
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            recipeId = it.getInt("RECIPE_ID")
+            recipeTitle = it.getString("RECIPE_TITLE")
+            recipeImage = it.getString("RECIPE_IMAGE")
         }
+
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe_details, container, false)
+        val view = inflater.inflate(R.layout.fragment_recipe_details, container, false)
+        val collapsingToolbar: CollapsingToolbarLayout = view.findViewById(R.id.collapsing_TB)
+        collapsingToolbar.title = recipeTitle
+
+        val recipeImageView: ImageView = view.findViewById(R.id.img_recipe_detail)
+        if(!recipeImage.isNullOrEmpty()){
+            Glide.with(this)
+                .load(recipeImage)
+                .placeholder(R.drawable.placeholder_img)
+                .into(recipeImageView)
+
+            val recipeImageView: ImageView = view.findViewById(R.id.img_recipe_detail)
+            Log.d("RecipeDetailsFragment", "ImageView found: $recipeImageView")
+
+        }
+
+
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment recipeDetails.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecipeDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }
+

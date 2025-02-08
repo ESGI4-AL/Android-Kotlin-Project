@@ -9,7 +9,7 @@ interface SpoonacularRecipesApiService {
     @GET("recipes/random")
      fun getRandomRecipe (
         //hardcoded but needs to be a secured var env
-        @Query("apiKey") apiKey: String="0b6f5ac409fd45f9a84267d65de75be9",
+        @Query("apiKey") apiKey: String="7c1d68022f50446bb19f40f722671ca7",
         @Query("number") number: Int=1
     ): Call<RecipeListDto>
 

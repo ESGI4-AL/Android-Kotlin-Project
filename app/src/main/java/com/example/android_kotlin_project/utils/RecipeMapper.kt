@@ -6,12 +6,12 @@ import com.example.android_kotlin_project.models.Entities.Recipe
 fun RecipeDto.toEntity(): Recipe {
     return Recipe(
         id = this.id,
-        title = this.title,
-        image = this.image,
+        title = this.title!!,
+        image = this.image!!,
         readyInMinutes = this.readyInMinutes,
-        servings = this.servings,
+        servings = this.servings!!,
         instructions = this.instructions ?: "",
-        healthScore = this.healthScore,
+        healthScore = this.healthScore!!,
         vegetarian = this.vegetarian,
         vegan = this.vegan,
         extendedIngredients = this.extendedIngredients,

@@ -25,6 +25,7 @@ abstract class MyDatabase : RoomDatabase() {
                     MyDatabase::class.java,
                     "recipe_database"
                 ).addTypeConverter(Converters())
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 instance
