@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -23,7 +24,6 @@ class RecipesFragment : Fragment() {
     private lateinit var recipeImageView: ImageView
     private lateinit var recipeMvvm: RecipeViewModel
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,107 +32,62 @@ class RecipesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_recipes, container, false)
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recipeImageView =view.findViewById(R.id.RandomRecipeIV)
+        recipeImageView = view.findViewById(R.id.RandomRecipeIV)
 
-        val recipeDao =MyDatabase.getInstance(requireContext()).recipeDao()
-        val repository =RecipeRepository(recipeDao)
-        val viewModelFactory =RecipeViewModelFactory(repository)
+        val recipeDao = MyDatabase.getInstance(requireContext()).recipeDao()
+        val repository = RecipeRepository(recipeDao)
+        val viewModelFactory = RecipeViewModelFactory(repository)
         recipeMvvm = ViewModelProvider(this, viewModelFactory)[RecipeViewModel::class.java]
 
-        recipeMvvm.getRandomRecipe()
         observerRandomRecipe()
 
+        recipeMvvm.getRandomRecipe()
+
         onRandomRecipeClick(view)
-
-
-
     }
 
-//    private fun observerRandomRecipe() {
-//        recipeMvvm.observeRandomRecipeLiveData().observe(viewLifecycleOwner, Observer { recipe ->
-//            if (recipe != null) {
-//                val imageUrl = recipe.image
-//                Log.d("RecipeFragment", "Recipe Image URL: $imageUrl")
-//
-//                // Load Image with Glide
-//                Glide.with(this)
-//                    .load(imageUrl ?: R.drawable.placeholder_img)
-//                    .placeholder(R.drawable.placeholder_img)
-//                    .error(R.drawable.placeholder_img) // Show placeholder if image is missing
-//                    .transition(DrawableTransitionOptions.withCrossFade(500))
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .into(recipeImageView)
-//            } else {
-//                Log.e("RecipeFragment", "API returned null recipe")
-//                Toast.makeText(requireContext(), "Failed to load recipe", Toast.LENGTH_SHORT).show()
-//            }
-//        })
-//
-//
-//    }
-private fun observerRandomRecipe() {
-    recipeMvvm.observeRandomRecipeLiveData().observe(viewLifecycleOwner) { recipe ->
-        recipe?.let {
-            val imageUrl = it.image
+    private fun observerRandomRecipe() {
+        Log.d("DEBUG_CHECK", "Observer started!")
+
+        recipeMvvm.observeRandomRecipeLiveData().observe(viewLifecycleOwner) { recipe ->
+            Log.d("DEBUG_CHECK", "Observer triggered with recipe: $recipe")
+
+            val imageUrl = recipe?.image
             Log.d("GLIDE_DEBUG", "Loading Image URL: $imageUrl")
 
             Glide.with(this)
-                .load(imageUrl)
+                .load(if (imageUrl.isNullOrEmpty()) R.drawable.placeholder_img else imageUrl)
                 .placeholder(R.drawable.placeholder_img)
-                .error(R.drawable.placeholder_img)  // Show error image if URL fails
+                .error(R.drawable.placeholder_img)
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(recipeImageView)
-        } ?: Log.e("GLIDE_ERROR", "Recipe data is null")
+
+            Log.d("GLIDE_DEBUG", "Glide should be loading now.")
+        }
     }
-}
 
 
     private fun onRandomRecipeClick(view: View) {
         val recipeCard = view.findViewById<View>(R.id.RandomRecipeIV)
 
         recipeCard.setOnClickListener {
-            val randomRecipe =recipeMvvm.observeRandomRecipeLiveData().value
-            // val fragment = RecipeDetailsFragment()
-
-            if(randomRecipe != null){
+            val randomRecipe = recipeMvvm.randomRecipeLiveData.value
+            if (randomRecipe != null) {
                 val bundle = Bundle().apply {
                     putInt("RECIPE_ID", randomRecipe.id)
                     putString("RECIPE_TITLE", randomRecipe.title)
                     putString("RECIPE_IMAGE", randomRecipe.image)
                 }
 
-//                requireActivity().supportFragmentManager.beginTransaction()
-//                    .replace(R.id.fragment_container, fragment)
-//                    .addToBackStack(null)
-//                    .commit()
                 findNavController().navigate(R.id.recipeDetailsFragment, bundle)
+            } else {
+                Log.e("NAVIGATION_ERROR", "Recipe is null, cannot navigate.")
+                Toast.makeText(requireContext(), "Recipe not available", Toast.LENGTH_SHORT).show()
             }
-
-
-//            val bundle = Bundle()
-//            bundle.putString("id", "4517")
-//            fragment.arguments = bundle
-
-
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container , fragment)
-//                .commit()
-
-
         }
     }
-
-
-
-
-
-
-
-
 }
