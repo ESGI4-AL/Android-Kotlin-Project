@@ -2,11 +2,13 @@ package com.example.android_kotlin_project.fragments
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.android_kotlin_project.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class FragmentDialogAddNote : DialogFragment() {
 
@@ -22,7 +24,6 @@ class FragmentDialogAddNote : DialogFragment() {
         val saveButton = view.findViewById<Button>(R.id.saveNoteButton)
 
         builder.setView(view)
-
         val dialog = builder.create()
 
         cancelButton.setOnClickListener {
@@ -33,16 +34,39 @@ class FragmentDialogAddNote : DialogFragment() {
             val date = noteDate.text.toString().trim()
             val title = noteTitle.text.toString().trim()
             val description = noteDescription.text.toString().trim()
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
 
             if (title.isEmpty()) {
                 noteTitle.error = "Title is required"
                 return@setOnClickListener
             }
 
-            val listener = activity as? OnNoteAddedListener
-            listener?.onNoteAdded(date, title, description)
+            if (userId == null) {
+                noteTitle.error = "User not authenticated"
+                return@setOnClickListener
+            }
 
-            dialog.dismiss()
+            val db = FirebaseFirestore.getInstance()
+            val newNoteRef = db.collection("notes").document()
+
+            val note = hashMapOf(
+                "noteId" to newNoteRef.id,
+                "userId" to userId,
+                "date" to date,
+                "title" to title,
+                "description" to description,
+                "timestamp" to System.currentTimeMillis()
+            )
+
+            newNoteRef.set(note)
+                .addOnSuccessListener {
+                    val listener = activity as? OnNoteAddedListener
+                    listener?.onNoteAdded(date, title, description)
+                    dialog.dismiss()
+                }
+                .addOnFailureListener {
+                    noteTitle.error = "Error saving note"
+                }
         }
 
         return dialog
