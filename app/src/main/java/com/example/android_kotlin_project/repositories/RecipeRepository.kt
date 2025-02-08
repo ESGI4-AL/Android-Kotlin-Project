@@ -1,12 +1,17 @@
 package com.example.android_kotlin_project.repositories
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.android_kotlin_project.models.Dao.RecipeDao
 import com.example.android_kotlin_project.models.Dto.RecipeDto
 import com.example.android_kotlin_project.models.Entities.Recipe
 import com.example.android_kotlin_project.models.Entities.RecipeList
 import com.example.android_kotlin_project.retrofit.RetrofitInstance
 import com.example.android_kotlin_project.utils.toEntity
+import com.example.android_kotlin_project.utils.toEntityList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class RecipeRepository(private val recipeDao: RecipeDao) {
@@ -34,26 +39,33 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
         recipeDao.deleteAllRecipes()
     }
 
+
+    private val _randomRecipe = MutableLiveData<Recipe?>()
+    val randomRecipe: LiveData<Recipe?> get() = _randomRecipe
+
     suspend fun fetchRandomRecipe(): Recipe? {
-        return try {
-            Log.d("API_DEBUG", "Fetching random recipe...")
-
-            val response = RetrofitInstance.api.getRandomRecipe().execute()
-
-            if (response.isSuccessful && response.body() != null) {
-                val recipeDto = response.body()!!.recipes.firstOrNull()
-                Log.d("API_DEBUG", "API Response: ${response.body()}") // Log full response
-
-                recipeDto?.toEntity() // Convert DTO to Entity
-            } else {
-                Log.e("API_ERROR", "Request failed: ${response.errorBody()?.string()}")
-                null
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = RetrofitInstance.api.getRandomRecipe().execute()
+                if (response.isSuccessful && response.body() != null) {
+                    val recipeDtos = response.body()!!.recipes
+                    if (!recipeDtos.isNullOrEmpty()) {
+                        return@withContext recipeDtos.toEntityList().first()
+                    } else {
+                        Log.e("API_ERROR", "No recipes found")
+                        return@withContext null
+                    }
+                } else {
+                    Log.e("API_ERROR", "Response unsuccessful: ${response.message()}")
+                    return@withContext null
+                }
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "API call failed: ${e.message}")
+                return@withContext null
             }
-        } catch (e: Exception) {
-            Log.e("API_ERROR", "Network request failed: ${e.message}")
-            null
         }
     }
-
-
+    fun getCurrentRandomRecipe(): Recipe? {
+        return _randomRecipe.value
+    }
 }

@@ -1,31 +1,34 @@
 package com.example.android_kotlin_project.ui.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android_kotlin_project.models.Dto.RecipeDto
-import com.example.android_kotlin_project.models.Dto.RecipeListDto
 import com.example.android_kotlin_project.models.Entities.Recipe
 import com.example.android_kotlin_project.models.Entities.RecipeList
 import com.example.android_kotlin_project.repositories.RecipeRepository
-import com.example.android_kotlin_project.retrofit.RetrofitInstance
-import com.example.android_kotlin_project.utils.toEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
 
-    private val _error = MutableLiveData<String>()
-    // MutableStateFlow for the list of recipes
     private val _savedRecipes = MutableStateFlow<RecipeList>(RecipeList(emptyList()))
-    var randomRecipeLiveData = MutableLiveData<Recipe>()
-    private val _randomRecipeLiveData = MutableLiveData<Recipe?>()
-    val error: LiveData<String> get() = _error
+    private val _randomRecipeLiveData = MutableLiveData<Recipe?>() // Private MutableLiveData
+    val randomRecipeLiveData: MutableLiveData<Recipe?> get() = _randomRecipeLiveData // Public LiveData
+    val error = MutableLiveData<String>()
+
+    fun getRandomRecipe() {
+        viewModelScope.launch {
+            val recipe = repository.fetchRandomRecipe()
+            if (recipe != null) {
+                _randomRecipeLiveData.postValue(recipe)
+            } else {
+                Log.e("API_ERROR", "Failed to fetch recipe")
+            }
+        }
+    }
+
 
     // Load saved recipes from the repository
     fun loadSavedRecipes() {
@@ -70,39 +73,55 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
 //            }
 //        }
 //    }
-fun getRandomRecipe() {
-    Log.d("API_DEBUG", "Fetching random recipe...")
+//fun getRandomRecipe() {
+//    Log.d("API_DEBUG", "Fetching random recipe...")
+//
+//    RetrofitInstance.api.getRandomRecipe().enqueue(object : Callback<RecipeListDto> {
+//        override fun onResponse(call: Call<RecipeListDto>, response: Response<RecipeListDto>) {
+//            Log.d("API_DEBUG", "Response Code: ${response.code()}")
+//            Log.d("API_DEBUG", "Response Body: ${response.body()}")
+//
+//            if (response.isSuccessful && response.body() != null) {
+//                val recipeDtos = response.body()!!.recipes
+//                if (!recipeDtos.isNullOrEmpty()) {
+//                    val recipe = recipeDtos[0] // Get first recipe
+//                    Log.d("API_SUCCESS", "Recipe Title: ${recipe.title}")
+//                    Log.d("API_SUCCESS", "Recipe Image URL: ${recipe.image}")
+//
+//                    val recipeEntity = recipe.toEntity() // Convert DTO to Entity
+//                    randomRecipeLiveData.postValue(recipeEntity)
+//                } else {
+//                    Log.e("API_ERROR", "Recipe list is empty")
+//                }
+//            } else {
+//                Log.e("API_ERROR", "API Error: ${response.code()} - ${response.message()}")
+//            }
+//        }
+//
+//        override fun onFailure(call: Call<RecipeListDto>, t: Throwable) {
+//            Log.e("API_ERROR", "Network request failed: ${t.message}")
+//        }
+//    })
+//}
 
-    RetrofitInstance.api.getRandomRecipe().enqueue(object : Callback<RecipeListDto> {
-        override fun onResponse(call: Call<RecipeListDto>, response: Response<RecipeListDto>) {
-            Log.d("API_DEBUG", "Response Code: ${response.code()}")
-            Log.d("API_DEBUG", "Response Body: ${response.body()}")
 
-            if (response.isSuccessful && response.body() != null) {
-                val recipeDtos = response.body()!!.recipes
-                if (!recipeDtos.isNullOrEmpty()) {
-                    val recipe = recipeDtos[0] // Get first recipe
-                    Log.d("API_SUCCESS", "Recipe Title: ${recipe.title}")
-                    Log.d("API_SUCCESS", "Recipe Image URL: ${recipe.image}")
+//    fun getRandomRecipe() {
+//        viewModelScope.launch {
+//            repository.fetchRandomRecipe()
+//        }
+//    }
 
-                    val recipeEntity = recipe.toEntity() // Convert DTO to Entity
-                    randomRecipeLiveData.postValue(recipeEntity)
-                } else {
-                    Log.e("API_ERROR", "Recipe list is empty")
-                }
-            } else {
-                Log.e("API_ERROR", "API Error: ${response.code()} - ${response.message()}")
-            }
-        }
-
-        override fun onFailure(call: Call<RecipeListDto>, t: Throwable) {
-            Log.e("API_ERROR", "Network request failed: ${t.message}")
-        }
-    })
-}
-
-
-    fun observeRandomRecipeLiveData(): LiveData<Recipe> {
+//    fun getRandomRecipe() {
+//        viewModelScope.launch {
+//            try {
+//                repository.fetchRandomRecipe()
+//                _randomRecipeLiveData.postValue(repository.getCurrentRandomRecipe())
+//            } catch (e: Exception) {
+//                error.postValue("Failed to fetch recipe: ${e.message}")
+//            }
+//        }
+//    }
+    fun observeRandomRecipeLiveData(): MutableLiveData<Recipe?> {
         return randomRecipeLiveData
     }
 
