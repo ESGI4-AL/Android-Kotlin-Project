@@ -51,6 +51,10 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation ("androidx.media3:media3-common:1.4.0")
+    implementation ("androidx.media3:media3-exoplayer:1.4.0")
+    implementation ("androidx.media3:media3-ui:1.4.0")
+
     val lifecycle_version = "2.4.0"
     implementation(libs.firebase.common.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
