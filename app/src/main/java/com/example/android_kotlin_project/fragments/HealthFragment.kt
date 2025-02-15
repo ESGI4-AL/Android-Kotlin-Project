@@ -14,8 +14,12 @@ import com.example.android_kotlin_project.databinding.FragmentHealthBinding
 import com.example.android_kotlin_project.databinding.HeartRateCardBinding
 import com.example.android_kotlin_project.databinding.OxygenCardBinding
 import com.example.android_kotlin_project.viewmodels.HealthViewModel
+import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -27,6 +31,7 @@ class HealthFragment : Fragment() {
     private lateinit var heartRateTextView: TextView
     private lateinit var lineChart: LineChart
     private lateinit var oxygenLevelTextView: TextView
+    private lateinit var oxygenBulletChart: HorizontalBarChart
 
     private var _fragmentBinding: FragmentHealthBinding? = null
     private val fragmentBinding get() = _fragmentBinding!!
@@ -86,9 +91,13 @@ class HealthFragment : Fragment() {
             updateDailySteps(dailySteps)
         }
 
+        oxygenBulletChart = oxygenLevelCardBinding.oxygenBulletChart
+        setupOxygenBulletChart()
+
         // Observe oxygen level data
-        healthViewModel.oxygenLevel.observe(viewLifecycleOwner) { oxygenLevel ->
+        healthViewModel.oxygenLevel.observe(/* owner = */ viewLifecycleOwner) { oxygenLevel ->
             updateOxygenLevel(oxygenLevel)
+            updateOxygenBulletChart(oxygenLevel.replace("%", "").toFloat())
         }
     }
 
@@ -195,6 +204,71 @@ class HealthFragment : Fragment() {
      */
     private fun updateOxygenLevel(oxygenLevel: String) {
         oxygenLevelTextView.text = oxygenLevel
+    }
+
+    /**
+     * Set up the oxygen bullet chart
+     */
+    private fun setupOxygenBulletChart() {
+        oxygenBulletChart.apply {
+            description.isEnabled = false
+            legend.isEnabled = false
+            setTouchEnabled(false)
+            isDragEnabled = false
+            setScaleEnabled(false)
+
+            xAxis.apply {
+                setDrawGridLines(false)
+                setDrawAxisLine(false)
+                setDrawLabels(false)
+            }
+
+            axisLeft.apply {
+                axisMinimum = 0f
+                axisMaximum = 100f
+                setDrawGridLines(false)
+                setDrawAxisLine(false)
+                setDrawLabels(false)
+            }
+
+            axisRight.isEnabled = false
+
+            setDrawBorders(false)
+
+            // Resets the padding values to 0
+            minOffset = 0f
+            extraBottomOffset = 0f
+            extraTopOffset = 0f
+            setViewPortOffsets(0f, 0f, 0f, 0f)
+        }
+    }
+
+
+    /**
+     * Update the oxygen bullet chart with new data
+     */
+    private fun updateOxygenBulletChart(oxygenLevel: Float) {
+        val entries = listOf(BarEntry(0f, oxygenLevel))
+
+        // Set the color based on the oxygen level
+        val dataSet = BarDataSet(entries, "").apply {
+            color = when {
+                oxygenLevel >= 95f -> ContextCompat.getColor(requireContext(), R.color.blue_oxygen)
+                oxygenLevel >= 90f -> ContextCompat.getColor(requireContext(), R.color.yellow_warning)
+                else -> ContextCompat.getColor(requireContext(), R.color.red_danger)
+            }
+            setDrawValues(false)
+        }
+
+        val barData = BarData(dataSet).apply {
+            barWidth = 0.75f
+        }
+
+        oxygenBulletChart.apply {
+            data = barData
+            animateY(500)
+            invalidate()
+        }
     }
 
     /**

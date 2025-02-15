@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/oxygen_data_card"
-        android:layout_width="170dp"
+        android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_margin="10dp"
         app:cardCornerRadius="15dp"
@@ -16,7 +16,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <!-- Oxygen Icon and Title -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,6 +73,46 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:id="@+id/oxygen_bullet_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/oxygen_data" />
+
+                <View
+                    android:id="@+id/oxygen_chart_end_delimiter"
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintTop_toTopOf="@id/oxygen_bullet_chart"
+                    app:layout_constraintBottom_toBottomOf="@id/oxygen_bullet_chart"
+                    app:layout_constraintEnd_toEndOf="@id/oxygen_bullet_chart"/>
+
+                <TextView
+                    android:id="@+id/min_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_value"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintStart_toStartOf="@id/oxygen_bullet_chart"
+                    app:layout_constraintTop_toBottomOf="@id/oxygen_bullet_chart"/>
+
+                <TextView
+                    android:id="@+id/max_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hundred_percent"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintEnd_toEndOf="@id/oxygen_bullet_chart"
+                    app:layout_constraintTop_toBottomOf="@id/oxygen_bullet_chart"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

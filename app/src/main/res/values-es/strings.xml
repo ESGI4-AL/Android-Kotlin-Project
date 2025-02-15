@@ -50,5 +50,6 @@
     <string name="dark_mode">modo oscuro</string>
     <string name="notification">Notificaciones</string>
     <string name="langue">Idioma</string>
+    <string name="hundred_percent">100%</string>
 
 </resources>

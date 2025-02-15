@@ -65,6 +65,7 @@
     <string name="oxygen_icon">Oxygen Icon</string>
     <string name="oxygen_level">Oxygen Level</string>
     <string name="oxygen_unit">%</string>
+    <string name="hundred_percent">100%</string>
 
     <string-array name="languages">
         <item>English</item>

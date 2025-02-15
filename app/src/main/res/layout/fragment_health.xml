@@ -33,12 +33,13 @@
         </LinearLayout>
 
         <include
+            android:id="@+id/oxygen_card"
+            layout="@layout/oxygen_card" />
+
+        <include
             android:id="@+id/daily_steps_card"
             layout="@layout/daily_steps_card" />
 
-        <include
-            android:id="@+id/oxygen_card"
-            layout="@layout/oxygen_card" />
 
     </LinearLayout>
 </ScrollView>

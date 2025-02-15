@@ -43,7 +43,7 @@
     <string name="dark_mode">Mode sombre</string>
     <string name="notification">Notifications</string>
     <string name="langue">Langue</string>
-
+    <string name="hundred_percent">100%</string>
 
 
     <string-array name="languages">

@@ -128,9 +128,9 @@ class HealthViewModel(
         viewModelScope.launch {
             try {
                 val oxygenLevel = healthDataRepository.getOxygenLevel()
-                _oxygenLevel.value = oxygenLevel.toString() ?: "0"
+                _oxygenLevel.value = oxygenLevel.toString()
             } catch (e: Exception) {
-                _oxygenLevel.value = "Error loading heart rate data: ${e.message}"
+                _oxygenLevel.value = "Error loading oxygen data: ${e.message}"
             }
         }
     }

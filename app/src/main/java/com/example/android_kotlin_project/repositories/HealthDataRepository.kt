@@ -166,9 +166,9 @@ class HealthDataRepository(private val context: Context, private val healthConne
             )
             val response = healthConnectClient.readRecords(request)
 
-            response.records.joinToString(", ") { it.percentage.toString() }
+            if (response.records.isEmpty()) "0" else response.records.last().percentage.toString()
         } catch (e: Exception) {
-            null
+            "0"
         }
     }
 }
