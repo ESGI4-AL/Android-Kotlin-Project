@@ -1,6 +1,7 @@
 package com.example.android_kotlin_project.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.databinding.DailyStepsCardBinding
 import com.example.android_kotlin_project.databinding.FragmentHealthBinding
@@ -24,6 +27,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import kotlinx.coroutines.launch
 
 class HealthFragment : Fragment() {
     private lateinit var healthViewModel: HealthViewModel
@@ -32,6 +36,7 @@ class HealthFragment : Fragment() {
     private lateinit var lineChart: LineChart
     private lateinit var oxygenLevelTextView: TextView
     private lateinit var oxygenBulletChart: HorizontalBarChart
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private var _fragmentBinding: FragmentHealthBinding? = null
     private val fragmentBinding get() = _fragmentBinding!!
@@ -57,6 +62,11 @@ class HealthFragment : Fragment() {
         _dailyStepsCardBinding = DailyStepsCardBinding.bind(fragmentBinding.root.findViewById(R.id.daily_steps_card))
         _oxygenLevelCardBinding = OxygenCardBinding.bind(fragmentBinding.root.findViewById(R.id.oxygen_card))
 
+        swipeRefreshLayout = fragmentBinding.root.findViewById(R.id.swipeRefreshLayout)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            refreshData()
+        }
         return fragmentBinding.root
     }
 
@@ -279,5 +289,25 @@ class HealthFragment : Fragment() {
         _fragmentBinding = null
         _heartRateBinding = null
         _dailyStepsCardBinding = null
+    }
+
+    /**
+     * Refresh the data when swiping down
+     */
+    private fun refreshData() {
+        swipeRefreshLayout.isRefreshing = true
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                healthViewModel.fetchHeartRateData()
+                healthViewModel.fetchLastHeartRate()
+                healthViewModel.fetchDailySteps()
+                healthViewModel.fetchOxygenLevel()
+            } catch (e: Exception) {
+                Log.e("HealthFragment", "Error refreshing data", e)
+            } finally {
+                swipeRefreshLayout.isRefreshing = false
+            }
+        }
     }
 }
