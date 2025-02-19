@@ -11,7 +11,8 @@ import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.adapters.NewsAdapter
 import com.example.android_kotlin_project.repositories.NewsRepository
 
-class ActivityFragment : Fragment() {
+class NewsFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
