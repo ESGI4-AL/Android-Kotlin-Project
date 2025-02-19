@@ -22,9 +22,9 @@ class ActivityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
       //  val fullBodyButton = view.findViewById<Button>(R.id.start_yoga)
-        val yogaButton = view.findViewById<Button>(R.id.start_yoga)
+      //  val yogaButton = view.findViewById<Button>(R.id.start_yoga)
      //   val cardioButton = view.findViewById<Button>(R.id.start_cardio)
-        val scaleUpAnimation = AnimationUtils.loadAnimation(context, R.anim.scale_up)
+     //   val scaleUpAnimation = AnimationUtils.loadAnimation(context, R.anim.scale_up)
 
 
     /*    fullBodyButton.setOnClickListener {
@@ -32,12 +32,12 @@ class ActivityFragment : Fragment() {
             Toast.makeText(context, "Full Body Workout commencé !", Toast.LENGTH_SHORT).show()
         }
 
-     */
+
 
         yogaButton.setOnClickListener {
             Toast.makeText(context, "Yoga Session commencée !", Toast.LENGTH_SHORT).show()
         }
-
+        */
  /*       cardioButton.setOnClickListener {
             Toast.makeText(context, "Cardio Blast commencé !", Toast.LENGTH_SHORT).show()
         }
