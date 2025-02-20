@@ -12,6 +12,12 @@ import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.lifecycle.MutableLiveData
 import com.example.android_kotlin_project.utils.HealthConnectAvailability
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.time.Duration
 import java.time.LocalDate
 import java.time.ZoneId
@@ -19,6 +25,8 @@ import java.time.ZoneId
 class HealthDataRepository(private val context: Context, private val healthConnectClient: HealthConnectClient) {
 
     var availability = MutableLiveData<HealthConnectAvailability>()
+    private val firestore = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
     init {
         checkAvailability()
@@ -169,6 +177,72 @@ class HealthDataRepository(private val context: Context, private val healthConne
             if (response.records.isEmpty()) "0" else response.records.last().percentage.toString()
         } catch (e: Exception) {
             "0"
+        }
+    }
+
+    /**
+     * Save body composition data to Firebase
+     */
+    suspend fun saveBodyComposition(height: String, weight: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                val userId = auth.currentUser?.uid ?: return@withContext false
+
+                val bodyCompositionData = hashMapOf(
+                    "height" to height,
+                    "weight" to weight,
+                    "updatedAt" to FieldValue.serverTimestamp()
+                )
+
+                val userDoc = Tasks.await(firestore.collection("users").document(userId).get())
+
+                if (userDoc.exists()) {
+                    Tasks.await(
+                        firestore.collection("users").document(userId)
+                            .update("bodyComposition", bodyCompositionData)
+                    )
+                } else {
+                    Tasks.await(
+                        firestore.collection("users").document(userId)
+                            .set(mapOf("bodyComposition" to bodyCompositionData))
+                    )
+                }
+                true
+            } catch (e: Exception) {
+                Log.e("HealthDataRepository", "Error saving body composition: ${e.message}", e)
+                false
+            }
+        }
+    }
+
+    /**
+     * Load body composition data from Firebase
+     */
+    suspend fun loadBodyComposition(): Pair<String, String>? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val userId = auth.currentUser?.uid ?: return@withContext null
+
+                val document = Tasks.await(
+                    firestore.collection("users").document(userId).get()
+                )
+
+                if (document != null && document.exists()) {
+                    val bodyComposition = document.get("bodyComposition") as? Map<String, Any>
+                    if (bodyComposition != null) {
+                        val height = bodyComposition["height"] as? String ?: "0"
+                        val weight = bodyComposition["weight"] as? String ?: "0"
+                        Pair(height, weight)
+                    } else {
+                        null
+                    }
+                } else {
+                    null
+                }
+            } catch (e: Exception) {
+                Log.e("HealthDataRepository", "Error loading body composition: ${e.message}", e)
+                null
+            }
         }
     }
 }

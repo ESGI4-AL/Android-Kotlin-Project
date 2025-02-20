@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.android_kotlin_project.repositories.HealthDataRepository
 import com.example.android_kotlin_project.repositories.HealthPermissionsRepository
 import com.example.android_kotlin_project.utils.HealthConnectAvailability
+import com.example.android_kotlin_project.utils.HealthSaveStatus
 import kotlinx.coroutines.launch
 
 class HealthViewModel(
@@ -34,6 +35,15 @@ class HealthViewModel(
 
     private val _oxygenLevel = MutableLiveData<String>()
     val oxygenLevel: LiveData<String> get() = _oxygenLevel
+
+    private val _height = MutableLiveData("0")
+    val height: LiveData<String> get() = _height
+
+    private val _weight = MutableLiveData("0")
+    val weight: LiveData<String> get() = _weight
+
+    private val _saveStatus = MutableLiveData(HealthSaveStatus.IDLE)
+    val saveStatus: LiveData<HealthSaveStatus> get() = _saveStatus
 
     /**
      * Check Health Connect availability
@@ -133,5 +143,47 @@ class HealthViewModel(
                 _oxygenLevel.value = "Error loading oxygen data: ${e.message}"
             }
         }
+    }
+
+    /**
+     * Save body composition data
+     */
+    fun saveBodyComposition(height: String, weight: String) {
+        viewModelScope.launch {
+            try {
+                _saveStatus.value = HealthSaveStatus.SAVING
+                val result = healthDataRepository.saveBodyComposition(height, weight)
+                if (result) {
+                    _height.value = height
+                    _weight.value = weight
+                    _saveStatus.value = HealthSaveStatus.SUCCESS
+                } else {
+                    _saveStatus.value = HealthSaveStatus.ERROR
+                }
+            } catch (e: Exception) {
+                Log.e("HealthViewModel", "Error saving body composition", e)
+                _saveStatus.value = HealthSaveStatus.ERROR
+            }
+        }
+    }
+
+    /**
+     * Load body composition data
+     */
+    fun loadBodyComposition() {
+        viewModelScope.launch {
+            val data = healthDataRepository.loadBodyComposition()
+            if (data != null) {
+                _height.value = data.first
+                _weight.value = data.second
+            }
+        }
+    }
+
+    /**
+     * Reset save status
+     */
+    fun resetSaveStatus() {
+        _saveStatus.value = HealthSaveStatus.IDLE
     }
 }
