@@ -26,6 +26,7 @@
     <color name="card_background">#EEECEC</color>
     <color name="green_steps">#2B7627</color>
     <color name="blue_oxygen">#66CCFF</color>
+    <color name="body_purple">#A01F64</color>
 
     <color name="yellow_warning">#FFC107</color>
     <color name="red_danger">#F44336</color>

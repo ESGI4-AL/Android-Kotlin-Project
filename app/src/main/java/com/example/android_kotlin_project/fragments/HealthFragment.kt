@@ -10,8 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.android_kotlin_project.R
+import com.example.android_kotlin_project.databinding.BodyCompositionCardBinding
 import com.example.android_kotlin_project.databinding.DailyStepsCardBinding
 import com.example.android_kotlin_project.databinding.FragmentHealthBinding
 import com.example.android_kotlin_project.databinding.HeartRateCardBinding
@@ -50,6 +52,9 @@ class HealthFragment : Fragment() {
     private var _oxygenLevelCardBinding: OxygenCardBinding? = null
     private val oxygenLevelCardBinding get() = _oxygenLevelCardBinding!!
 
+    private var _bodyCompositionCardBinding: BodyCompositionCardBinding? = null
+    private val bodyCompositionCardBinding get() = _bodyCompositionCardBinding!!
+
     /**
      * Create the view
      */
@@ -63,6 +68,10 @@ class HealthFragment : Fragment() {
         _oxygenLevelCardBinding = OxygenCardBinding.bind(fragmentBinding.root.findViewById(R.id.oxygen_card))
 
         swipeRefreshLayout = fragmentBinding.root.findViewById(R.id.swipeRefreshLayout)
+
+        _bodyCompositionCardBinding = BodyCompositionCardBinding.bind(
+            fragmentBinding.root.findViewById(R.id.body_composition_card)
+        )
 
         swipeRefreshLayout.setOnRefreshListener {
             refreshData()
@@ -105,10 +114,28 @@ class HealthFragment : Fragment() {
         setupOxygenBulletChart()
 
         // Observe oxygen level data
-        healthViewModel.oxygenLevel.observe(/* owner = */ viewLifecycleOwner) { oxygenLevel ->
+        healthViewModel.oxygenLevel.observe( viewLifecycleOwner) { oxygenLevel ->
             updateOxygenLevel(oxygenLevel)
             updateOxygenBulletChart(oxygenLevel.replace("%", "").toFloat())
         }
+
+        // Observe body composition data
+        healthViewModel.height.observe(viewLifecycleOwner) { height ->
+            updateHeight(height)
+        }
+
+        healthViewModel.weight.observe(viewLifecycleOwner) { weight ->
+            updateWeight(weight)
+        }
+
+        // Navigate to body composition fragment
+        bodyCompositionCardBinding.bodyCompositionCard.setOnClickListener {
+            healthViewModel.resetSaveStatus()
+            findNavController().navigate(R.id.bodyCompositionFragment)
+        }
+
+        refreshData()
+
     }
 
     /**
@@ -282,6 +309,20 @@ class HealthFragment : Fragment() {
     }
 
     /**
+     * Update height data
+     */
+    private fun updateHeight(height: String) {
+        bodyCompositionCardBinding.heightData.text = height
+    }
+
+    /**
+     * Update weight data
+     */
+    private fun updateWeight(weight: String) {
+        bodyCompositionCardBinding.weightData.text = weight
+    }
+
+    /**
      * Clean up the view
      */
     override fun onDestroyView() {
@@ -289,6 +330,8 @@ class HealthFragment : Fragment() {
         _fragmentBinding = null
         _heartRateBinding = null
         _dailyStepsCardBinding = null
+        _oxygenLevelCardBinding = null
+        _bodyCompositionCardBinding = null
     }
 
     /**
@@ -303,6 +346,7 @@ class HealthFragment : Fragment() {
                 healthViewModel.fetchLastHeartRate()
                 healthViewModel.fetchDailySteps()
                 healthViewModel.fetchOxygenLevel()
+                healthViewModel.loadBodyComposition()
             } catch (e: Exception) {
                 Log.e("HealthFragment", "Error refreshing data", e)
             } finally {

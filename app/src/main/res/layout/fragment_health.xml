@@ -45,6 +45,10 @@
                 android:id="@+id/daily_steps_card"
                 layout="@layout/daily_steps_card" />
 
+            <include
+                android:id="@+id/body_composition_card"
+                layout="@layout/body_composition_card" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
