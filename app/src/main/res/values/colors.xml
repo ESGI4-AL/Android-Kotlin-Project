@@ -22,13 +22,26 @@
     <color name="startColor">#EBFDB2</color>
     <color name="endColor">#FFD1B6</color>
 
+    <!-- Health Page colors -->
     <color name="red_heart">#F54255</color>
     <color name="card_background">#EEECEC</color>
     <color name="green_steps">#2B7627</color>
     <color name="blue_oxygen">#66CCFF</color>
     <color name="body_purple">#A01F64</color>
 
+    <!-- Oxygen level diagram colors -->
     <color name="yellow_warning">#FFC107</color>
     <color name="red_danger">#F44336</color>
     <color name="light_gray">#EEEEEE</color>
+
+    <!-- BMI colors -->
+    <color name="underweight">#BFECFF</color>
+    <color name="normal">#D0EDBA</color>
+    <color name="overweight">#FBC58B</color>
+    <color name="obese">#FF8A80</color>
+    <color name="underweight_shadow">#5A9AC0</color>
+    <color name="normal_shadow">#64ED64</color>
+    <color name="overweight_shadow">#F17A33</color>
+    <color name="obese_shadow">#F44336</color>
+
 </resources>

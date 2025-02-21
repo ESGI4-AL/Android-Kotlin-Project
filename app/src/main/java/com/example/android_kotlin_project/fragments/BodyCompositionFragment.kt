@@ -14,6 +14,7 @@ import com.example.android_kotlin_project.databinding.HeightCardBinding
 import com.example.android_kotlin_project.databinding.WeightCardBinding
 import com.example.android_kotlin_project.utils.HealthSaveStatus
 import com.example.android_kotlin_project.viewmodels.HealthViewModel
+import com.example.android_kotlin_project.views.BmiView
 
 class BodyCompositionFragment : Fragment() {
     private lateinit var healthViewModel: HealthViewModel
@@ -26,6 +27,9 @@ class BodyCompositionFragment : Fragment() {
 
     private var _weightCardBinding: WeightCardBinding? = null
     private val weightCardBinding get() = _weightCardBinding!!
+
+    private var _bmiCardBinding: BmiView? = null
+    private val bmiCardBinding get() = _bmiCardBinding!!
 
     companion object {
         private const val MIN_HEIGHT = 1
@@ -43,6 +47,7 @@ class BodyCompositionFragment : Fragment() {
         val rootView = fragmentBinding.root
         _heightCardBinding = HeightCardBinding.bind(rootView.findViewById(R.id.height_card))
         _weightCardBinding = WeightCardBinding.bind(rootView.findViewById(R.id.weight_card))
+        _bmiCardBinding = BmiView(rootView.findViewById(R.id.bmi_calculator_card))
 
         return rootView
     }
@@ -138,6 +143,29 @@ class BodyCompositionFragment : Fragment() {
                     fragmentBinding.saveButton.isEnabled = true
                 }
             }
+        }
+
+        // update bmi
+        healthViewModel.apply {
+            height.observe(viewLifecycleOwner) { height ->
+                updateBmi()
+            }
+            weight.observe(viewLifecycleOwner) { weight ->
+                updateBmi()
+            }
+        }
+    }
+
+    /**
+     * Update BMI value based on height and weight
+     */
+    private fun updateBmi() {
+        val height = heightCardBinding.heightPicker.value.toFloat() / 100
+        val weight = weightCardBinding.weightPicker.value.toFloat()
+
+        if (height > 0) {
+            val bmi = weight / (height * height)
+            bmiCardBinding.updateBmiDisplay(bmi)
         }
     }
 

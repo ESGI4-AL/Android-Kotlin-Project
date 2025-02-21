@@ -54,6 +54,17 @@
     <string name="height_cm">Height (cm)</string>
     <string name="weight_kg">Weight (kg)</string>
     <string name="cm">cm</string>
+    <string name="bmi_result">BMI Result</string>
+    <string name="bmi_indicator">BMI indicator</string>
+    <string name="Kilo">kg</string>
+    <string name="about_bmi">About BMI</string>
+    <string name="bmi_definition">Body Mass Index (BMI) is a simple measure that uses your height and weight to work out if your weight is healthy.</string>
+    <string name="bmi_categories">BMI Categories:</string>
+    <string name="underweight_info">Underweight: Less than 18.5</string>
+    <string name="normal_weight_info">Normal weight: 18.5 to 24.9</string>
+    <string name="overweight_info">Overweight: 25 to 29.9</string>
+    <string name="obese_info">Obese: 30 or greater</string>
+    <string name="bmi_disclaimer">Note: BMI is a general guide and may not be accurate for athletes, elderly people, or during pregnancy. Consult your healthcare provider for personalized advice.</string>
 
 
     <string-array name="languages">

@@ -19,6 +19,8 @@ firebaseAuthKtx = "23.1.0"
 firebaseCommonKtx = "21.0.0"
 navigationFragmentKtx = "2.8.5"
 firebaseDatabaseKtx = "21.0.0"
+nav_version = "2.7.7"
+coreAnimation = "1.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,9 +40,11 @@ firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common-k
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+androidx-core-animation = { group = "androidx.core", name = "core-animation", version.ref = "coreAnimation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "nav_version" }
 

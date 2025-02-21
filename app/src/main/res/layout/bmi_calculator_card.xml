@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bmi_calculator_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp"
+        android:elevation="8dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/bmi_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bmi_result"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/bmi_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bmi_title"
+                tools:text="0" />
+
+            <TextView
+                android:id="@+id/bmi_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintStart_toEndOf="@id/bmi_value"
+                app:layout_constraintBottom_toBottomOf="@id/bmi_value"
+                tools:text="Normal weight" />
+
+            <LinearLayout
+                android:id="@+id/bmi_scale_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/bmi_value">
+
+                <View
+                    android:id="@+id/underweightScale"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="18.5"
+                    android:background="@drawable/bmi_underweight" />
+
+                <View
+                    android:id="@+id/normalScale"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="6.5"
+                    android:background="@drawable/bmi_normal" />
+
+                <View
+                    android:id="@+id/overweightScale"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="5"
+                    android:background="@drawable/bmi_overweight" />
+
+                <View
+                    android:id="@+id/obeseScale"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/bmi_obese" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/bmi_indicator"
+                android:layout_width="12dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/bmi_indicator"
+                android:src="@drawable/bmi_indicator"
+                app:layout_constraintStart_toStartOf="@id/bmi_scale_container"
+                app:layout_constraintTop_toBottomOf="@id/bmi_scale_container"
+                android:layout_marginTop="-10dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
