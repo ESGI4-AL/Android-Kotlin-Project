@@ -48,6 +48,7 @@ android {
 dependencies {
     implementation(libs.firebase.common.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.firebase.database.ktx)
     // navigation
     val nav_version = "2.8.0"
     implementation("androidx.navigation:navigation-compose:$nav_version")
