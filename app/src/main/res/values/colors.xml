@@ -23,6 +23,8 @@
     <color name="endColor">#FFD1B6</color>
 
     <!-- Health Page colors -->
+    <color name="data_policy_info">#C6C9C9</color>
+    <color name="data_policy_link">#218CED</color>
     <color name="red_heart">#F54255</color>
     <color name="card_background">#EEECEC</color>
     <color name="green_steps">#2B7627</color>

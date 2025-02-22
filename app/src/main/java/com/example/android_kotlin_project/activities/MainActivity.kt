@@ -79,8 +79,6 @@ class MainActivity : AppCompatActivity() {
             settingsPopup.visibility = View.GONE
             navController.navigate(R.id.settingsFragment)
         }
-        // initialize views
-        permissionStatusTextView = findViewById(R.id.permission_status)
 
         // Initialize ViewModel
         val healthDataRepository = HealthDataRepository(applicationContext, HealthConnectClient.getOrCreate(applicationContext))
@@ -89,24 +87,15 @@ class MainActivity : AppCompatActivity() {
         healthViewModel = ViewModelProvider(this, HealthViewModelFactory(healthDataRepository, permissionsRepository))
             .get(HealthViewModel::class.java)
 
-        // Observe LiveData from ViewModel
+        // Observe LiveData from ViewModel -> we launch permissions request in main activity and show the status in settings
         healthViewModel.availability.observe(this) { availabilityStatus ->
             when (availabilityStatus) {
                 HealthConnectAvailability.INSTALLED -> {
                     healthViewModel.checkAndRequestPermissions(requestPermissionsLauncher)
                 }
-                HealthConnectAvailability.NOT_SUPPORTED -> {
-                    permissionStatusTextView.text = "Health Connect not available on this device"
-                }
-                HealthConnectAvailability.NOT_INSTALLED -> {
-                    permissionStatusTextView.text = "Health Connect is not installed"
-                }
+                HealthConnectAvailability.NOT_SUPPORTED,
+                HealthConnectAvailability.NOT_INSTALLED -> {}
             }
-        }
-
-        // Observe permission status
-        healthViewModel.permissionStatus.observe(this) { statusMessage ->
-            permissionStatusTextView.text = statusMessage
         }
 
         // Start the Health Connect setup process

@@ -80,6 +80,13 @@ class HealthViewModel(
     }
 
     /**
+     * Update permission status
+     */
+    fun updatePermissionStatus(status: String) {
+        _permissionStatus.value = status
+    }
+
+    /**
      * Fetch daily steps data
      */
     fun fetchDailySteps() {
