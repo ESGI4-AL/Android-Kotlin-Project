@@ -19,6 +19,7 @@ class JournalFragment : Fragment() {
     private var allNotes = mutableListOf<Map<String, String>>()
     private lateinit var notesContainer: GridLayout
     private lateinit var inflater: LayoutInflater
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,13 +50,15 @@ class JournalFragment : Fragment() {
             }
         })
 
+        // Utiliser un listener en temps réel pour mettre à jour l'affichage automatiquement
         fetchNotes(notesContainer)
+        listenForNoteChanges()  // Ecouter les changements en temps réel
+
         return view
     }
 
     private fun fetchNotes(container: GridLayout) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val db = FirebaseFirestore.getInstance()
 
         db.collection("notes")
             .whereEqualTo("userId", userId)
@@ -102,6 +105,23 @@ class JournalFragment : Fragment() {
             }
             .addOnFailureListener { exception ->
                 Log.e("Firestore", "Erreur lors de la récupération des notes", exception)
+            }
+    }
+
+    private fun listenForNoteChanges() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        db.collection("notes")
+            .whereEqualTo("userId", userId)
+            .addSnapshotListener { documents, exception ->
+                if (exception != null) {
+                    Log.e("Firestore", "Erreur lors de l'écoute des notes", exception)
+                    return@addSnapshotListener
+                }
+
+                documents?.let {
+                    fetchNotes(notesContainer)
+                }
             }
     }
 
