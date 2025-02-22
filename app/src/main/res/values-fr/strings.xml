@@ -1,71 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">Health Wave</string>
     <string name="home">Accueil</string>
-    <string name="activity">Activités</string>
+    <string name="activity">Activité</string>
     <string name="health">Santé</string>
     <string name="recipe">Recettes</string>
-    <string name="profile">Profile</string>
-    <string name="settings">Paramétres</string>
-    <string name="no_quotes_found">Pas de citations trouvés</string>
+    <string name="profile">Profil</string>
+    <string name="settings">Paramètres</string>
+    <string name="no_quotes_found">Aucune citation trouvée</string>
     <string name="back">Retour</string>
     <string name="email">Email</string>
     <string name="password">Mot de passe</string>
     <string name="forgotPwd">Mot de passe oublié ?</string>
-    <string name="login">Se connecter</string>
-    <string name="signup">Inscription</string>
-    <string name="noAccount">Pas de compte ?</string>
-    <string name="yrName">Votre name</string>
+    <string name="login">Connexion</string>
+    <string name="signup">S\'inscrire</string>
+    <string name="noAccount">Vous n\'avez pas de compte ?</string>
+    <string name="yrName">Votre nom</string>
     <string name="yrEmail">Votre email</string>
     <string name="yrPassword">Entrez votre mot de passe</string>
-    <string name="confirmPassword">Confirmation du mot de passe</string>
-    <string name="submit">Connexion</string>
+    <string name="confirmPassword">Confirmez votre mot de passe</string>
+    <string name="submit">Soumettre</string>
     <string name="anAccount">Vous avez un compte ?</string>
     <string name="welcome">Bienvenue dans Health Wave !</string>
     <string name="sign_up">S\'inscrire</string>
     <string name="name_error">Veuillez entrer votre nom</string>
-    <string name="email_error">Veuillez entrer votre adresse e-mail</string>
+    <string name="email_error">Veuillez entrer votre email</string>
     <string name="password_errror">Veuillez entrer votre mot de passe</string>
     <string name="confirm_password_error">Veuillez confirmer votre mot de passe</string>
     <string name="passwords_matching_error">Les mots de passe ne correspondent pas</string>
     <string name="user_not_found_error">Utilisateur non trouvé</string>
     <string name="error_checking_user">Erreur lors de la vérification de l\'utilisateur</string>
     <string name="incorrect_password">Mot de passe incorrect</string>
-    <string name="authentication_failed">Échec de l\'authentification</string>
-    <string name="your_name">Votre nom</string>
-    <string name="your_email">Votre email</string>
+    <string name="authentication_failed">Authentification échouée</string>
+    <string name="your_name">Votre Nom</string>
+    <string name="your_email">Votre Email</string>
     <string name="save_changes">Enregistrer les modifications</string>
-    <string name="logout">Se déconnecter</string>
+    <string name="logout">Déconnexion</string>
     <string name="profile_information">Informations du profil</string>
     <string name="name">Nom</string>
     <string name="enter_your_name">Entrez votre nom</string>
     <string name="enter_your_email">Entrez votre email</string>
     <string name="save">Enregistrer</string>
-    <string name="dark_mode">Mode sombre</string>
-    <string name="notification">Notifications</string>
-    <string name="langue">Langue</string>
-    <string name="hundred_percent">100%</string>
-    <string name="body_composition_icon">body_composition_icon</string>
-    <string name="body_composition">Body Composition</string>
-    <string name="height">Height</string>
-    <string name="weight">Weight</string>
-    <string name="height_unit">cm</string>
-    <string name="weight_unit">kg</string>
-    <string name="edit_icon">edit icon</string>
-    <string name="height_cm">Height (cm)</string>
-    <string name="weight_kg">Weight (kg)</string>
-    <string name="cm">cm</string>
-    <string name="bmi_result">BMI Result</string>
-    <string name="bmi_indicator">BMI indicator</string>
-    <string name="Kilo">kg</string>
-    <string name="about_bmi">About BMI</string>
-    <string name="bmi_definition">Body Mass Index (BMI) is a simple measure that uses your height and weight to work out if your weight is healthy.</string>
-    <string name="bmi_categories">BMI Categories:</string>
-    <string name="underweight_info">Underweight: Less than 18.5</string>
-    <string name="normal_weight_info">Normal weight: 18.5 to 24.9</string>
-    <string name="overweight_info">Overweight: 25 to 29.9</string>
-    <string name="obese_info">Obese: 30 or greater</string>
-    <string name="bmi_disclaimer">Note: BMI is a general guide and may not be accurate for athletes, elderly people, or during pregnancy. Consult your healthcare provider for personalized advice.</string>
-
+    <string name="app_logo">Logo de l\'application</string>
 
     <string-array name="languages">
         <item>Anglais</item>
@@ -73,5 +49,70 @@
         <item>Espagnol</item>
         <item>Chinois</item>
     </string-array>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="notification">Notifications</string>
+    <string name="language">Langue</string>
 
+    <string name="privacy_policy_text">
+        Votre confidentialité est importante pour nous. Cette application collecte des données de Health Connect
+        pour fournir des informations relatives à la santé. Nous collectons uniquement les données nécessaires aux fonctionnalités
+        essentielles de l\'application, qui incluent le suivi des indicateurs de santé tels que les pas, la fréquence cardiaque et les niveaux d\'oxygène.
+        Les données sont stockées en toute sécurité sur votre appareil,
+        et nous ne les partageons pas avec des tiers. En acceptant cette politique, vous acceptez que l\'application
+        accède aux données Health Connect comme spécifié dans les autorisations de l\'application.
+        Vous pouvez révoquer l\'accès à tout moment depuis les paramètres de l\'application.
+    </string>
+    <string name="permission_status_title">Statut des autorisations :</string>
+    <string name="Permission_status_default">Inconnu</string>
+    <string name="info_icon">icône d\'information</string>
+    <string name="data_info">En savoir plus sur la gestion de vos données.</string>
+    <string name="read_data_policy">Lire notre politique de données</string>
+
+    <string name="health_connect_not_supported">Health Connect n\'est pas disponible sur cet appareil</string>
+    <string name="health_connect_not_installed">Health Connect n\'est pas installé</string>
+    <string name="all_permissions_granted">Toutes les autorisations accordées</string>
+    <string name="permissions_denied">Autorisations refusées</string>
+
+    <string name="error_checking_availability">Erreur lors de la vérification de la disponibilité de Health Connect : %1$s</string>
+    <string name="error_checking_permissions">Erreur lors de la vérification des autorisations : %1$s</string>
+    <string name="error_loading_data">Erreur lors du chargement des données : %1$s</string>
+    <string name="no_steps_data">Aucune donnée de pas disponible</string>
+    <string name="error_refreshing_data">Erreur lors de l\'actualisation des données : %1$s</string>
+
+    <string name="steps_icon">Icône des pas</string>
+    <string name="steps">Pas</string>
+    <string name="default_value">0</string>
+    <string name="health_title">Santé</string>
+    <string name="heart_icon">Icône du cœur</string>
+    <string name="heart_rate">Fréquence cardiaque</string>
+    <string name="heart_rate_label">BPM</string>
+    <string name="oxygen_icon">Icône d\'oxygène</string>
+    <string name="oxygen_level">Niveau d\'oxygène</string>
+    <string name="oxygen_unit">%</string>
+    <string name="hundred_percent">100%</string>
+    <string name="body_composition_icon">icône_composition_corporelle</string>
+    <string name="body_composition">Composition corporelle</string>
+    <string name="height">Taille</string>
+    <string name="weight">Poids</string>
+    <string name="height_unit">cm</string>
+    <string name="weight_unit">kg</string>
+    <string name="edit_icon">icône modifier</string>
+    <string name="height_cm">Taille (cm) :</string>
+    <string name="weight_kg">Poids (kg) :</string>
+    <string name="cm">cm</string>
+    <string name="bmi_result">Résultat IMC</string>
+    <string name="bmi_indicator">Indicateur IMC</string>
+    <string name="Kilo">kg</string>
+    <string name="about_bmi">À propos de l\'IMC</string>
+    <string name="bmi_definition">L\'Indice de Masse Corporelle (IMC) est une mesure simple qui utilise votre taille et votre poids pour déterminer si votre poids est sain.</string>
+    <string name="bmi_categories">Catégories d\'IMC :</string>
+    <string name="underweight_info">Insuffisance pondérale : Moins de 18,5</string>
+    <string name="normal_weight_info">Poids normal : 18,5 à 24,9</string>
+    <string name="overweight_info">Surpoids : 25 à 29,9</string>
+    <string name="obese_info">Obésité : 30 ou plus</string>
+    <string name="bmi_disclaimer">Note : L\'IMC est un guide général et peut ne pas être précis pour les athlètes, les personnes âgées ou pendant la grossesse. Consultez votre professionnel de santé pour des conseils personnalisés.</string>
+    <string name="bmi_underweight">Insuffisance pondérale</string>
+    <string name="bmi_normal_weight">Poids normal</string>
+    <string name="bmi_overweight">Surpoids</string>
+    <string name="bmi_obese">Obésité</string>
 </resources>

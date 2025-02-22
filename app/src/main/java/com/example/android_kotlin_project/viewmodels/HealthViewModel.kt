@@ -1,11 +1,13 @@
 package com.example.android_kotlin_project.viewmodels
 
-import android.util.Log
+import android.app.Application
+import android.content.Context
 import androidx.activity.result.ActivityResultLauncher
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.repositories.HealthDataRepository
 import com.example.android_kotlin_project.repositories.HealthPermissionsRepository
 import com.example.android_kotlin_project.utils.HealthConnectAvailability
@@ -13,9 +15,10 @@ import com.example.android_kotlin_project.utils.HealthSaveStatus
 import kotlinx.coroutines.launch
 
 class HealthViewModel(
+    application: Application,
     private val healthDataRepository: HealthDataRepository,
     private val permissionsRepository: HealthPermissionsRepository
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
     // Expose availability as LiveData from the repository
     val availability: LiveData<HealthConnectAvailability> = healthDataRepository.availability
@@ -53,7 +56,7 @@ class HealthViewModel(
             try {
                 healthDataRepository.checkAvailability()
             } catch (e: Exception) {
-                _permissionStatus.value = "Error checking Health Connect availability: ${e.message}"
+                _permissionStatus.value = getApplication<Application>().getString(R.string.error_checking_availability, e.message)
             }
         }
     }
@@ -61,20 +64,20 @@ class HealthViewModel(
     /**
      * Check permissions and request if necessary
      */
-    fun checkAndRequestPermissions(launcher: ActivityResultLauncher<Array<String>>) {
+    fun checkAndRequestPermissions(launcher: ActivityResultLauncher<Array<String>>, context: Context) {
         viewModelScope.launch {
             try {
                 if (!permissionsRepository.hasAllPermissions()) {
                     permissionsRepository.requestPermissions(launcher)
                 } else {
-                    _permissionStatus.value = "Permissions already granted"
+                    _permissionStatus.value = context.getString(R.string.all_permissions_granted)
                     fetchDailySteps()
                     fetchLastHeartRate()
                     fetchHeartRateData()
                     fetchOxygenLevel()
                 }
             } catch (e: Exception) {
-                _permissionStatus.value = "Error checking permissions: ${e.message}"
+                _permissionStatus.value = context.getString(R.string.error_checking_permissions, e.message)
             }
         }
     }
@@ -93,17 +96,10 @@ class HealthViewModel(
         viewModelScope.launch {
             try {
                 val stepRecords = healthDataRepository.getDailySteps()
-                Log.d("HealthConnect", "Step Records: $stepRecords")
 
                 // If no records are found
                 if (stepRecords.isEmpty()) {
-                    _dailySteps.value = """
-                    No steps data available today
-                    Please check:
-                    1. Health Connect is installed
-                    2. Health Connect has permissions
-                    3. The device has step data for today
-                """.trimIndent()
+                    _dailySteps.value = getApplication<Application>().getString(R.string.no_steps_data)
                 } else {
                     val totalSteps = stepRecords.sumOf { it.count }
 
@@ -112,8 +108,7 @@ class HealthViewModel(
                 """.trimIndent()
                 }
             } catch (e: Exception) {
-                _dailySteps.value = "Error loading step data: ${e.message}"
-                Log.e("HealthConnect", "Error fetching daily steps", e)
+                _dailySteps.value = getApplication<Application>().getString(R.string.error_loading_data, e.message)
             }
         }
     }
@@ -127,7 +122,7 @@ class HealthViewModel(
                 val lastHeartRate = healthDataRepository.getLastHeartRate()
                 _lastHeartRate.value = lastHeartRate?.toString() ?: "0"
             } catch (e: Exception) {
-                _lastHeartRate.value = "Error loading heart rate data: ${e.message}"
+                _dailySteps.value = getApplication<Application>().getString(R.string.error_loading_data, e.message)
             }
         }
     }
@@ -147,7 +142,7 @@ class HealthViewModel(
                 val oxygenLevel = healthDataRepository.getOxygenLevel()
                 _oxygenLevel.value = oxygenLevel.toString()
             } catch (e: Exception) {
-                _oxygenLevel.value = "Error loading oxygen data: ${e.message}"
+                _oxygenLevel.value = getApplication<Application>().getString(R.string.error_loading_data, e.message)
             }
         }
     }
@@ -168,7 +163,6 @@ class HealthViewModel(
                     _saveStatus.value = HealthSaveStatus.ERROR
                 }
             } catch (e: Exception) {
-                Log.e("HealthViewModel", "Error saving body composition", e)
                 _saveStatus.value = HealthSaveStatus.ERROR
             }
         }

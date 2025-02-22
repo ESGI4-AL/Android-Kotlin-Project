@@ -1,45 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home">Principal</string>
+    <string name="app_name" translatable="false">Health Wave</string>
+    <string name="home">Inicio</string>
     <string name="activity">Actividad</string>
     <string name="health">Salud</string>
     <string name="recipe">Recetas</string>
     <string name="profile">Perfil</string>
     <string name="settings">Ajustes</string>
-    <string name="back">Atrás</string>
     <string name="no_quotes_found">No se encontraron citas</string>
+    <string name="back">Atrás</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
-    <string name="forgotPwd">Has olvidado tu contraseña?</string>
-    <string name="login">Acceso</string>
-    <string name="signup">Inscribirse</string>
-    <string name="noAccount">¿Sin cuenta?</string>
+    <string name="forgotPwd">¿Olvidó su contraseña?</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="signup">Registrarse</string>
+    <string name="noAccount">¿No tiene una cuenta?</string>
     <string name="yrName">Su nombre</string>
-    <string name="yrEmail">Tu correo electrónico</string>
-    <string name="yrPassword">Introduce tu contraseña</string>
-    <string name="confirmPassword">Confirma tu contraseña</string>
-    <string name="submit">Entregar</string>
-    <string name="anAccount">Tienes una cuenta?</string>
-    <string name="welcome">¡Bienvenido a Health Wave !</string>
+    <string name="yrEmail">Su correo electrónico</string>
+    <string name="yrPassword">Ingrese su contraseña</string>
+    <string name="confirmPassword">Confirme su contraseña</string>
+    <string name="submit">Enviar</string>
+    <string name="anAccount">¿Tiene una cuenta?</string>
+    <string name="welcome">¡Bienvenido a Health Wave!</string>
     <string name="sign_up">Registrarse</string>
-    <string name="name_error">Por favor, introduzca su nombre</string>
-    <string name="email_error">Por favor, introduzca su correo electrónico</string>
-    <string name="password_errror">Por favor, introduzca su contraseña</string>
-    <string name="confirm_password_error">Por favor, confirme su contraseña</string>
+    <string name="name_error">Por favor ingrese su nombre</string>
+    <string name="email_error">Por favor ingrese su correo electrónico</string>
+    <string name="password_errror">Por favor ingrese su contraseña</string>
+    <string name="confirm_password_error">Por favor confirme su contraseña</string>
     <string name="passwords_matching_error">Las contraseñas no coinciden</string>
     <string name="user_not_found_error">Usuario no encontrado</string>
-    <string name="error_checking_user">Error al verificar el usuario</string>
+    <string name="error_checking_user">Error al verificar usuario</string>
     <string name="incorrect_password">Contraseña incorrecta</string>
-    <string name="authentication_failed">Error de autenticación</string>
-    <string name="your_name">Tu nombre</string>
-    <string name="your_email">Tu correo electrónico</string>
+    <string name="authentication_failed">Autenticación fallida</string>
+    <string name="your_name">Su Nombre</string>
+    <string name="your_email">Su Correo Electrónico</string>
     <string name="save_changes">Guardar cambios</string>
     <string name="logout">Cerrar sesión</string>
     <string name="profile_information">Información del perfil</string>
     <string name="name">Nombre</string>
-    <string name="enter_your_name">Introduce tu nombre</string>
-    <string name="enter_your_email">Introduce tu correo electrónico</string>
+    <string name="enter_your_name">Ingrese su nombre</string>
+    <string name="enter_your_email">Ingrese su correo electrónico</string>
     <string name="save">Guardar</string>
-
+    <string name="app_logo">Logo de la aplicación</string>
 
     <string-array name="languages">
         <item>Inglés</item>
@@ -47,30 +49,75 @@
         <item>Español</item>
         <item>Chino</item>
     </string-array>
-    <string name="dark_mode">modo oscuro</string>
+    <string name="dark_mode">Modo oscuro</string>
     <string name="notification">Notificaciones</string>
-    <string name="langue">Idioma</string>
+    <string name="language">Idioma</string>
+
+    <!-- Health strings -->
+    <string name="privacy_policy_text">
+        Su privacidad es importante para nosotros. Esta aplicación recopila datos de Health Connect
+        para proporcionar información relacionada con la salud. Solo recopilamos los datos necesarios para las funcionalidades
+        principales de la aplicación, que incluyen el monitoreo de métricas de salud como pasos, frecuencia cardíaca y niveles de oxígeno.
+        Los datos se almacenan de forma segura en su dispositivo,
+        y no los compartimos con terceros. Al aceptar esta política, usted acepta permitir que la aplicación
+        acceda a los datos de Health Connect según lo especificado en los permisos de la aplicación.
+        Puede revocar el acceso en cualquier momento desde los ajustes de la aplicación.
+    </string>
+
+    <!-- Permissions & data policy-->
+    <string name="permission_status_title">Estado de permisos:</string>
+    <string name="Permission_status_default">Desconocido</string>
+    <string name="info_icon">icono de información</string>
+    <string name="data_info">Aprenda más sobre cómo manejamos sus datos.</string>
+    <string name="read_data_policy">Lea nuestra política de datos</string>
+
+    <string name="health_connect_not_supported">Health Connect no está disponible en este dispositivo</string>
+    <string name="health_connect_not_installed">Health Connect no está instalado</string>
+    <string name="all_permissions_granted">Todos los permisos concedidos</string>
+    <string name="permissions_denied">Permisos denegados</string>
+
+    <!-- Error messages -->
+    <string name="error_checking_availability">Error al verificar la disponibilidad de Health Connect: %1$s</string>
+    <string name="error_checking_permissions">Error al verificar los permisos: %1$s</string>
+    <string name="error_loading_data">Error al cargar los datos: %1$s</string>
+    <string name="no_steps_data">No hay datos de pasos disponibles</string>
+    <string name="error_refreshing_data">Error al actualizar los datos: %1$s</string>
+
+    <!-- Health data -->
+    <string name="steps_icon">Icono de pasos</string>
+    <string name="steps">Pasos</string>
+    <string name="default_value">0</string>
+    <string name="health_title">Salud</string>
+    <string name="heart_icon">Icono de corazón</string>
+    <string name="heart_rate">Frecuencia cardíaca</string>
+    <string name="heart_rate_label">LPM</string>
+    <string name="oxygen_icon">Icono de oxígeno</string>
+    <string name="oxygen_level">Nivel de oxígeno</string>
+    <string name="oxygen_unit">%</string>
     <string name="hundred_percent">100%</string>
-    <string name="body_composition_icon">body_composition_icon</string>
-    <string name="body_composition">Body Composition</string>
-    <string name="height">Height</string>
-    <string name="weight">Weight</string>
+    <string name="body_composition_icon">icono_composición_corporal</string>
+    <string name="body_composition">Composición corporal</string>
+    <string name="height">Altura</string>
+    <string name="weight">Peso</string>
     <string name="height_unit">cm</string>
     <string name="weight_unit">kg</string>
-    <string name="edit_icon">edit icon</string>
-    <string name="height_cm">Height (cm)</string>
-    <string name="weight_kg">Weight (kg)</string>
+    <string name="edit_icon">icono editar</string>
+    <string name="height_cm">Altura (cm):</string>
+    <string name="weight_kg">Peso (kg):</string>
     <string name="cm">cm</string>
-    <string name="bmi_result">BMI Result</string>
-    <string name="bmi_indicator">BMI indicator</string>
+    <string name="bmi_result">Resultado IMC</string>
+    <string name="bmi_indicator">Indicador IMC</string>
     <string name="Kilo">kg</string>
-    <string name="about_bmi">About BMI</string>
-    <string name="bmi_definition">Body Mass Index (BMI) is a simple measure that uses your height and weight to work out if your weight is healthy.</string>
-    <string name="bmi_categories">BMI Categories:</string>
-    <string name="underweight_info">Underweight: Less than 18.5</string>
-    <string name="normal_weight_info">Normal weight: 18.5 to 24.9</string>
-    <string name="overweight_info">Overweight: 25 to 29.9</string>
-    <string name="obese_info">Obese: 30 or greater</string>
-    <string name="bmi_disclaimer">Note: BMI is a general guide and may not be accurate for athletes, elderly people, or during pregnancy. Consult your healthcare provider for personalized advice.</string>
-
+    <string name="about_bmi">Acerca del IMC</string>
+    <string name="bmi_definition">El Índice de Masa Corporal (IMC) es una medida simple que utiliza su altura y peso para determinar si su peso es saludable.</string>
+    <string name="bmi_categories">Categorías de IMC:</string>
+    <string name="underweight_info">Bajo peso: Menos de 18.5</string>
+    <string name="normal_weight_info">Peso normal: 18.5 a 24.9</string>
+    <string name="overweight_info">Sobrepeso: 25 a 29.9</string>
+    <string name="obese_info">Obesidad: 30 o más</string>
+    <string name="bmi_disclaimer">Nota: El IMC es una guía general y puede no ser preciso para atletas, personas mayores o durante el embarazo. Consulte a su profesional de la salud para obtener consejos personalizados.</string>
+    <string name="bmi_underweight">Bajo peso</string>
+    <string name="bmi_normal_weight">Peso normal</string>
+    <string name="bmi_overweight">Sobrepeso</string>
+    <string name="bmi_obese">Obesidad</string>
 </resources>

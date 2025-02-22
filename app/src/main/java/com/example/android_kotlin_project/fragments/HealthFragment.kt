@@ -1,11 +1,11 @@
 package com.example.android_kotlin_project.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -348,7 +348,8 @@ class HealthFragment : Fragment() {
                 healthViewModel.fetchOxygenLevel()
                 healthViewModel.loadBodyComposition()
             } catch (e: Exception) {
-                Log.e("HealthFragment", "Error refreshing data", e)
+                val errorMessage = getString(R.string.error_refreshing_data, e.message)
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
             } finally {
                 swipeRefreshLayout.isRefreshing = false
             }

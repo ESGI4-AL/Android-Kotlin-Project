@@ -11,7 +11,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgotPwd">Forgot password?</string>
-    <string name="login">Login</string>
+    <string name="login">Log In</string>
     <string name="signup">Sign Up</string>
     <string name="noAccount">Don\'t have an account?</string>
     <string name="yrName">Your name</string>
@@ -45,16 +45,47 @@
     <string name="add_a_new_note">Add a new note</string>
     <string name="delete_note" />
 
+    <string-array name="languages">
+        <item>English</item>
+        <item>French</item>
+        <item>Spanish</item>
+        <item>Chinese</item>
+    </string-array>
+    <string name="dark_mode">Dark mode</string>
+    <string name="notification">Notifications</string>
+    <string name="language">Language</string>
+
     <!-- Health strings -->
+
+    <!-- Permissions & data policy-->
     <string name="privacy_policy_text">
         Your privacy is important to us. This app collects data from Health Connect
         to provide health-related insights. We collect only the data necessary for the app’s core
-        functionalities, which include monitoring health metrics such as steps, heart rate, oxygen levels,
-        stress levels, activity, body measurements and sleep data. The data is stored securely on your device,
+        functionalities, which include monitoring health metrics such as steps, heart rate and oxygen levels.
+        The data is stored securely on your device,
         and we do not share it with third parties. By accepting this policy, you agree to allow the app to
         access Health Connect data as specified in the app’s permissions.
         You can revoke access at any time from the app settings.
     </string>
+    <string name="permission_status_title">Permission status:</string>
+    <string name="Permission_status_default">Unknown</string>
+    <string name="info_icon">info icon</string>
+    <string name="data_info">Learn more about how we handle your data.</string>
+    <string name="read_data_policy">Read our data policy</string>
+
+    <string name="health_connect_not_supported">Health Connect not available on this device</string>
+    <string name="health_connect_not_installed">Health Connect is not installed</string>
+    <string name="all_permissions_granted">All permissions granted</string>
+    <string name="permissions_denied">Permissions denied</string>
+
+    <!-- Error messages -->
+    <string name="error_checking_availability">Error checking Health Connect availability: %1$s</string>
+    <string name="error_checking_permissions">Error checking permissions: %1$s</string>
+    <string name="error_loading_data">Error loading data: %1$s</string>
+    <string name="no_steps_data">No steps data available</string>
+    <string name="error_refreshing_data">Error refreshing data: %1$s</string>
+
+    <!-- Health data -->
     <string name="steps_icon">Steps icon</string>
     <string name="steps">Steps</string>
     <string name="default_value">0</string>
@@ -66,16 +97,6 @@
     <string name="oxygen_level">Oxygen Level</string>
     <string name="oxygen_unit">%</string>
     <string name="hundred_percent">100%</string>
-
-    <string-array name="languages">
-        <item>English</item>
-        <item>French</item>
-        <item>Spanish</item>
-        <item>Chinese</item>
-    </string-array>
-    <string name="dark_mode">Dark mode</string>
-    <string name="notification">Notifications</string>
-    <string name="langue">Language</string>
     <string name="body_composition_icon">body_composition_icon</string>
     <string name="body_composition">Body Composition</string>
     <string name="height">Height</string>
@@ -97,4 +118,8 @@
     <string name="overweight_info">Overweight: 25 to 29.9</string>
     <string name="obese_info">Obese: 30 or greater</string>
     <string name="bmi_disclaimer">Note: BMI is a general guide and may not be accurate for athletes, elderly people, or during pregnancy. Consult your healthcare provider for personalized advice.</string>
+    <string name="bmi_underweight">Underweight</string>
+    <string name="bmi_normal_weight">Normal weight</string>
+    <string name="bmi_overweight">Overweight</string>
+    <string name="bmi_obese">Obese</string>
 </resources>

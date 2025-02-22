@@ -38,13 +38,13 @@ class MainActivity : AppCompatActivity() {
     ) { permissions ->
         val allGranted = permissions.all { it.value }
         if (allGranted) {
-            permissionStatusTextView.text = "All permissions granted"
+            healthViewModel.updatePermissionStatus(getString(R.string.all_permissions_granted))
             healthViewModel.fetchDailySteps()
             healthViewModel.fetchLastHeartRate()
             healthViewModel.fetchHeartRateData()
             healthViewModel.fetchOxygenLevel()
         } else {
-            permissionStatusTextView.text = "Permissions denied"
+            healthViewModel.updatePermissionStatus(getString(R.string.permissions_denied))
         }
     }
 
@@ -84,14 +84,14 @@ class MainActivity : AppCompatActivity() {
         val healthDataRepository = HealthDataRepository(applicationContext, HealthConnectClient.getOrCreate(applicationContext))
         val permissionsRepository = HealthPermissionsRepository(HealthConnectClient.getOrCreate(applicationContext))
 
-        healthViewModel = ViewModelProvider(this, HealthViewModelFactory(healthDataRepository, permissionsRepository))
+        healthViewModel = ViewModelProvider(this, HealthViewModelFactory(application, healthDataRepository, permissionsRepository))
             .get(HealthViewModel::class.java)
 
         // Observe LiveData from ViewModel -> we launch permissions request in main activity and show the status in settings
         healthViewModel.availability.observe(this) { availabilityStatus ->
             when (availabilityStatus) {
                 HealthConnectAvailability.INSTALLED -> {
-                    healthViewModel.checkAndRequestPermissions(requestPermissionsLauncher)
+                    healthViewModel.checkAndRequestPermissions(requestPermissionsLauncher, this)
                 }
                 HealthConnectAvailability.NOT_SUPPORTED,
                 HealthConnectAvailability.NOT_INSTALLED -> {}

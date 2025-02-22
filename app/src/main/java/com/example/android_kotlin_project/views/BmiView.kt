@@ -15,11 +15,12 @@ class BmiView(private val view: View) {
     fun updateBmiDisplay(bmi: Float) {
         bmiValueText.text = String.format("%.1f", bmi)
 
+        val context = view.context
         val category = when {
-            bmi < 18.5 -> "Underweight"
-            bmi < 25 -> "Normal weight"
-            bmi < 30 -> "Overweight"
-            else -> "Obese"
+            bmi < 18.5 -> context.getString(R.string.bmi_underweight)
+            bmi < 25 -> context.getString(R.string.bmi_normal_weight)
+            bmi < 30 -> context.getString(R.string.bmi_overweight)
+            else -> context.getString(R.string.bmi_obese)
         }
         bmiCategoryText.text = category
 

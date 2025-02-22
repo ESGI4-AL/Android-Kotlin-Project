@@ -124,7 +124,7 @@ class SettingsFragment : Fragment() {
                     1 -> "fr"
                     2 -> "es"
                     3 -> "zh"
-                    else -> "fr"
+                    else -> "en"
                 }
                 if (currentLocale != selectedLanguage) {
                     updateLocale(selectedLanguage)

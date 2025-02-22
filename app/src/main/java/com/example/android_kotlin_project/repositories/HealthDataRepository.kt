@@ -3,7 +3,6 @@ package com.example.android_kotlin_project.repositories
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.health.connect.client.records.StepsRecord
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
@@ -79,7 +78,6 @@ class HealthDataRepository(private val context: Context, private val healthConne
             val response = healthConnectClient.readRecords(request)
             response.records
         } catch (e: Exception) {
-            Log.e("HealthDataRepository", "Error reading step data: ${e.message}", e)
             emptyList()
         }
     }
@@ -105,11 +103,8 @@ class HealthDataRepository(private val context: Context, private val healthConne
 
             val lastSample = allSamples.maxByOrNull { it.time }
 
-            lastSample?.beatsPerMinute.also {
-                Log.d("HealthDataRepository", "Last heart rate: $it bpm")
-            }
+            lastSample?.beatsPerMinute
         } catch (e: Exception) {
-            Log.e("HealthDataRepository", "Error reading heart rate data: ${e.message}", e)
             null
         }
     }
@@ -136,27 +131,11 @@ class HealthDataRepository(private val context: Context, private val healthConne
                 }
             }
 
-            // format time
-            mappedData.forEach { (timeInSeconds, bpm) ->
-                val readableTime = formatTime(timeInSeconds.toLong())
-                Log.d("HealthDataRepository", "Time: $readableTime, BPM: $bpm")
-            }
-
             mappedData
 
         } catch (e: Exception) {
-            Log.e("HealthDataRepository", "Error reading heart rate data: ${e.message}", e)
             emptyList()
         }
-    }
-
-    /**
-     * Format time in hours and minutes (because heart rate data time is in seconds)
-     */
-    private fun formatTime(secondsFromStartOfDay: Long): String {
-        val hours = secondsFromStartOfDay / 3600
-        val minutes = (secondsFromStartOfDay % 3600) / 60
-        return String.format("%02d:%02d", hours, minutes)
     }
 
     /**
@@ -209,7 +188,6 @@ class HealthDataRepository(private val context: Context, private val healthConne
                 }
                 true
             } catch (e: Exception) {
-                Log.e("HealthDataRepository", "Error saving body composition: ${e.message}", e)
                 false
             }
         }
@@ -240,7 +218,6 @@ class HealthDataRepository(private val context: Context, private val healthConne
                     null
                 }
             } catch (e: Exception) {
-                Log.e("HealthDataRepository", "Error loading body composition: ${e.message}", e)
                 null
             }
         }
