@@ -70,6 +70,8 @@ class JournalFragment : Fragment() {
                     for (document in documents) {
                         val noteTitle = document.getString("title") ?: "Untitled"
                         val noteId = document.getString("noteId") ?: ""
+                        val noteDescription = document.getString("description") ?: ""
+                        val noteDate = document.getString("date") ?: ""
 
                         val noteData = mapOf("title" to noteTitle, "noteId" to noteId)
                         allNotes.add(noteData)
@@ -89,8 +91,10 @@ class JournalFragment : Fragment() {
 
                         titleTextView.text = noteTitle
                         seeMoreButton.setOnClickListener {
-                            Log.d("Firestore", "Bouton Voir Plus cliqué pour la note: $noteTitle")
-                            // Logique à mettre en place
+                            val editDialog = FragmentDialogEditNote.newInstance(
+                                noteId, noteDate, noteTitle, noteDescription
+                            )
+                            editDialog.show(parentFragmentManager, "FragmentDialogEditNote")
                         }
                         container.addView(noteView)
                     }
@@ -132,8 +136,10 @@ class JournalFragment : Fragment() {
 
             titleTextView.text = noteTitle
             seeMoreButton.setOnClickListener {
-                Log.d("Firestore", "Bouton Voir Plus cliqué pour la note: $noteTitle")
-                // Logique à mettre en place
+                val editDialog = FragmentDialogEditNote.newInstance(
+                    note["noteId"] ?: "", "", noteTitle, ""
+                )
+                editDialog.show(parentFragmentManager, "FragmentDialogEditNote")
             }
             notesContainer.addView(noteView)
         }
