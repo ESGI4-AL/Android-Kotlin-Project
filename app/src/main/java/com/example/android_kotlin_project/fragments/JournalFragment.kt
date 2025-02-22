@@ -50,9 +50,8 @@ class JournalFragment : Fragment() {
             }
         })
 
-        // Utiliser un listener en temps réel pour mettre à jour l'affichage automatiquement
         fetchNotes(notesContainer)
-        listenForNoteChanges()  // Ecouter les changements en temps réel
+        listenForNoteChanges()
 
         return view
     }
