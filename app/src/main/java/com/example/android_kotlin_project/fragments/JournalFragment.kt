@@ -12,8 +12,13 @@ import androidx.fragment.app.Fragment
 import com.example.android_kotlin_project.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import androidx.appcompat.widget.SearchView
 
 class JournalFragment : Fragment() {
+
+    private var allNotes = mutableListOf<Map<String, String>>()
+    private lateinit var notesContainer: GridLayout
+    private lateinit var inflater: LayoutInflater
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,8 +26,10 @@ class JournalFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_journal, container, false)
 
+        this.inflater = inflater
+        notesContainer = view.findViewById(R.id.notesContainer)
         val addNoteButton: CardView = view.findViewById(R.id.addNoteButton)
-        val notesContainer: GridLayout = view.findViewById(R.id.notesContainer)
+        val searchView: SearchView = view.findViewById(R.id.searchView)
 
         notesContainer.columnCount = 3
 
@@ -31,11 +38,22 @@ class JournalFragment : Fragment() {
             dialog.show(parentFragmentManager, "FragmentDialogAddNote")
         }
 
-        fetchNotes(notesContainer, inflater)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterNotes(newText)
+                return true
+            }
+        })
+
+        fetchNotes(notesContainer)
         return view
     }
 
-    private fun fetchNotes(container: GridLayout, inflater: LayoutInflater) {
+    private fun fetchNotes(container: GridLayout) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val db = FirebaseFirestore.getInstance()
 
@@ -44,6 +62,7 @@ class JournalFragment : Fragment() {
             .get()
             .addOnSuccessListener { documents ->
                 container.removeAllViews()
+                allNotes.clear()
 
                 if (documents.isEmpty) {
                     Log.d("Firestore", "Aucune note trouvée pour cet utilisateur.")
@@ -52,7 +71,8 @@ class JournalFragment : Fragment() {
                         val noteTitle = document.getString("title") ?: "Untitled"
                         val noteId = document.getString("noteId") ?: ""
 
-                        Log.d("Firestore", "Note trouvée: $noteTitle ($noteId)")
+                        val noteData = mapOf("title" to noteTitle, "noteId" to noteId)
+                        allNotes.add(noteData)
 
                         val noteView = inflater.inflate(R.layout.fragment_note_card, container, false)
                         val titleTextView: TextView = noteView.findViewById(R.id.noteTitle)
@@ -70,7 +90,7 @@ class JournalFragment : Fragment() {
                         titleTextView.text = noteTitle
                         seeMoreButton.setOnClickListener {
                             Log.d("Firestore", "Bouton Voir Plus cliqué pour la note: $noteTitle")
-                            // Logique a mettre en place
+                            // Logique à mettre en place
                         }
                         container.addView(noteView)
                     }
@@ -79,5 +99,43 @@ class JournalFragment : Fragment() {
             .addOnFailureListener { exception ->
                 Log.e("Firestore", "Erreur lors de la récupération des notes", exception)
             }
+    }
+
+    private fun filterNotes(query: String?) {
+        val filteredNotes = allNotes.filter { note ->
+            val title = note["title"] ?: ""
+            query?.let {
+                title.contains(it, ignoreCase = true)
+            } ?: true
+        }
+        updateNotesDisplay(filteredNotes)
+    }
+
+    private fun updateNotesDisplay(filteredNotes: List<Map<String, String>>) {
+        notesContainer.removeAllViews()
+
+        filteredNotes.forEach { note ->
+            val noteTitle = note["title"] ?: "Untitled"
+
+            val noteView = inflater.inflate(R.layout.fragment_note_card, notesContainer, false)
+            val titleTextView: TextView = noteView.findViewById(R.id.noteTitle)
+            val seeMoreButton: TextView = noteView.findViewById(R.id.seeMoreButton)
+
+            val layoutParams = GridLayout.LayoutParams().apply {
+                width = 0
+                height = GridLayout.LayoutParams.WRAP_CONTENT
+                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                marginEnd = resources.getDimensionPixelSize(R.dimen.note_card_margin)
+                bottomMargin = resources.getDimensionPixelSize(R.dimen.note_card_margin)
+            }
+            noteView.layoutParams = layoutParams
+
+            titleTextView.text = noteTitle
+            seeMoreButton.setOnClickListener {
+                Log.d("Firestore", "Bouton Voir Plus cliqué pour la note: $noteTitle")
+                // Logique à mettre en place
+            }
+            notesContainer.addView(noteView)
+        }
     }
 }
