@@ -93,7 +93,7 @@ class RecipeDetailsFragment : Fragment() {
     }
     @SuppressLint("SetTextI18n")
     private fun observeRecipeDetails() {
-    recipeViewModel.recipeByIdLiveData.observe(viewLifecycleOwner) { recipe ->
+    recipeViewModel.recipeUiState.observe(viewLifecycleOwner) { recipe ->
         if (recipe != null) {
             Log.d("DEBUG_CHECK", "Recipe retrieved by ID: $recipe")
 

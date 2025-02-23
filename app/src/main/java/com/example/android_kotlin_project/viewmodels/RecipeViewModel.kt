@@ -90,6 +90,8 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
                         RecipeUiState(
                             title = recipe.title,
                             image = recipe.image,
+                            readyInMinutes = recipe.readyInMinutes,
+                            healthScore = recipe.healthScore,
                             instructions = TextFormatter.formatInstructions(
                                 recipe.instructions ?: "No instructions found"
                             )

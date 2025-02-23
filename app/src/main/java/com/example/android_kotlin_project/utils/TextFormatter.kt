@@ -7,5 +7,10 @@ object TextFormatter {
             .replace("</ol>", "")
             .replace("<li>", "\n\n• ")
             .replace("</li>", "")
+            .replace("<p>", "")
+            .replace("</p>", "")
+            .replace(Regex("<[^>]*>"), "")
+            .replace(Regex("\\s+"), " ")
+            .replace(Regex("\n\\s*\n\\s*\n"), "\n\n")
             .trim()}
 }
