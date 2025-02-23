@@ -6,4 +6,5 @@ data class RecipeUiState( val title: String = "",
                           val error: String? = null,
                           val readyInMinutes: Int =0 ,
                           val healthScore: Int =0,
+                          val summary : String=""
 )

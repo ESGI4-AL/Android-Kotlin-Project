@@ -29,6 +29,8 @@ class RecipeDetailsFragment : Fragment() {
     private lateinit var collapsingToolbar: CollapsingToolbarLayout
     private lateinit var durationTextView: TextView
     private lateinit var healthScoreTextView: TextView
+    private lateinit var summaryContentTextView: TextView
+
 
 
 
@@ -71,6 +73,8 @@ class RecipeDetailsFragment : Fragment() {
         collapsingToolbar = view.findViewById(R.id.collapsing_TB)
         durationTextView = view.findViewById(R.id.durationTV)
         healthScoreTextView = view.findViewById(R.id.healthScoreTV)
+        summaryContentTextView = view.findViewById(R.id.summaryContentTV)
+
     }
     private fun setupInitialState() {
         collapsingToolbar.title = recipeTitle
@@ -98,6 +102,7 @@ class RecipeDetailsFragment : Fragment() {
             Log.d("DEBUG_CHECK", "Recipe retrieved by ID: $recipe")
 
             collapsingToolbar.title = recipe.title
+            summaryContentTextView.text = recipe.summary
             recipeInstructionsTextView.text = recipe.instructions ?: "No instructions found"
             durationTextView.text= "Cooking time : " +recipe.readyInMinutes +"min"
             healthScoreTextView.text= "Health score : " +recipe.healthScore.toString()
