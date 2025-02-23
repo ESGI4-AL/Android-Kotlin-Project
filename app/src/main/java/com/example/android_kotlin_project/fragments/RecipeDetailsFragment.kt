@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.dataBase.MyDatabase
@@ -30,10 +31,7 @@ class RecipeDetailsFragment : Fragment() {
     private lateinit var durationTextView: TextView
     private lateinit var healthScoreTextView: TextView
     private lateinit var summaryContentTextView: TextView
-
-
-
-
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +72,13 @@ class RecipeDetailsFragment : Fragment() {
         durationTextView = view.findViewById(R.id.durationTV)
         healthScoreTextView = view.findViewById(R.id.healthScoreTV)
         summaryContentTextView = view.findViewById(R.id.summaryContentTV)
-
+        toolbar = view.findViewById(R.id.toolbar)
+        toolbar.apply {
+            setNavigationIcon(R.drawable.ic_arrow_back)
+            setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
     private fun setupInitialState() {
         collapsingToolbar.title = recipeTitle
