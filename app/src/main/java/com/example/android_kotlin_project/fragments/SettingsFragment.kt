@@ -1,48 +1,53 @@
 package com.example.android_kotlin_project.fragments
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ImageButton
 import android.widget.Spinner
-import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.android_kotlin_project.R
+import com.example.android_kotlin_project.activities.PermissionsRationaleActivity
 import com.example.android_kotlin_project.adapters.FlagSpinnerAdapter
+import com.example.android_kotlin_project.databinding.FragmentSettingsBinding
+import com.example.android_kotlin_project.utils.HealthConnectAvailability
+import com.example.android_kotlin_project.viewmodels.HealthViewModel
 import java.util.Locale
 
 class SettingsFragment : Fragment() {
 
     private var isInitialSelection = true
+    private lateinit var healthViewModel: HealthViewModel
+    private lateinit var settingsBinding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        settingsBinding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return settingsBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupLanguageSpinner(view)
 
-        val themeSwitch = view.findViewById<Switch>(R.id.dark_mode_switch)
-
-        val backButton: ImageButton = view.findViewById(R.id.back_button)
-        backButton.setOnClickListener {
+        settingsBinding.backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
         val sharedPreferences = requireActivity().getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
         val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
-        themeSwitch.isChecked = isDarkMode
+        settingsBinding.darkModeSwitch.isChecked = isDarkMode
 
-        themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+        settingsBinding.darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
             val editor = sharedPreferences.edit()
 
             if (isChecked) {
@@ -53,6 +58,34 @@ class SettingsFragment : Fragment() {
                 editor.putBoolean("dark_mode", false)
             }
             editor.apply()
+        }
+
+        healthViewModel = ViewModelProvider(requireActivity())[HealthViewModel::class.java]
+
+        healthViewModel.permissionStatus.observe(viewLifecycleOwner) { status ->
+            settingsBinding.permissionStatus.text = status
+        }
+
+
+        healthViewModel.availability.observe(viewLifecycleOwner) { availabilityStatus ->
+            when (availabilityStatus) {
+                HealthConnectAvailability.INSTALLED -> {}
+                HealthConnectAvailability.NOT_SUPPORTED -> {
+                    settingsBinding.permissionStatus.text =
+                        getString(R.string.health_connect_not_supported)
+                }
+                HealthConnectAvailability.NOT_INSTALLED -> {
+                    settingsBinding.permissionStatus.text =
+                        getString(R.string.health_connect_not_installed)
+                }
+            }
+        }
+
+        settingsBinding.dataPolicyLink.apply {
+            paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            setOnClickListener {
+                startActivity(Intent(requireContext(), PermissionsRationaleActivity::class.java))
+            }
         }
     }
 
@@ -91,7 +124,7 @@ class SettingsFragment : Fragment() {
                     1 -> "fr"
                     2 -> "es"
                     3 -> "zh"
-                    else -> "fr"
+                    else -> "en"
                 }
                 if (currentLocale != selectedLanguage) {
                     updateLocale(selectedLanguage)

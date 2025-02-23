@@ -16,6 +16,12 @@
         android:label="Health" />
 
     <fragment
+        android:id="@+id/bodyCompositionFragment"
+        android:name="com.example.android_kotlin_project.fragments.BodyCompositionFragment"
+        android:label="Body Composition"
+        tools:layout="@layout/fragment_body_composition" />
+
+    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.android_kotlin_project.fragments.ProfileFragment"
         android:label="Profile" />

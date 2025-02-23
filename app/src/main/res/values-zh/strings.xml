@@ -1,33 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home">家</string>
+    <string name="app_name" translatable="false">Health Wave</string>
+    <string name="home">首页</string>
     <string name="activity">活动</string>
     <string name="health">健康</string>
     <string name="recipe">食谱</string>
-    <string name="profile">轮廓</string>
+    <string name="profile">个人资料</string>
     <string name="settings">设置</string>
-    <string name="email">电子邮件</string>
+    <string name="no_quotes_found">未找到引用</string>
+    <string name="back">返回</string>
+    <string name="email">电子邮箱</string>
     <string name="password">密码</string>
     <string name="forgotPwd">忘记密码？</string>
     <string name="login">登录</string>
-    <string name="signup">报名</string>
-    <string name="noAccount">没有帐户？</string>
-    <string name="yrName">你的名字</string>
-    <string name="yrEmail">您的电子邮件</string>
-    <string name="yrPassword">输入您的密码</string>
-    <string name="confirmPassword">确认您的密码</string>
+    <string name="signup">注册</string>
+    <string name="noAccount">还没有账号？</string>
+    <string name="yrName">您的姓名</string>
+    <string name="yrEmail">您的邮箱</string>
+    <string name="yrPassword">输入密码</string>
+    <string name="confirmPassword">确认密码</string>
     <string name="submit">提交</string>
-    <string name="anAccount">您有帐户吗？</string>
-    <string name="welcome">欢迎使用我们的应用程序！</string>
+    <string name="anAccount">已有账号？</string>
+    <string name="welcome">欢迎使用 Health Wave！</string>
+    <string name="sign_up">注册</string>
+    <string name="name_error">请输入您的姓名</string>
+    <string name="email_error">请输入您的邮箱</string>
+    <string name="password_errror">请输入您的密码</string>
+    <string name="confirm_password_error">请确认您的密码</string>
+    <string name="passwords_matching_error">密码不匹配</string>
+    <string name="user_not_found_error">未找到用户</string>
+    <string name="error_checking_user">验证用户时出错</string>
+    <string name="incorrect_password">密码错误</string>
+    <string name="authentication_failed">身份验证失败</string>
+    <string name="your_name">您的姓名</string>
+    <string name="your_email">您的邮箱</string>
+    <string name="save_changes">保存更改</string>
+    <string name="logout">退出登录</string>
+    <string name="profile_information">个人信息</string>
+    <string name="name">姓名</string>
+    <string name="enter_your_name">输入您的姓名</string>
+    <string name="enter_your_email">输入您的邮箱</string>
+    <string name="save">保存</string>
+    <string name="app_logo">应用标志</string>
 
     <string-array name="languages">
         <item>英语</item>
         <item>法语</item>
         <item>西班牙语</item>
-        <item>中国人</item>
+        <item>中文</item>
     </string-array>
     <string name="dark_mode">深色模式</string>
     <string name="notification">通知</string>
-    <string name="langue">语言</string>
+    <string name="language">语言</string>
 
+    <!-- Health strings -->
+    <string name="privacy_policy_text">
+        我们重视您的隐私。本应用程序从 Health Connect 收集数据
+        以提供健康相关的见解。我们仅收集应用程序核心功能所需的数据，
+        包括监测步数、心率和血氧水平等健康指标。
+        数据安全存储在您的设备上，
+        我们不会与第三方共享。接受此政策即表示您同意允许应用程序
+        按照应用程序权限中的规定访问 Health Connect 数据。
+        您可以随时从应用程序设置中撤销访问权限。
+    </string>
+
+    <!-- Permissions & data policy-->
+    <string name="permission_status_title">权限状态：</string>
+    <string name="Permission_status_default">未知</string>
+    <string name="info_icon">信息图标</string>
+    <string name="data_info">了解更多关于我们如何处理您的数据。</string>
+    <string name="read_data_policy">阅读我们的数据政策</string>
+
+    <string name="health_connect_not_supported">此设备不支持 Health Connect</string>
+    <string name="health_connect_not_installed">未安装 Health Connect</string>
+    <string name="all_permissions_granted">已授予所有权限</string>
+    <string name="permissions_denied">权限被拒绝</string>
+
+    <!-- Error messages -->
+    <string name="error_checking_availability">检查 Health Connect 可用性时出错：%1$s</string>
+    <string name="error_checking_permissions">检查权限时出错：%1$s</string>
+    <string name="error_loading_data">加载数据时出错：%1$s</string>
+    <string name="no_steps_data">没有可用的步数数据</string>
+    <string name="error_refreshing_data">刷新数据时出错：%1$s</string>
+
+    <!-- Health data -->
+    <string name="steps_icon">步数图标</string>
+    <string name="steps">步数</string>
+    <string name="default_value">0</string>
+    <string name="health_title">健康</string>
+    <string name="heart_icon">心脏图标</string>
+    <string name="heart_rate">心率</string>
+    <string name="heart_rate_label">次/分</string>
+    <string name="oxygen_icon">氧气图标</string>
+    <string name="oxygen_level">血氧水平</string>
+    <string name="oxygen_unit">%</string>
+    <string name="hundred_percent">100%</string>
+    <string name="body_composition_icon">身体成分图标</string>
+    <string name="body_composition">身体成分</string>
+    <string name="height">身高</string>
+    <string name="weight">体重</string>
+    <string name="height_unit">厘米</string>
+    <string name="weight_unit">公斤</string>
+    <string name="edit_icon">编辑图标</string>
+    <string name="height_cm">身高（厘米）：</string>
+    <string name="weight_kg">体重（公斤）：</string>
+    <string name="cm">厘米</string>
+    <string name="bmi_result">BMI 结果</string>
+    <string name="bmi_indicator">BMI 指标</string>
+    <string name="Kilo">公斤</string>
+    <string name="about_bmi">关于 BMI</string>
+    <string name="bmi_definition">身体质量指数（BMI）是一个简单的测量方法，通过您的身高和体重来判断您的体重是否健康。</string>
+    <string name="bmi_categories">BMI 分类：</string>
+    <string name="underweight_info">体重过轻：低于 18.5</string>
+    <string name="normal_weight_info">正常体重：18.5 至 24.9</string>
+    <string name="overweight_info">超重：25 至 29.9</string>
+    <string name="obese_info">肥胖：30 或以上</string>
+    <string name="bmi_disclaimer">注意：BMI 是一般性指导，可能不适用于运动员、老年人或孕期女性。请咨询您的医疗保健提供者以获取个性化建议。</string>
+    <string name="bmi_underweight">体重过轻</string>
+    <string name="bmi_normal_weight">正常体重</string>
+    <string name="bmi_overweight">超重</string>
+    <string name="bmi_obese">肥胖</string>
 </resources>

@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.example.android_kotlin_project"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.android_kotlin_project"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.firebase.common.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.core.animation)
     // navigation
     val nav_version = "2.8.0"
     implementation("androidx.navigation:navigation-compose:$nav_version")
@@ -65,8 +66,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // samsung health sdk
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
     implementation(libs.gson)
+
+    // health connect
+    implementation("androidx.health.connect:connect-client:1.1.0-alpha10")
+
+    // Chart
+    implementation(libs.mpandroidchart)
+
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 }
