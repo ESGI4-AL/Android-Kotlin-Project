@@ -1,5 +1,6 @@
 package com.example.android_kotlin_project.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,6 +27,9 @@ class RecipeDetailsFragment : Fragment() {
     private lateinit var recipeImageView: ImageView
     private lateinit var recipeInstructionsTextView: TextView
     private lateinit var collapsingToolbar: CollapsingToolbarLayout
+    private lateinit var durationTextView: TextView
+    private lateinit var healthScoreTextView: TextView
+
 
 
 
@@ -65,6 +69,8 @@ class RecipeDetailsFragment : Fragment() {
         recipeImageView = view.findViewById(R.id.img_recipe_detail)
         recipeInstructionsTextView = view.findViewById(R.id.instructionsContentTV)
         collapsingToolbar = view.findViewById(R.id.collapsing_TB)
+        durationTextView = view.findViewById(R.id.durationTV)
+        healthScoreTextView = view.findViewById(R.id.healthScoreTV)
     }
     private fun setupInitialState() {
         collapsingToolbar.title = recipeTitle
@@ -85,6 +91,7 @@ class RecipeDetailsFragment : Fragment() {
             Log.e("RecipeDetailsFragment", "No recipe ID passed!")
         }
     }
+    @SuppressLint("SetTextI18n")
     private fun observeRecipeDetails() {
     recipeViewModel.recipeByIdLiveData.observe(viewLifecycleOwner) { recipe ->
         if (recipe != null) {
@@ -92,6 +99,8 @@ class RecipeDetailsFragment : Fragment() {
 
             collapsingToolbar.title = recipe.title
             recipeInstructionsTextView.text = recipe.instructions ?: "No instructions found"
+            durationTextView.text= "Cooking time : " +recipe.readyInMinutes +"min"
+            healthScoreTextView.text= "Health score : " +recipe.healthScore.toString()
             loadImage(recipe.image)
         } else {
             Log.e("DETAILS_ERROR", "Failed to load recipe details")

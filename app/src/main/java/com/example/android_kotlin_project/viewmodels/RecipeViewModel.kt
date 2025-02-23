@@ -9,6 +9,8 @@ import com.example.android_kotlin_project.models.Dto.RecipeDto
 import com.example.android_kotlin_project.models.Entities.Recipe
 import com.example.android_kotlin_project.models.Entities.RecipeList
 import com.example.android_kotlin_project.repositories.RecipeRepository
+import com.example.android_kotlin_project.utils.RecipeUiState
+import com.example.android_kotlin_project.utils.TextFormatter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -20,6 +22,9 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
     private val _randomRecipeLiveData = MutableLiveData<Recipe?>() // Private MutableLiveData
     val randomRecipeLiveData: MutableLiveData<Recipe?> get() = _randomRecipeLiveData // Public LiveData
     val error = MutableLiveData<String>()
+
+    private val _recipeUiState = MutableLiveData<RecipeUiState>()
+    val recipeUiState: LiveData<RecipeUiState> = _recipeUiState
 
     fun getRandomRecipe() {
         viewModelScope.launch {
@@ -75,18 +80,30 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
     fun fetchRecipeById(recipeId: Int) {
         viewModelScope.launch {
             try {
-                // If your repository method is a synchronous network call,
-                // switch to the IO dispatcher.
                 val recipe = withContext(Dispatchers.IO) {
                     repository.getRecipeById(recipeId)
                 }
+
                 _recipeByIdLiveData.postValue(recipe)
-                // Optional: Log the fetched recipe for debugging.
-                // Log.d("RecipeViewModel", "Fetched recipe: $recipe")
+                _recipeUiState.postValue(
+                    if (recipe != null) {
+                        RecipeUiState(
+                            title = recipe.title,
+                            image = recipe.image,
+                            instructions = TextFormatter.formatInstructions(
+                                recipe.instructions ?: "No instructions found"
+                            )
+                        )
+                    } else {
+                        RecipeUiState(error = "Recipe not found")
+                    }
+                )
             } catch (e: Exception) {
-                // Log the error and post null (or an error state) if something goes wrong.
-                // Log.e("RecipeViewModel", "Error fetching recipe by ID: ${e.message}")
                 _recipeByIdLiveData.postValue(null)
+                _recipeUiState.postValue(
+                    RecipeUiState(error = e.message ?: "Unknown error occurred")
+                )
+
             }
         }
     }
