@@ -1,6 +1,7 @@
 package com.example.android_kotlin_project.ui.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -125,6 +126,15 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
         return randomRecipeLiveData
     }
 
+    private val _recipeByIdLiveData = MutableLiveData<Recipe?>()
+    val recipeByIdLiveData: LiveData<Recipe?> get() = _recipeByIdLiveData
+
+    fun fetchRecipeById(recipeId: Int) {
+        viewModelScope.launch {
+            val recipe = repository.getRecipeById(recipeId)
+            _recipeByIdLiveData.postValue(recipe)
+        }
+    }
 
 
 
