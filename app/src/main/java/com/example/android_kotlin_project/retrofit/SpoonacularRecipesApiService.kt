@@ -19,7 +19,9 @@ interface SpoonacularRecipesApiService {
     @GET("recipes/{id}/information")
     fun getRecipeById(
         @Path("id") recipeId: Int,
-        @Query("apiKey") apiKey: String="7c1d68022f50446bb19f40f722671ca7"
+        @Query("apiKey") apiKey: String="7c1d68022f50446bb19f40f722671ca7",
+        @Query("includeNutrition") includeNutrition: Boolean = false
+
     ): Call<RecipeDto>
 
 }
