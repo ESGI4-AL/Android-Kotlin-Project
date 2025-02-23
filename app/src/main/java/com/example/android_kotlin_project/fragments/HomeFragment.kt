@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.databinding.FragmentHomeBinding
 import com.example.android_kotlin_project.viewmodels.HomeViewModel
 
@@ -45,6 +47,9 @@ class HomeFragment : Fragment() {
 
         homeViewModel.fetchRandomQuote()
 
+        fragmentBinding.thoughtCard.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_journalFragment)
+        }
     }
 
     /**
