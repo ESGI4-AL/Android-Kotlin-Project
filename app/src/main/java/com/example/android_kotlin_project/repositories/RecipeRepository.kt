@@ -68,4 +68,22 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     fun getCurrentRandomRecipe(): Recipe? {
         return _randomRecipe.value
     }
+
+    suspend fun getRecipeById(recipeId: Int): Recipe? {
+        return try {
+            val response = RetrofitInstance.api.getRecipeById(recipeId).execute()
+            if (response.isSuccessful && response.body() != null) {
+                response.body()!!.toEntity()
+            } else {
+                Log.e("API_ERROR", "Failed to fetch recipe by ID: ${response.message()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("API_ERROR", "Error fetching recipe by ID: ${e.message}")
+            null
+        }
+    }
+
+
+
 }

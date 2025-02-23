@@ -3,6 +3,7 @@ package com.example.android_kotlin_project.models.Entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.android_kotlin_project.models.ExtendedIngredient
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName ="recipes")
 
@@ -12,7 +13,8 @@ data class Recipe(
     val image: String ="",
     val readyInMinutes: Int,
     val servings: Int =0,
-    val instructions: String ?= null,
+    @SerializedName("instructions")
+    val instructions: String?,
     val extendedIngredients: List<ExtendedIngredient> = emptyList(),
     val healthScore: Int =0,
     val vegetarian: Boolean,
