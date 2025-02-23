@@ -13,4 +13,14 @@ object TextFormatter {
             .replace(Regex("\\s+"), " ")
             .replace(Regex("\n\\s*\n\\s*\n"), "\n\n")
             .trim()}
+    fun formatSummary(summary: String?): String {
+        if (summary.isNullOrEmpty()) return "No summary available"
+
+        return summary
+            .replace("<b>", "")  // Remove bold tags
+            .replace("</b>", "")
+            // Remove HTML links
+            .replace(Regex("<a href=.*?</a>"), "")
+            .trim()
+    }
 }
