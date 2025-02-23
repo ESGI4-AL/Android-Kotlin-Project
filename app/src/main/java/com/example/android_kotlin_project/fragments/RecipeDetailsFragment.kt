@@ -21,23 +21,22 @@ class RecipeDetailsFragment : Fragment() {
     private var recipeId: Int? = null
     private var recipeTitle: String? =null
     private var recipeImage: String? =null
-    private lateinit var recipeMvvm: RecipeViewModel
+
+    private lateinit var recipeViewModel: RecipeViewModel
     private lateinit var recipeImageView: ImageView
-    private lateinit var recipeTitleTextView: TextView
     private lateinit var recipeInstructionsTextView: TextView
+    private lateinit var collapsingToolbar: CollapsingToolbarLayout
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Debug
         Log.d("RecipeDetailsFragment", "onCreate called")
-
         arguments?.let {
             recipeId = it.getInt("RECIPE_ID")
             recipeTitle = it.getString("RECIPE_TITLE")
             recipeImage = it.getString("RECIPE_IMAGE")
         }
-
-
 
     }
 
@@ -45,60 +44,68 @@ class RecipeDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //inflate the layout
         val view = inflater.inflate(R.layout.fragment_recipe_details, container, false)
-        val collapsingToolbar: CollapsingToolbarLayout = view.findViewById(R.id.collapsing_TB)
-        collapsingToolbar.title = recipeTitle
 
-        val recipeImageView: ImageView = view.findViewById(R.id.img_recipe_detail)
-        if(!recipeImage.isNullOrEmpty()){
-            Glide.with(this)
-                .load(recipeImage)
-                .placeholder(R.drawable.placeholder_img)
-                .into(recipeImageView)
-
-            val recipeImageView: ImageView = view.findViewById(R.id.img_recipe_detail)
-            Log.d("RecipeDetailsFragment", "ImageView found: $recipeImageView")
-
-        }
+        initializeViews(view)
+        setupInitialState()
 
         return view
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViewModel()
+        observeRecipeDetails()
+        fetchRecipeDetails()
 
+
+    }
+    private fun initializeViews(view: View) {
         recipeImageView = view.findViewById(R.id.img_recipe_detail)
         recipeInstructionsTextView = view.findViewById(R.id.instructionsContentTV)
-
-        val repository = RecipeRepository(MyDatabase.getInstance(requireContext()).recipeDao())
-        val viewModelFactory = RecipeViewModelFactory(repository)
-        recipeMvvm = ViewModelProvider(this, viewModelFactory)[RecipeViewModel::class.java]
-
-        val recipeId = arguments?.getInt("RECIPE_ID") ?: return
-        Log.d("RecipeDetailsFragment", "Fetching recipe with ID: $recipeId")
-
-        recipeMvvm.fetchRecipeById(recipeId)
-
-        observerRecipeDetails()
+        collapsingToolbar = view.findViewById(R.id.collapsing_TB)
     }
-
-    private fun observerRecipeDetails() {
-        recipeMvvm.recipeByIdLiveData.observe(viewLifecycleOwner) { recipe ->
-            if (recipe != null) {
-                recipeTitleTextView.text = recipe.title
-                recipeInstructionsTextView.text = recipe.instructions ?: "No instructions available."
-
-                // Update the image using Glide
-                Glide.with(this)
-                    .load(recipe.image)
-                    .placeholder(R.drawable.placeholder_img)
-                    .error(R.drawable.placeholder_img)
-                    .into(recipeImageView)
-            } else {
-                Log.e("DETAILS_ERROR", "Failed to load recipe details")
-            }
+    private fun setupInitialState() {
+        collapsingToolbar.title = recipeTitle
+        if (!recipeImage.isNullOrEmpty()) {
+            loadImage(recipeImage!!)
         }
     }
+    private fun setupViewModel() {
+        val recipeDao = MyDatabase.getInstance(requireContext()).recipeDao()
+        val repository = RecipeRepository(recipeDao)
+        val viewModelFactory = RecipeViewModelFactory(repository)
+        recipeViewModel = ViewModelProvider(this, viewModelFactory)[RecipeViewModel::class.java]
+    }
+    private fun fetchRecipeDetails() {
+        recipeId?.let { id ->
+            recipeViewModel.fetchRecipeById(id)
+        } ?: run {
+            Log.e("RecipeDetailsFragment", "No recipe ID passed!")
+        }
+    }
+    private fun observeRecipeDetails() {
+    recipeViewModel.recipeByIdLiveData.observe(viewLifecycleOwner) { recipe ->
+        if (recipe != null) {
+            Log.d("DEBUG_CHECK", "Recipe retrieved by ID: $recipe")
 
+            collapsingToolbar.title = recipe.title
+            recipeInstructionsTextView.text = recipe.instructions ?: "No instructions found"
+            loadImage(recipe.image)
+        } else {
+            Log.e("DETAILS_ERROR", "Failed to load recipe details")
+        }
+    }
+}
+
+    private fun loadImage(imageUrl: String) {
+        Glide.with(this)
+            .load(imageUrl)
+            .placeholder(R.drawable.placeholder_img)
+            .error(R.drawable.placeholder_img)
+            .into(recipeImageView)
+    }
 
 
 }

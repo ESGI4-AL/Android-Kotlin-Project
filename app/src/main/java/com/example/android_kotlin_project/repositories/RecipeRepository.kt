@@ -65,11 +65,11 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
             }
         }
     }
-    fun getCurrentRandomRecipe(): Recipe? {
-        return _randomRecipe.value
-    }
+//    fun getCurrentRandomRecipe(): Recipe? {
+//        return _randomRecipe.value
+//    }
 
-    suspend fun getRecipeById(recipeId: Int): Recipe? {
+    fun getRecipeById(recipeId: Int): Recipe? {
         return try {
             val response = RetrofitInstance.api.getRecipeById(recipeId).execute()
             if (response.isSuccessful && response.body() != null) {

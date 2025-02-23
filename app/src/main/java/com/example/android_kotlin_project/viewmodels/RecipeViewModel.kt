@@ -9,8 +9,10 @@ import com.example.android_kotlin_project.models.Dto.RecipeDto
 import com.example.android_kotlin_project.models.Entities.Recipe
 import com.example.android_kotlin_project.models.Entities.RecipeList
 import com.example.android_kotlin_project.repositories.RecipeRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
 
@@ -63,65 +65,6 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
         }
     }
 
-
-//    fun getRandomRecipe() {
-//        viewModelScope.launch {
-//            val recipe = repository.fetchRandomRecipe()
-//            if (recipe != null) {
-//                _randomRecipeLiveData.postValue(recipe)
-//            } else {
-//                _error.postValue("Failed to fetch recipe")
-//            }
-//        }
-//    }
-//fun getRandomRecipe() {
-//    Log.d("API_DEBUG", "Fetching random recipe...")
-//
-//    RetrofitInstance.api.getRandomRecipe().enqueue(object : Callback<RecipeListDto> {
-//        override fun onResponse(call: Call<RecipeListDto>, response: Response<RecipeListDto>) {
-//            Log.d("API_DEBUG", "Response Code: ${response.code()}")
-//            Log.d("API_DEBUG", "Response Body: ${response.body()}")
-//
-//            if (response.isSuccessful && response.body() != null) {
-//                val recipeDtos = response.body()!!.recipes
-//                if (!recipeDtos.isNullOrEmpty()) {
-//                    val recipe = recipeDtos[0] // Get first recipe
-//                    Log.d("API_SUCCESS", "Recipe Title: ${recipe.title}")
-//                    Log.d("API_SUCCESS", "Recipe Image URL: ${recipe.image}")
-//
-//                    val recipeEntity = recipe.toEntity() // Convert DTO to Entity
-//                    randomRecipeLiveData.postValue(recipeEntity)
-//                } else {
-//                    Log.e("API_ERROR", "Recipe list is empty")
-//                }
-//            } else {
-//                Log.e("API_ERROR", "API Error: ${response.code()} - ${response.message()}")
-//            }
-//        }
-//
-//        override fun onFailure(call: Call<RecipeListDto>, t: Throwable) {
-//            Log.e("API_ERROR", "Network request failed: ${t.message}")
-//        }
-//    })
-//}
-
-
-//    fun getRandomRecipe() {
-//        viewModelScope.launch {
-//            repository.fetchRandomRecipe()
-//        }
-//    }
-
-//    fun getRandomRecipe() {
-//        viewModelScope.launch {
-//            try {
-//                repository.fetchRandomRecipe()
-//                _randomRecipeLiveData.postValue(repository.getCurrentRandomRecipe())
-//            } catch (e: Exception) {
-//                error.postValue("Failed to fetch recipe: ${e.message}")
-//            }
-//        }
-//    }
     fun observeRandomRecipeLiveData(): MutableLiveData<Recipe?> {
         return randomRecipeLiveData
     }
@@ -131,10 +74,23 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
 
     fun fetchRecipeById(recipeId: Int) {
         viewModelScope.launch {
-            val recipe = repository.getRecipeById(recipeId)
-            _recipeByIdLiveData.postValue(recipe)
+            try {
+                // If your repository method is a synchronous network call,
+                // switch to the IO dispatcher.
+                val recipe = withContext(Dispatchers.IO) {
+                    repository.getRecipeById(recipeId)
+                }
+                _recipeByIdLiveData.postValue(recipe)
+                // Optional: Log the fetched recipe for debugging.
+                // Log.d("RecipeViewModel", "Fetched recipe: $recipe")
+            } catch (e: Exception) {
+                // Log the error and post null (or an error state) if something goes wrong.
+                // Log.e("RecipeViewModel", "Error fetching recipe by ID: ${e.message}")
+                _recipeByIdLiveData.postValue(null)
+            }
         }
     }
+
 
 
 
