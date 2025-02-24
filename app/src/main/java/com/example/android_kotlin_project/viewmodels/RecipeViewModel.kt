@@ -1,5 +1,6 @@
 package com.example.android_kotlin_project.ui.viewmodel
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +19,7 @@ import kotlinx.coroutines.withContext
 
 class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
 
+    private val _randomRecipesLiveData = MutableLiveData<List<Recipe>?>()
     private val _savedRecipes = MutableStateFlow<RecipeList>(RecipeList(emptyList()))
     private val _randomRecipeLiveData = MutableLiveData<Recipe?>() // Private MutableLiveData
     val randomRecipeLiveData: MutableLiveData<Recipe?> get() = _randomRecipeLiveData // Public LiveData
@@ -26,6 +28,10 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
     private val _recipeUiState = MutableLiveData<RecipeUiState>()
     val recipeUiState: LiveData<RecipeUiState> = _recipeUiState
 
+    init {
+
+        getPopularRecipes()
+    }
     fun getRandomRecipe() {
         viewModelScope.launch {
             val recipe = repository.fetchRandomRecipe()
@@ -74,9 +80,11 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
         return randomRecipeLiveData
     }
 
-    private val _recipeByIdLiveData = MutableLiveData<Recipe?>()
-    val recipeByIdLiveData: LiveData<Recipe?> get() = _recipeByIdLiveData
+    private val _recipeByIdLiveData = MutableLiveData<Recipe>()
+    private val _popularRecipes = MutableLiveData<List<Recipe>>()
+    val popularRecipes: MutableLiveData<List<Recipe>> = _popularRecipes
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun fetchRecipeById(recipeId: Int) {
         viewModelScope.launch {
             try {
@@ -84,7 +92,7 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
                     repository.getRecipeById(recipeId)
                 }
 
-                _recipeByIdLiveData.postValue(recipe)
+                _recipeByIdLiveData.postValue(recipe!!)
                 _recipeUiState.postValue(
                     if (recipe != null) {
                         RecipeUiState(
@@ -111,7 +119,19 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
         }
     }
 
+    fun getPopularRecipes() {
+        viewModelScope.launch {
+            try {
+                val recipes = repository.fetchRandomRecipes()
+                _popularRecipes.value = recipes!!
+                Log.d("ViewModel", "Popular recipes fetched: ${recipes.size}")
 
+            } catch (e: Exception) {
+                Log.e("RecipeViewModel", "Error fetching popular recipes", e)
+                _popularRecipes.value= emptyList()
+            }
+        }
+    }
 
 
 }
