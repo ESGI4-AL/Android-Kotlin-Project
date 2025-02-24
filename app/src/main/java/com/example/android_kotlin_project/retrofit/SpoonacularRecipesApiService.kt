@@ -24,4 +24,10 @@ interface SpoonacularRecipesApiService {
 
     ): Call<RecipeDto>
 
+    @GET("recipes/random")
+    fun getRandomRecipes(
+        @Query("apiKey") apiKey: String="7c1d68022f50446bb19f40f722671ca7",
+        @Query("number") number: Int=10
+    ): Call<RecipeListDto>
+
 }

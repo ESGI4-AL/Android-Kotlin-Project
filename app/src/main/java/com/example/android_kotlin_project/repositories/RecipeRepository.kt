@@ -84,6 +84,27 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
         }
     }
 
+    suspend fun fetchRandomRecipes(): List<Recipe>? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = RetrofitInstance.api.getRandomRecipes().execute()
+                when {
+                    response.isSuccessful && response.body() != null -> {
+                        response.body()?.recipes?.takeUnless { it.isEmpty() }
+                            ?.toEntityList()
+
+                    }
+                    else -> {
+                        Log.e("API_ERROR", "Response unsuccessful: ${response.code()} - ${response.message()}")
+                        null
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("API_ERROR", "API call failed", e)  // Better error logging with exception
+                null
+            }
+        }
+    }
 
 
 }
