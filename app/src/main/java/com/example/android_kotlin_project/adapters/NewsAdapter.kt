@@ -1,6 +1,8 @@
 package com.example.android_kotlin_project.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.models.NewsItem
+import com.bumptech.glide.Glide
 
 class NewsAdapter(private val context: Context, private val newsList: List<NewsItem>) :
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
@@ -26,16 +29,21 @@ class NewsAdapter(private val context: Context, private val newsList: List<NewsI
         return NewsViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val news = newsList[position]
         holder.newsTitle.text = news.title
         holder.newsDescription.text = news.description
-        holder.newsImage.setImageResource(
-            context.resources.getIdentifier(news.image, "drawable", context.packageName)
-        )
+
+        Glide.with(context)
+            .load(news.image)
+            .placeholder(R.drawable.n1)
+            .error(R.drawable.n1)
+            .into(holder.newsImage)
 
         holder.btnReadMore.setOnClickListener {
-            // Ouvrir le lien de l'actualité
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(news.link))
+            context.startActivity(intent)
         }
     }
 
