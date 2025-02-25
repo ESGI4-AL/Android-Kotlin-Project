@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/card_background"
+    android:elevation="4dp">
+
+    <!-- Image de l'exercice -->
+    <ImageView
+        android:id="@+id/exercise_image"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/image_rounded_corners"
+        android:contentDescription="Exercice image" />
+
+    <!-- Nom de l'exercice -->
+    <TextView
+        android:id="@+id/exercise_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="?attr/colorOnBackground" />
+
+    <TextView
+        android:id="@+id/exerciseDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/colorOnBackground"/>
+
+    <!-- Durée et Niveau -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="4dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/timer_icon"
+            android:contentDescription="Durée" />
+
+        <TextView
+            android:id="@+id/exercise_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 min"
+            android:layout_marginStart="4dp"
+            android:textColor="?attr/colorOnBackground" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/workout_icon"
+            android:layout_marginStart="8dp"
+            android:contentDescription="Niveau" />
+
+        <TextView
+            android:id="@+id/exercise_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Débutant"
+            android:layout_marginStart="4dp"
+            android:textColor="?attr/colorOnBackground" />
+    </LinearLayout>
+
+</LinearLayout>
