@@ -10,14 +10,18 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.android_kotlin_project.R
+import com.example.android_kotlin_project.adapters.CategoryAdapter
 import com.example.android_kotlin_project.adapters.PopularRecipesAdapter
 import com.example.android_kotlin_project.dataBase.MyDatabase
+import com.example.android_kotlin_project.models.Entities.CategoryItem
+import com.example.android_kotlin_project.models.Entities.DietCategory
 import com.example.android_kotlin_project.repositories.RecipeRepository
 import com.example.android_kotlin_project.ui.viewmodel.RecipeViewModel
 import com.example.android_kotlin_project.ui.viewmodel.RecipeViewModelFactory
@@ -60,6 +64,7 @@ class RecipesFragment : Fragment() {
 
 
         setupRecyclerView()
+        setupCategoryRecyclerView()
         observePopularRecipes()
         observerRandomRecipe()
         recipeViewModel.getRandomRecipe()
@@ -74,7 +79,7 @@ class RecipesFragment : Fragment() {
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
-            adapter = popularRecipesAdapter // Set adapter here
+            adapter = popularRecipesAdapter
         }
     }
 
@@ -135,5 +140,36 @@ class RecipesFragment : Fragment() {
                 Toast.makeText(requireContext(), "Recipe not available", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    private fun setupCategoryRecyclerView() {
+        val categories = listOf(
+            CategoryItem("Vegan", R.drawable.img_vegan, DietCategory.VEGAN),
+            CategoryItem("Vegetarian", R.drawable.img_vegetarian, DietCategory.VEGETARIAN),
+            CategoryItem("Gluten Free", R.drawable.img_gluten_free, DietCategory.GLUTEN_FREE),
+            CategoryItem("Keto", R.drawable.img_keto, DietCategory.KETO),
+            CategoryItem("Breakfast", R.drawable.img_breakfast, DietCategory.BREAKFAST),
+            CategoryItem("Dessert", R.drawable.img_dessert, DietCategory.DESSERT),
+            CategoryItem("Appetizer", R.drawable.img_appetizer, DietCategory.APPETIZER),
+            CategoryItem("Pescaterian", R.drawable.img_pescaterian, DietCategory.PESCETARIAN)
+        )
+
+        val categoryAdapter = CategoryAdapter(categories) { category ->
+
+            Toast.makeText(
+                requireContext(),
+                "Selected category: ${category.name}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        val categoryRecyclerView = view?.findViewById<RecyclerView>(R.id.CategoryRV)
+        categoryRecyclerView?.layoutManager = GridLayoutManager(requireContext(), 2)
+        categoryRecyclerView?.adapter = categoryAdapter
+
+
+
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid_spacing)
+        categoryRecyclerView?.addItemDecoration(GridSpacingItemDecoration(spacingInPixels))
+
     }
 }
