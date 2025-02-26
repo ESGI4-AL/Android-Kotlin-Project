@@ -120,4 +120,5 @@
     <string name="bmi_normal_weight">Peso normal</string>
     <string name="bmi_overweight">Sobrepeso</string>
     <string name="bmi_obese">Obesidad</string>
+    <string name="citation_yoga">El yoga nos enseña a sanar lo que necesita ser sanado y a dejar ir lo que no se puede sanar</string>
 </resources>

@@ -45,5 +45,6 @@
     <color name="normal_shadow">#64ED64</color>
     <color name="overweight_shadow">#F17A33</color>
     <color name="obese_shadow">#F44336</color>
-
+    <color name="greenYoga">#E6E7DF</color>
+    <color name="green4">#61735A</color>
 </resources>

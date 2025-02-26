@@ -1,4 +1,4 @@
-package com.example.android_kotlin_project.adapter
+package com.example.android_kotlin_project.adapters
 
 import android.view.LayoutInflater
 import android.view.View
