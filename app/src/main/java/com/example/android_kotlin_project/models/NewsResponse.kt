@@ -1,6 +1,5 @@
 package com.example.android_kotlin_project.models
 
-
 data class NewsResponse(
     val articles: List<Article>
 )

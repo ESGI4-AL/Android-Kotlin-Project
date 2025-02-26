@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.models.YogaExercise
 
@@ -28,7 +29,9 @@ class YogaAdapter(private val exercises: List<YogaExercise>) :
         val exercise = exercises[position]
         holder.exerciseName.text = exercise.name
         holder.exerciseDescription.text = exercise.description
-        holder.exerciseImage.setImageResource(exercise.imageId)
+        Glide.with(holder.itemView.context)
+            .load(exercise.imageUrl)
+            .into(holder.exerciseImage)
     }
 
     override fun getItemCount() = exercises.size

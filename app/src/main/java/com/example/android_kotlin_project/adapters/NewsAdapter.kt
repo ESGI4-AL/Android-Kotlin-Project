@@ -37,8 +37,8 @@ class NewsAdapter(private val context: Context, private val newsList: List<NewsI
 
         Glide.with(context)
             .load(news.image)
-            .placeholder(R.drawable.n1)
-            .error(R.drawable.n1)
+            .placeholder(R.drawable.heart_logo)
+            .error(R.drawable.heart_logo)
             .into(holder.newsImage)
 
         holder.btnReadMore.setOnClickListener {

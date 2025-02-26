@@ -52,6 +52,7 @@
         android:background="@drawable/round_cercle"
         android:padding="20dp" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_exercises"
         android:layout_width="match_parent"
