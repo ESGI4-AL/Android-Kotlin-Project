@@ -13,6 +13,7 @@ import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.adapters.NewsAdapter
 import com.example.android_kotlin_project.data.NewsRepository
 import android.content.Intent
+import com.example.android_kotlin_project.activities.EmptyActivity
 import com.example.android_kotlin_project.activities.YogaActivity
 
 class ActivityFragment : Fragment() {
@@ -29,6 +30,18 @@ class ActivityFragment : Fragment() {
         val yogaCard = view.findViewById<LinearLayout>(R.id.yogaCard)
         yogaCard.setOnClickListener {
             val intent = Intent(requireContext(), YogaActivity::class.java)
+            startActivity(intent)
+        }
+
+        val workoutCard = view.findViewById<LinearLayout>(R.id.workoutCard)
+        workoutCard.setOnClickListener {
+            val intent = Intent(requireContext(), EmptyActivity::class.java)
+            startActivity(intent)
+        }
+
+        val cardioCard = view.findViewById<LinearLayout>(R.id.cardioCard)
+        cardioCard.setOnClickListener {
+            val intent = Intent(requireContext(), EmptyActivity::class.java)
             startActivity(intent)
         }
 

@@ -4,4 +4,5 @@ data class YogaExercise (
     val name: String,
     val description: String,
     val imageUrl: String,
+    val longDescription: String
 )

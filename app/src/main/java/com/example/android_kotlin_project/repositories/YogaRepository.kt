@@ -14,7 +14,8 @@ class YogaRepository {
                     YogaExercise(
                         name = doc.getString("name") ?: "",
                         description = doc.getString("description") ?: "",
-                        imageUrl = doc.getString("imageUrl") ?: ""
+                        imageUrl = doc.getString("imageUrl") ?: "",
+                        longDescription = doc.getString("longDescription") ?: "",
                     )
                 }
                 callback(exercises)

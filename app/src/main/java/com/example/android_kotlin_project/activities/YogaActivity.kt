@@ -9,7 +9,6 @@ import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.adapters.YogaAdapter
 import com.example.android_kotlin_project.repositories.YogaRepository
 
-
 class YogaActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private val yogaRepository = YogaRepository()
@@ -29,12 +28,10 @@ class YogaActivity : AppCompatActivity() {
             if (exercises.isEmpty()) {
                 Toast.makeText(this, "Aucune actualité disponible", Toast.LENGTH_SHORT).show()
             } else {
-                recyclerView.adapter = YogaAdapter(exercises)
+                recyclerView.adapter = YogaAdapter(
+                    exercises, supportFragmentManager
+                )
             }
         }
     }
-
 }
-
-
-

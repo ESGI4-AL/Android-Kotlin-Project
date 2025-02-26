@@ -111,6 +111,7 @@
 
                 <!-- Carte Workout -->
                 <LinearLayout
+                    android:id="@+id/workoutCard"
                     android:layout_width="105dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -160,6 +161,7 @@
 
                 <!-- Carte Cardio -->
                 <LinearLayout
+                    android:id="@+id/cardioCard"
                     android:layout_width="105dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

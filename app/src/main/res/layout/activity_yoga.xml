@@ -49,16 +49,23 @@
         android:id="@+id/timer_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="30s"
-        android:textSize="22sp"
+        android:text="@string/start"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/bold_green"
         android:layout_gravity="center"
-        android:layout_marginTop="-40dp"
+        android:layout_marginTop="-35dp"
         android:background="@drawable/round_cercle"
         android:padding="20dp" />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Information posture"
+        android:layout_marginTop="15dp"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_exercises"
         android:layout_width="match_parent"

@@ -130,4 +130,6 @@
     <string name="level3">Advance</string>
     <string name="level1">Beginner</string>
     <string name="top_actu">"  top news"</string>
+    <string name="close">Close</string>
+    <string name="start">Start</string>
 </resources>

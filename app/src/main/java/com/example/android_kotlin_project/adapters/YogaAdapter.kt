@@ -5,13 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android_kotlin_project.R
+import com.example.android_kotlin_project.dialog.YogaDescriptionDialog
 import com.example.android_kotlin_project.models.YogaExercise
 
-class YogaAdapter(private val exercises: List<YogaExercise>) :
-    RecyclerView.Adapter<YogaAdapter.YogaViewHolder>() {
+class YogaAdapter(
+    private val exercises: List<YogaExercise>,
+    private val fragmentManager: FragmentManager)
+    : RecyclerView.Adapter<YogaAdapter.YogaViewHolder>() {
 
     class YogaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val exerciseImage: ImageView = view.findViewById(R.id.exercise_image)
@@ -32,6 +36,11 @@ class YogaAdapter(private val exercises: List<YogaExercise>) :
         Glide.with(holder.itemView.context)
             .load(exercise.imageUrl)
             .into(holder.exerciseImage)
+
+        holder.itemView.setOnClickListener {
+            val dialog = YogaDescriptionDialog(exercise.name, exercise.longDescription, exercise.imageUrl)
+            dialog.show(fragmentManager, "YogaDescriptionDialog")
+        }
     }
 
     override fun getItemCount() = exercises.size
