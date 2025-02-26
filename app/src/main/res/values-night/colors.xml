@@ -23,4 +23,8 @@
     <color name="endColor">#8F8E6A</color>
     <color name="greenYoga">#69BABBAB</color>
     <color name="green4">#44973E</color>
+    <color name="pink3">#8E5453</color>
+    <color name="pinky">#B4AEAE</color>
+    <color name="blueGreen">#8E5453</color>
+    <color name="text_activity">#000</color>
 </resources>

@@ -123,4 +123,11 @@
     <string name="bmi_overweight">Overweight</string>
     <string name="bmi_obese">Obese</string>
     <string name="citation_yoga">Yoga teaches us to heal what needs to be healed and to let go of what cannot be healed</string>
+    <string name="citation_activity">Sport is about surpassing oneself. Sport is a school of life</string>
+    <string name="yoga">yoga</string>
+    <string name="workout">Workout</string>
+    <string name="cardio">Cardio</string>
+    <string name="level3">Advance</string>
+    <string name="level1">Beginner</string>
+    <string name="top_actu">"  top news"</string>
 </resources>
