@@ -1,59 +1,81 @@
 package com.example.android_kotlin_project.dialog
 
-import android.app.Dialog
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ProgressBar
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.bumptech.glide.Glide
 import com.example.android_kotlin_project.R
+import com.example.android_kotlin_project.models.YogaExercise
 
-class YogaTimerDialog(private val exerciseName: String) : DialogFragment() {
+class YogaTimerDialog(private val exercises: List<YogaExercise>) : DialogFragment() {
 
-    private lateinit var timerTextView: TextView
-    private lateinit var progressBar: ProgressBar
-    private lateinit var stopButton: Button
+    private lateinit var exerciseImage: ImageView
+    private lateinit var exerciseName: TextView
+    private lateinit var timerText: TextView
+    private lateinit var closeButton: Button
+
     private var countDownTimer: CountDownTimer? = null
-    private val totalTime = 30000L  // 30 secondes
-    private val interval = 1000L    // 1 seconde
+    private var currentIndex = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.dialog_yoga_timer, container, false)
 
-        timerTextView = view.findViewById(R.id.timerTextView)
-        progressBar = view.findViewById(R.id.progressBar)
-        stopButton = view.findViewById(R.id.stopButton)
+        exerciseImage = view.findViewById(R.id.exercise_image)
+        exerciseName = view.findViewById(R.id.exercise_name)
+        timerText = view.findViewById(R.id.timer_text)
+        closeButton = view.findViewById(R.id.stopButton)
 
-        progressBar.max = (totalTime / interval).toInt()
-
-        startTimer()
-
-        stopButton.setOnClickListener {
+        closeButton.setOnClickListener {
+            countDownTimer?.cancel()
             dismiss()
         }
-
+        startExerciseDisplay()
         return view
     }
 
-    private fun startTimer() {
-        countDownTimer = object : CountDownTimer(totalTime, interval) {
-            override fun onTick(millisUntilFinished: Long) {
-                val secondsRemaining = (millisUntilFinished / 1000).toInt()
-                timerTextView.text = "$secondsRemaining s"
-                progressBar.progress = secondsRemaining
-            }
+    private fun startExerciseDisplay() {
+        if (exercises.isEmpty()) {
+            dismiss()
+            return
+        }
 
+        updateExercise()
+        countDownTimer = object : CountDownTimer((exercises.size * 60000L), 1000L) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsRemaining = ((millisUntilFinished % 60000) / 1000).toInt()
+                timerText.text = "$secondsRemaining s"
+
+                if (secondsRemaining == 0) {
+                    nextExercise()
+                }
+            }
             override fun onFinish() {
-                timerTextView.text = "Terminé !"
                 dismiss()
             }
         }.start()
+    }
+
+    private fun nextExercise() {
+        if (currentIndex < exercises.size - 1) {
+            currentIndex++
+            updateExercise()
+        } else {
+            dismiss()
+        }
+    }
+
+    private fun updateExercise() {
+        val exercise = exercises[currentIndex]
+        exerciseName.text = exercise.name
+        Glide.with(requireContext()).load(exercise.imageUrl).into(exerciseImage)
     }
 
     override fun onDestroyView() {
