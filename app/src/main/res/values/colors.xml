@@ -45,5 +45,10 @@
     <color name="normal_shadow">#64ED64</color>
     <color name="overweight_shadow">#F17A33</color>
     <color name="obese_shadow">#F44336</color>
-
+    <color name="greenYoga">#E6E7DF</color>
+    <color name="green4">#61735A</color>
+    <color name="pink3">#F8F3F3</color>
+    <color name="pinky">#A88E5453</color>
+    <color name="blueGreen">#E80F3435</color>
+    <color name="text_activity">#8E5453</color>
 </resources>

@@ -120,4 +120,8 @@
     <string name="bmi_normal_weight">正常体重</string>
     <string name="bmi_overweight">超重</string>
     <string name="bmi_obese">肥胖</string>
+
+    <string name="citation_yoga">瑜伽教导我们治愈需要治愈的事物，并放弃无法治愈的事物</string>
+    <string name="citation_activity">体育就是要超越自我。体育是人生的学校</string>
+
 </resources>

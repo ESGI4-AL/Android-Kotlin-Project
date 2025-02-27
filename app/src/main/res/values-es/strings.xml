@@ -120,4 +120,13 @@
     <string name="bmi_normal_weight">Peso normal</string>
     <string name="bmi_overweight">Sobrepeso</string>
     <string name="bmi_obese">Obesidad</string>
+    <string name="citation_yoga">El yoga nos enseña a sanar lo que necesita ser sanado y a dejar ir lo que no se puede sanar</string>
+    <string name="citation_activity">El deporte es superarse a uno mismo. El deporte es una escuela de vida</string>
+    <string name="yoga">yoga</string>
+    <string name="workout">Workout</string>
+    <string name="cardio">Cardio</string>
+    <string name="level3">Avance</string>
+    <string name="level1">Principiante</string>
+    <string name="top_actu">noticias principales</string>
+
 </resources>

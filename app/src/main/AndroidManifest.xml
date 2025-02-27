@@ -62,6 +62,8 @@
                 <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
             </intent-filter>
         </activity-alias>
+        <activity android:name=".activities.YogaActivity" />
+        <activity android:name=".activities.EmptyActivity" />
     </application>
 
     <!-- Check if Health Connect is installed -->

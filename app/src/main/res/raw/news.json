@@ -1,0 +1,20 @@
+[
+  {
+    "title": "5 astuces pour s'étirer efficacement",
+    "description": "Maximisez vos performances avec ces conseils simples.",
+    "image": "n1",
+    "link": "https://exemple.com/etirements"
+  },
+  {
+    "title": "Nouveaux exercices pour le cardio",
+    "description": "Boostez votre endurance avec ces nouvelles séries.",
+    "image": "n1",
+    "link": "https://exemple.com/cardio"
+  },
+  {
+    "title": "Les bienfaits du yoga sur la santé",
+    "description": "Découvrez comment le yoga peut améliorer votre bien-être.",
+    "image": "n1",
+    "link": "https://exemple.com/yoga"
+  }
+]

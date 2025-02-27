@@ -1,31 +1,59 @@
 package com.example.android_kotlin_project.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android_kotlin_project.R
+import com.example.android_kotlin_project.adapters.NewsAdapter
+import com.example.android_kotlin_project.data.NewsRepository
+import android.content.Intent
+import com.example.android_kotlin_project.activities.EmptyActivity
+import com.example.android_kotlin_project.activities.YogaActivity
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ActivityFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ActivityFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_activity, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val yogaCard = view.findViewById<LinearLayout>(R.id.yogaCard)
+        yogaCard.setOnClickListener {
+            val intent = Intent(requireContext(), YogaActivity::class.java)
+            startActivity(intent)
+        }
+
+        val workoutCard = view.findViewById<LinearLayout>(R.id.workoutCard)
+        workoutCard.setOnClickListener {
+            val intent = Intent(requireContext(), EmptyActivity::class.java)
+            startActivity(intent)
+        }
+
+        val cardioCard = view.findViewById<LinearLayout>(R.id.cardioCard)
+        cardioCard.setOnClickListener {
+            val intent = Intent(requireContext(), EmptyActivity::class.java)
+            startActivity(intent)
+        }
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewNews)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        NewsRepository.fetchNews { newsList ->
+            if (newsList.isEmpty()) {
+                Toast.makeText(requireContext(), "Aucune actualité disponible", Toast.LENGTH_SHORT).show()
+            } else {
+                recyclerView.adapter = NewsAdapter(requireContext(), newsList)
+            }
+        }
     }
 }
