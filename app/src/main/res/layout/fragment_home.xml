@@ -11,73 +11,96 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/logo_background_light"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/home_gradient_background"
-            android:orientation="vertical">
+            android:layout_height="100dp">
 
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/app_logo"
+                android:src="@drawable/app_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/welcome_msg"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/welcome_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="20dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="@font/blogger_sans_bold"
-                android:padding="16dp"
-                android:text="@string/welcome"
-                android:textColor="@color/logo_brown"
-                android:textSize="20sp" />
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@id/app_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/app_logo"
+                app:layout_constraintTop_toTopOf="@id/app_logo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="@drawable/rounded_background">
+
+            <include
+                android:id="@+id/tips_card"
+                layout="@layout/tips_card" />
 
             <include
                 android:id="@+id/quote_card"
                 layout="@layout/quote_card" />
 
+            <!-- Thoughts Card View -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/thought_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:gravity="center_vertical"
+                    android:background="#F8E6F3">
+
+                    <ImageView
+                        android:id="@+id/pencil_icon"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:contentDescription="@string/pen"
+                        android:src="@drawable/ic_edit"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        app:tint="#6B4EFF" />
+
+                    <TextView
+                        android:id="@+id/thought_prompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/what_are_your_thoughts_today"
+                        android:textSize="14sp"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/text_color" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
-
-        <!-- Thoughts Card View -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/thought_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="8dp"
-            app:cardBackgroundColor="#CA290E">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:gravity="center_vertical"
-                android:background="#F4DAEF">
-
-                <ImageView
-                    android:id="@+id/pencil_icon"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_edit"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    app:tint="#6B4EFF" />
-
-                <TextView
-                    android:id="@+id/thought_prompt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/what_are_your_thoughts_today"
-                    android:textSize="14sp"
-                    android:textColor="#1C1B1F" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 </ScrollView>

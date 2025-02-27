@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="backgroundColor">#F5F3F9</color>
+    <color name="backgroundColor">#f5f5f5</color>
     <color name="colorOnBackground">#FF000000</color> <!-- Texte noir -->
     <color name="logo_background_light">#DBE6D4</color>
     <color name="green2">#91A361</color>
@@ -21,6 +21,7 @@
     <color name="spinner_item_color">#F5F3F9</color>
     <color name="startColor">#EBFDB2</color>
     <color name="endColor">#FFD1B6</color>
+    <color name="text_color">#404040</color>
 
     <!-- Health Page colors -->
     <color name="data_policy_info">#C6C9C9</color>

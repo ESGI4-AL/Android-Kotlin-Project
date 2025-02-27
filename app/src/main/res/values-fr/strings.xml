@@ -128,4 +128,7 @@
     <string name="bmi_normal_weight">Poids normal</string>
     <string name="bmi_overweight">Surpoids</string>
     <string name="bmi_obese">Obésité</string>
+    <string name="tip_title">Tip of the day</string>
+    <string name="no_tips_found">No tips found.</string>
+    <string name="pen">pen</string>
 </resources>

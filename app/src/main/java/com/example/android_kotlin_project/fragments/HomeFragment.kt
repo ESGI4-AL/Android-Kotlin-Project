@@ -14,6 +14,7 @@ import com.example.android_kotlin_project.viewmodels.HomeViewModel
 
 class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var tipTextView: TextView
     private lateinit var quoteTextView: TextView
 
     private var _fragmentBinding: FragmentHomeBinding? = null
@@ -39,12 +40,19 @@ class HomeFragment : Fragment() {
 
         homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
+        tipTextView = fragmentBinding.tipsCard.tipsText
+
         quoteTextView = fragmentBinding.quoteCard.quoteText
 
         homeViewModel.quote.observe(viewLifecycleOwner) { quote ->
             updateQuote(quote)
         }
 
+        homeViewModel.tip.observe(viewLifecycleOwner) { quote ->
+            updateTip(quote)
+        }
+
+        homeViewModel.fetchRandomTip()
         homeViewModel.fetchRandomQuote()
 
         fragmentBinding.thoughtCard.setOnClickListener {
@@ -57,6 +65,13 @@ class HomeFragment : Fragment() {
      */
     private fun updateQuote(quote: String) {
         quoteTextView.text = quote
+    }
+
+    /**
+     * Update the tip text view with the new tip
+     */
+    private fun updateTip(tip: String) {
+        tipTextView.text = tip
     }
 
     /**
