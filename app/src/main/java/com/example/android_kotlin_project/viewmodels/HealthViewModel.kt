@@ -169,7 +169,7 @@ class HealthViewModel(
     }
 
     /**
-     * Load body composition data
+     * Load body composition data from repository
      */
     fun loadBodyComposition() {
         viewModelScope.launch {
@@ -177,6 +177,9 @@ class HealthViewModel(
             if (data != null) {
                 _height.value = data.first
                 _weight.value = data.second
+            } else {
+                _height.value = "175"
+                _weight.value = "70"
             }
         }
     }

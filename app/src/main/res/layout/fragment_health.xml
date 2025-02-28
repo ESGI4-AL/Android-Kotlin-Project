@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,28 +9,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/healthFragment"
-        xmlns:tools="http://schemas.android.com/tools"
         tools:context=".fragments.HealthFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/gradient_background"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/gradient_background"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/health_title"
-                    android:textSize="24sp"
-                    android:textColor="#000000"
                     android:layout_gravity="center"
-                    android:padding="16dp" />
+                    android:fontFamily="@font/blogger_sans_bold"
+                    android:padding="16dp"
+                    android:text="@string/health_title"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
 
                 <include
                     android:id="@+id/heart_rate_card"
@@ -37,18 +38,25 @@
 
             </LinearLayout>
 
-            <include
-                android:id="@+id/oxygen_card"
-                layout="@layout/oxygen_card" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:orientation="vertical">
 
-            <include
-                android:id="@+id/daily_steps_card"
-                layout="@layout/daily_steps_card" />
+                <include
+                    android:id="@+id/oxygen_card"
+                    layout="@layout/oxygen_card" />
 
-            <include
-                android:id="@+id/body_composition_card"
-                layout="@layout/body_composition_card" />
+                <include
+                    android:id="@+id/daily_steps_card"
+                    layout="@layout/daily_steps_card" />
 
+                <include
+                    android:id="@+id/body_composition_card"
+                    layout="@layout/body_composition_card" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

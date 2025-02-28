@@ -3,6 +3,7 @@ package com.example.android_kotlin_project.repositories
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.health.connect.client.records.StepsRecord
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
@@ -173,22 +174,20 @@ class HealthDataRepository(private val context: Context, private val healthConne
                     "updatedAt" to FieldValue.serverTimestamp()
                 )
 
-                val userDoc = Tasks.await(firestore.collection("users").document(userId).get())
+                val userDocRef = firestore.collection("users").document(userId)
+                val userDoc = Tasks.await(userDocRef.get())
 
                 if (userDoc.exists()) {
-                    Tasks.await(
-                        firestore.collection("users").document(userId)
-                            .update("bodyComposition", bodyCompositionData)
-                    )
+                    Tasks.await(userDocRef.update("bodyComposition", bodyCompositionData))
                 } else {
-                    Tasks.await(
-                        firestore.collection("users").document(userId)
-                            .set(mapOf("bodyComposition" to bodyCompositionData))
-                    )
+                    Tasks.await(userDocRef.set(mapOf("bodyComposition" to bodyCompositionData)))
                 }
-                true
+
+                val verifyDoc = Tasks.await(userDocRef.get())
+                val savedData = verifyDoc.get("bodyComposition") as? Map<String, Any>
+                return@withContext savedData != null
             } catch (e: Exception) {
-                false
+                return@withContext false
             }
         }
     }
@@ -205,20 +204,20 @@ class HealthDataRepository(private val context: Context, private val healthConne
                     firestore.collection("users").document(userId).get()
                 )
 
-                if (document != null && document.exists()) {
+                if (document.exists()) {
                     val bodyComposition = document.get("bodyComposition") as? Map<String, Any>
                     if (bodyComposition != null) {
                         val height = bodyComposition["height"] as? String ?: "0"
                         val weight = bodyComposition["weight"] as? String ?: "0"
-                        Pair(height, weight)
+                        return@withContext Pair(height, weight)
                     } else {
-                        null
+                        return@withContext null
                     }
                 } else {
-                    null
+                    return@withContext null
                 }
             } catch (e: Exception) {
-                null
+                return@withContext null
             }
         }
     }

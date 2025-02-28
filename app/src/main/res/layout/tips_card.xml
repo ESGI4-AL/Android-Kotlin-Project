@@ -9,14 +9,14 @@
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:background="#88000000" />
+        android:background="@color/tip1" />
 
     <LinearLayout
         android:id="@+id/tips_card"
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:orientation="vertical"
-        android:background="#E6F0E6E0"
+        android:background="@color/tip2"
         android:padding="16dp">
 
         <LinearLayout

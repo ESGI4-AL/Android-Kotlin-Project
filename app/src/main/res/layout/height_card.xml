@@ -15,24 +15,28 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
+        android:background="@color/card_background"
         android:padding="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/height"
+            android:textColor="@color/text_color"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <NumberPicker
             android:id="@+id/heightPicker"
             android:layout_width="wrap_content"
+            android:textColor="@color/text_color"
             android:layout_height="120dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:textColor="@color/text_color"
             android:text="@string/cm"
             android:textSize="16sp" />
     </LinearLayout>
