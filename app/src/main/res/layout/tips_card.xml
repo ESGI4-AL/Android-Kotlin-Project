@@ -1,0 +1,59 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_margin="10dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="#88000000" />
+
+    <LinearLayout
+        android:id="@+id/tips_card"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:orientation="vertical"
+        android:background="#E6F0E6E0"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/tip_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/idea"
+                android:contentDescription="@string/tip_title" />
+
+            <TextView
+                android:id="@+id/tip_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tip_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_color"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tips_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/no_tips_found"
+            android:textSize="16sp"
+            android:textColor="@color/text_color"
+            android:fontFamily="cursive"
+            android:layout_marginEnd="12dp" />
+
+    </LinearLayout>
+</FrameLayout>

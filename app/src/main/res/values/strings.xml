@@ -133,4 +133,7 @@
     <string name="close">Close</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+    <string name="tip_title">Tip of the day</string>
+    <string name="no_tips_found">No tips found.</string>
+    <string name="pen">pen</string>
 </resources>

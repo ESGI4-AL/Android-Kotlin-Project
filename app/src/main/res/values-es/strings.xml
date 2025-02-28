@@ -128,5 +128,8 @@
     <string name="level3">Avance</string>
     <string name="level1">Principiante</string>
     <string name="top_actu">noticias principales</string>
+    <string name="tip_title">Tip of the day</string>
+    <string name="no_tips_found">No tips found.</string>
+    <string name="pen">pen</string>
 
 </resources>
