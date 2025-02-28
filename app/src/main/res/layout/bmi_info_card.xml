@@ -12,7 +12,7 @@
         android:layout_margin="10dp"
         app:cardCornerRadius="15dp"
         android:elevation="8dp"
-        app:cardBackgroundColor="#FFFFFF">
+        app:cardBackgroundColor="@color/card_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/about_bmi"
+                android:textColor="@color/text_color"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,7 @@
                 android:id="@+id/bmi_definition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
                 android:layout_marginTop="8dp"
                 android:text="@string/bmi_definition"
                 android:textSize="14sp"
@@ -42,6 +44,7 @@
                 android:id="@+id/bmi_categories_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
                 android:layout_marginTop="16dp"
                 android:text="@string/bmi_categories"
                 android:textSize="16sp"
@@ -71,6 +74,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/text_color"
                         android:layout_marginStart="8dp"
                         android:text="@string/underweight_info"
                         android:textSize="14sp" />
@@ -91,6 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:textColor="@color/text_color"
                         android:text="@string/normal_weight_info"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -110,6 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:textColor="@color/text_color"
                         android:text="@string/overweight_info"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -129,6 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:textColor="@color/text_color"
                         android:text="@string/obese_info"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -139,6 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/text_color"
                 android:text="@string/bmi_disclaimer"
                 android:textSize="12sp"
                 android:textStyle="italic"

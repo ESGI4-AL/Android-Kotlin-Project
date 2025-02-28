@@ -2,8 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/quote_card"
@@ -12,7 +11,7 @@
         android:layout_margin="10dp"
         android:elevation="12dp"
         app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="#FBE5D2"
+        app:cardBackgroundColor="@color/quote"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true">
 

@@ -1,12 +1,14 @@
 package com.example.android_kotlin_project.fragments
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.android_kotlin_project.R
@@ -23,7 +25,7 @@ class ProfileFragment : Fragment() {
     private lateinit var nameEditText: EditText
     private lateinit var emailEditText: EditText
     private lateinit var saveButton: Button
-    private lateinit var logoutButton: Button
+    private lateinit var logoutLink: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +43,13 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //initi
+        //initialize
         nameEditText = view.findViewById(R.id.nameEditText)
         emailEditText = view.findViewById(R.id.emailEditText)
         saveButton = view.findViewById(R.id.saveButton)
-        logoutButton = view.findViewById(R.id.logoutButton) // Initialisation du bouton
+        logoutLink = view.findViewById(R.id.logoutLink)
+
+        logoutLink.paintFlags = logoutLink.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         fetchUserData()
 
@@ -53,7 +57,7 @@ class ProfileFragment : Fragment() {
             updateUserData()
         }
 
-        logoutButton.setOnClickListener {
+        logoutLink.setOnClickListener {
             logoutUser()
         }
     }

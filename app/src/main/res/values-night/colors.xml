@@ -2,7 +2,7 @@
 <resources>
     <color name="backgroundColor">#121212</color> <!-- Arrière-plan sombre -->
     <color name="colorOnBackground">#FFFFFFFF</color> <!-- Texte blanc -->
-    <color name="logo_background_light">#48694A</color>
+    <color name="logo_background_light">#1E301F</color>
     <color name="green2">#9CCA5B</color>
     <color name="green3">#4E7F30</color>
     <color name="sage">#445842</color>
@@ -27,4 +27,41 @@
     <color name="pinky">#B4AEAE</color>
     <color name="blueGreen">#8E5453</color>
     <color name="text_activity">#000</color>
+    <color name="text_color">#FFFFFFFF</color>
+    <color name="buttons">#FFFFFFFF</color>
+
+    <!-- Health Page colors -->
+    <color name="red_start">#440610</color>
+    <color name="red_end">#611B22</color>
+    <color name="red_heart">#F54255</color>
+    <color name="card_background">#282828</color>
+    <color name="green_steps">#45A542</color>
+    <color name="blue_oxygen">#92D5FD</color>
+    <color name="body_purple">#A01F64</color>
+
+    <!-- Oxygen level diagram colors -->
+    <color name="yellow_warning">#513C02</color>
+    <color name="red_danger">#5C0E0A</color>
+    <color name="light_gray">#FFFCFC</color>
+
+    <!-- BMI colors -->
+    <color name="underweight">#BFECFF</color>
+    <color name="normal">#D0EDBA</color>
+    <color name="overweight">#FBC58B</color>
+    <color name="obese">#FF8A80</color>
+    <color name="underweight_shadow">#5A9AC0</color>
+    <color name="normal_shadow">#64ED64</color>
+    <color name="overweight_shadow">#F17A33</color>
+    <color name="obese_shadow">#F44336</color>
+
+    <!-- Home colors -->
+    <color name="tip1">#282828</color>
+    <color name="tip2">#282828</color>
+    <color name="quote">#282828</color>
+
+    <!-- Journal colors -->
+    <color name="journal_card">#282828</color>
+    <color name="journal_page_cards">#6356D1</color>
+    <color name="journal_background">#121212</color>
+    <color name="journal_card_top">#121212</color>
 </resources>

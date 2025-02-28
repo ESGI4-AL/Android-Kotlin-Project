@@ -78,7 +78,7 @@
                     android:orientation="horizontal"
                     android:padding="8dp"
                     android:gravity="center_vertical"
-                    android:background="#F8E6F3">
+                    android:background="@color/journal_card">
 
                     <ImageView
                         android:id="@+id/pencil_icon"

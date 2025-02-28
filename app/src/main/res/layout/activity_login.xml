@@ -26,7 +26,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:contentDescription="@string/app_logo"
-                android:src="@drawable/heart_logo"
+                android:src="@drawable/app_logo"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:padding="10dp"
                 android:text="@string/app_name"
                 android:fontFamily="@font/blogger_sans_bold"
-                android:textColor="@color/logo_brown"
+                android:textColor="@color/black"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -49,7 +49,7 @@
             android:layout_below="@id/app_name"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:background="@drawable/roun_border">
+            android:background="@drawable/rounded_background">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout_userName"
@@ -71,8 +71,10 @@
                     android:drawableStart="@drawable/baseline_person"
                     android:drawableTint="@color/green2"
                     android:drawablePadding="5dp"
-                    android:inputType="text">
+                    android:inputType="text"
+                    android:background="@null">
                 </com.google.android.material.textfield.TextInputEditText>
+
                 <TextView
                     android:id="@+id/email_error"
                     android:layout_width="match_parent"
@@ -110,7 +112,9 @@
                         android:drawableStart="@drawable/baseline_lock"
                         android:drawableTint="@color/green2"
                         android:drawablePadding="5dp"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:background="@null"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/password_error"
@@ -147,7 +151,7 @@
                 android:padding="15dp"
                 android:text="@string/login"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/buttons"
                 android:textSize="18sp"
                 app:cornerRadius="15dp" />
 

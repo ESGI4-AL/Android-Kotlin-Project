@@ -22,12 +22,15 @@
     <color name="startColor">#EBFDB2</color>
     <color name="endColor">#FFD1B6</color>
     <color name="text_color">#404040</color>
+    <color name="buttons">#FFFFFFFF</color>
 
     <!-- Health Page colors -->
+    <color name="red_start">#FDB2B3</color>
+    <color name="red_end">#FFD1B6</color>
     <color name="data_policy_info">#C6C9C9</color>
     <color name="data_policy_link">#218CED</color>
     <color name="red_heart">#F54255</color>
-    <color name="card_background">#EEECEC</color>
+    <color name="card_background">#FFFFFF</color>
     <color name="green_steps">#2B7627</color>
     <color name="blue_oxygen">#66CCFF</color>
     <color name="body_purple">#A01F64</color>
@@ -52,4 +55,16 @@
     <color name="pinky">#A88E5453</color>
     <color name="blueGreen">#E80F3435</color>
     <color name="text_activity">#8E5453</color>
+
+    <!-- Home colors -->
+    <color name="tip1">#88000000</color>
+    <color name="tip2">#E6F0E6E0</color>
+    <color name="quote">#FBE5D2</color>
+
+    <!-- Journal colors -->
+    <color name="journal_card">#F8E6F3</color>
+    <color name="journal_page_cards">#DDD2DF</color>
+    <color name="journal_background">#FFF0F5</color>
+    <color name="journal_card_top">#FFFFFF</color>
+
 </resources>

@@ -106,7 +106,7 @@
                     android:padding="15dp"
                     android:text="@string/save"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/buttons"
                     android:textSize="18sp"
                     app:cornerRadius="15dp" />
 
