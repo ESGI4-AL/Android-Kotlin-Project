@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -56,7 +57,17 @@ class JournalFragment : Fragment() {
         return view
     }
 
-    private fun fetchNotes(container: GridLayout) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val backButton: ImageButton = view.findViewById(R.id.back_button)
+
+        backButton.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+    }
+
+private fun fetchNotes(container: GridLayout) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
         db.collection("notes")
