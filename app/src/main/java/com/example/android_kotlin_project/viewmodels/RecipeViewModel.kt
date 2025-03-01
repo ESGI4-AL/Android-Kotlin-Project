@@ -133,6 +133,15 @@ class RecipeViewModel(private val repository: RecipeRepository) : ViewModel() {
         }
     }
 
+    private val _recipesByCategoryLiveData = MutableLiveData<List<Recipe>>()
+    val recipesByCategoryLiveData: LiveData<List<Recipe>> get() = _recipesByCategoryLiveData
+
+    fun loadRecipesByCategory(tags: String) {
+        repository.fetchRandomRecipesByCategory(tags).observeForever { recipeList ->
+            _recipesByCategoryLiveData.value = recipeList
+        }
+    }
 
 }
+
 

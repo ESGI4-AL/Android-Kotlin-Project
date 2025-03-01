@@ -155,11 +155,13 @@ class RecipesFragment : Fragment() {
 
         val categoryAdapter = CategoryAdapter(categories) { category ->
 
-            Toast.makeText(
-                requireContext(),
-                "Selected category: ${category.name}",
-                Toast.LENGTH_SHORT
-            ).show()
+            val bundle =Bundle().apply{
+                putString("categoryName" , category.name)
+
+            }
+            findNavController().navigate(
+                R.id.categorieDetailsFragment , bundle
+            )
         }
 
         val categoryRecyclerView = view?.findViewById<RecyclerView>(R.id.CategoryRV)

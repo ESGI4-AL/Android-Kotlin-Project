@@ -11,7 +11,7 @@ interface SpoonacularRecipesApiService {
     @GET("recipes/random")
      fun getRandomRecipe (
         //hardcoded but needs to be a secured var env
-        @Query("apiKey") apiKey: String="7c1d68022f50446bb19f40f722671ca7",
+        @Query("apiKey") apiKey: String="1c4aa20d8f964caea36e1886cc9a380c",
         @Query("number") number: Int=1
     ): Call<RecipeListDto>
 
@@ -19,21 +19,24 @@ interface SpoonacularRecipesApiService {
     @GET("recipes/{id}/information")
     fun getRecipeById(
         @Path("id") recipeId: Int,
-        @Query("apiKey") apiKey: String="7c1d68022f50446bb19f40f722671ca7",
+        @Query("apiKey") apiKey: String="1c4aa20d8f964caea36e1886cc9a380c",
         @Query("includeNutrition") includeNutrition: Boolean = false
 
     ): Call<RecipeDto>
 
     @GET("recipes/random")
     fun getRandomRecipes(
-        @Query("apiKey") apiKey: String="7c1d68022f50446bb19f40f722671ca7",
+        @Query("apiKey") apiKey: String="1c4aa20d8f964caea36e1886cc9a380c",
         @Query("number") number: Int=10
     ): Call<RecipeListDto>
 
-//    @GET("recipes/random")
-//    suspend fun getRandomRecipes(
-//        @Query("number") number: Int,
-//        @Query("tags") tags: String? = null,
-//        @Query("apiKey") apiKey: String = API_KEY
-//    ): Response<RecipeResponse>
+
+    @GET("recipes/random")
+    fun getRecipesByCategory(
+        @Query("apiKey") apiKey: String="1c4aa20d8f964caea36e1886cc9a380c",
+        @Query("number") number: Int=20,
+        @Query("tags") tags: String? = null
+
+    ): Call<RecipeListDto>
+
 }
