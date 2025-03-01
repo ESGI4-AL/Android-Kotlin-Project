@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android_kotlin_project.models.Dao.RecipeDao
 import com.example.android_kotlin_project.models.Dto.RecipeDto
+import com.example.android_kotlin_project.models.Dto.RecipeListDto
 import com.example.android_kotlin_project.models.Entities.Recipe
 import com.example.android_kotlin_project.models.Entities.RecipeList
 import com.example.android_kotlin_project.retrofit.RetrofitInstance
@@ -12,6 +13,9 @@ import com.example.android_kotlin_project.utils.toEntity
 import com.example.android_kotlin_project.utils.toEntityList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class RecipeRepository(private val recipeDao: RecipeDao) {
@@ -65,9 +69,7 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
             }
         }
     }
-//    fun getCurrentRandomRecipe(): Recipe? {
-//        return _randomRecipe.value
-//    }
+//
 
     fun getRecipeById(recipeId: Int): Recipe? {
         return try {
@@ -105,6 +107,32 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
             }
         }
     }
+
+    fun fetchRandomRecipesByCategory(tags: String): LiveData<List<Recipe>> {
+        val liveData = MutableLiveData<List<Recipe>>()
+
+        RetrofitInstance.api.getRecipesByCategory(
+            tags = tags
+        ).enqueue(object : Callback<RecipeListDto> {
+            override fun onResponse(call: Call<RecipeListDto>, response: Response<RecipeListDto>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val recipeDtos = response.body()!!.recipes
+                    // Map the DTOs to your domain model if needed
+                    val domainRecipes = recipeDtos.map { dto -> dto.toEntity() }
+                    liveData.value = domainRecipes
+                } else {
+                    liveData.value = emptyList()
+                }
+            }
+
+            override fun onFailure(call: Call<RecipeListDto>, t: Throwable) {
+                liveData.value = emptyList()
+            }
+        })
+
+        return liveData
+    }
+
 
 
 }

@@ -32,18 +32,17 @@ class CategoryAdapter (private val categories: List<CategoryItem>,
 
         // Load the image using Glide and apply a circle crop transformation
         Glide.with(holder.itemView.context)
-            .load(categoryItem.imageId) // This can be a drawable resource or a URL
+            .load(categoryItem.imageId)
             .circleCrop()
             .into(holder.categoryImageView)
 
-        // Set the category name
         holder.categoryNameTextView.text = categoryItem.name
 
-        // Handle click events
         holder.itemView.setOnClickListener {
             onCategoryClick(categoryItem.dietCategory)
         }
-    }}
+    }
+}
 
 
 

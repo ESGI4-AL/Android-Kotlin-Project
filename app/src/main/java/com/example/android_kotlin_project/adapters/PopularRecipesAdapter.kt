@@ -10,7 +10,7 @@ import com.example.android_kotlin_project.R
 import com.example.android_kotlin_project.models.Entities.Recipe
 
 class PopularRecipesAdapter(
-    private val recipes: List<Recipe> = emptyList(),
+    private var recipes: List<Recipe> = emptyList(),
     private val onRecipeClickListener: (Recipe) -> Unit
 ) : RecyclerView.Adapter<PopularRecipesAdapter.RecipeViewHolder>(){
 
@@ -18,6 +18,10 @@ class PopularRecipesAdapter(
         val recipeImageView: ImageView = itemView.findViewById(R.id.img_popular_recipe_item)
     }
 
+    fun updateRecipes(newRecipes: List<Recipe>) {
+        this.recipes = newRecipes
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.popular_items, parent, false)

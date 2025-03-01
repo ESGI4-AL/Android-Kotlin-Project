@@ -53,6 +53,15 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/categorieDetailsFragment"
+        android:name="com.example.android_kotlin_project.fragments.CategorieDetailsFragment"
+        android:label="Category Details">
+
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
